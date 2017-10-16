@@ -10,10 +10,29 @@
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.14"
   },
+  "devDependencies": {
+    "babel-core": "6.26.0",
+    "babel-preset-react-app": "3.0.3",
+    "enzyme": "3.0.0",
+    "enzyme-adapter-react-16": "1.0.0",
+    "enzyme-to-json": "3.0.1",
+    "jest": "21.2.1",
+    "raf": "3.3.2",
+    "react-test-renderer": "16.0.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=raf/polyfill --setupFiles='./src/jest.setup.js'",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js",
+      "!src/index.js",
+      "!src/jest.config.js",
+      "!src/jest.setup.js",
+      "!src/registerServiceWorker.js"
+    ]
   }
 }
