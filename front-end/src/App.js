@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-const $ = require('jquery');
-window.jQuery = $;
-window.Popper = require('popper.js').default;
-require('bootstrap');
+import './bootstrapSetup.js';
+
+const $ = window.jQuery;
 
 class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = { url: 'home' };
