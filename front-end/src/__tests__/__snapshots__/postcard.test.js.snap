@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`last Snapshot category React  1`] = `
+<div
+  className="col-6 col-lg-4"
+  onClick={[Function]}
+>
+  <div
+    className="card text-white bg-info mb-3"
+  >
+    <div
+      className="card-header"
+    >
+      react
+    </div>
+    <div
+      className="card-body"
+    >
+      <h4
+        className="card-title"
+      >
+        Udacity is the best place to learn React
+      </h4>
+      <p
+        className="card-text"
+      >
+        Everyone says so after all.
+      </p>
+      <div
+        className="card-text"
+      >
+        <small
+          className="card-text"
+        >
+          thingtwo
+          , 
+          a year ago
+          .
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`last Snapshot category Redux  1`] = `
+<div
+  className="col-6 col-lg-4"
+  onClick={[Function]}
+>
+  <div
+    className="card text-white bg-danger mb-3"
+  >
+    <div
+      className="card-header"
+    >
+      redux
+    </div>
+    <div
+      className="card-body"
+    >
+      <h4
+        className="card-title"
+      >
+        Udacity is the best place to learn Redux
+      </h4>
+      <p
+        className="card-text"
+      >
+        Everyone says so after all.
+      </p>
+      <div
+        className="card-text"
+      >
+        <small
+          className="card-text"
+        >
+          thingtwo
+          , 
+          a year ago
+          .
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`last Snapshot category Udacity  1`] = `
+<div
+  className="col-6 col-lg-4"
+  onClick={[Function]}
+>
+  <div
+    className="card text-white bg-primary mb-3"
+  >
+    <div
+      className="card-header"
+    >
+      udacity
+    </div>
+    <div
+      className="card-body"
+    >
+      <h4
+        className="card-title"
+      >
+        Udacity is the best place to learn technology.
+      </h4>
+      <p
+        className="card-text"
+      >
+        Everyone says so after all.
+      </p>
+      <div
+        className="card-text"
+      >
+        <small
+          className="card-text"
+        >
+          thingtwo
+          , 
+          a year ago
+          .
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`last Snapshot wrong category 1`] = `
+<div
+  className="col-6 col-lg-4"
+  onClick={[Function]}
+>
+  <div
+    className="card text-white bg-dark mb-3"
+  >
+    <div
+      className="card-header"
+    >
+      xxxxxx
+    </div>
+    <div
+      className="card-body"
+    >
+      <h4
+        className="card-title"
+      >
+        Udacity is the best place to learn Redux
+      </h4>
+      <p
+        className="card-text"
+      >
+        Everyone says so after all.
+      </p>
+      <div
+        className="card-text"
+      >
+        <small
+          className="card-text"
+        >
+          thingtwo
+          , 
+          a year ago
+          .
+        </small>
+      </div>
+    </div>
+  </div>
+</div>
+`;
