@@ -9,3 +9,5 @@ export function post(state = {}, action) {
             return state
     }
 }
+
+export default post;

@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
 import './bootstrapSetup.js';
+import PostCard from './components/PostCard'
+import PostForm from './components/PostForm'
+import { postFormConfigEvents, PostFormButtonShow } from './components/PostForm'
+import { getColorClass } from './components/PostCard'
+//import ReadableAPI from './ReadableAPI'
 
 const $ = window.jQuery;
 
@@ -9,7 +14,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { url: 'home' };
+    this.state = { url: 'home', posts: [] };
   }
 
   render() {
@@ -21,6 +26,15 @@ class App extends Component {
       return this.postView('react')
     if (this.state.url === 'post/redux')
       return this.postView('redux')
+  }
+
+  componentDidMount() {
+    /*
+    ReadableAPI.getPosts().then( posts =>{
+      console.log(posts);
+    });
+    */
+    postFormConfigEvents();
   }
 
   componentDidUpdate() {
@@ -35,16 +49,6 @@ class App extends Component {
     })
 
 
-    $('#postModal').on('show.bs.modal', function (event) {
-      const button = $(event.relatedTarget) // Button that triggered the modal
-      const whatever = button.data('whatever'); // Extract info from data-* attributes
-      // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-      // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-      var modal = $(this)
-      modal.find('.modal-title').text(whatever.title)
-      modal.find('#post-title').val(whatever.postTitle)
-      modal.find('#post-body').val(whatever.postBody)
-    })
 
     $('#commentModal').on('show.bs.modal', function (event) {
       const button = $(event.relatedTarget) // Button that triggered the modal
@@ -96,80 +100,23 @@ class App extends Component {
           <div className="row">
             <div className="col-12 col-md-12">
               <div className="row">
-                <div className="col-6 col-lg-4">
-                  <div className="card text-white bg-primary mb-3" onClick={() => { this.setState({ url: "post/udacity" }) }} >
-                    <div className="card-header">udacity</div>
-                    <div className="card-body">
-                      <h4 className="card-title">Primary card title</h4>
-                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <div className="card-text"><small className="card-text">Last updated 3 mins ago, Breno Marques</small></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 col-lg-4">
-                  <div className="card text-white bg-danger mb-3" onClick={() => { this.setState({ url: "post/react" }) }} >
-                    <div className="card-header">redux</div>
-                    <div className="card-body">
-                      <h4 className="card-title">Danger card title</h4>
-                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <div className="card-text"><small className="card-text">Last updated 3 mins ago, Breno Marques</small></div>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-6 col-lg-4">
-                  <div className="card text-white bg-info mb-3" onClick={() => { this.setState({ url: "post/redux" }) }} >
-                    <div className="card-header">react</div>
-                    <div className="card-body">
-                      <h4 className="card-title">Info card title</h4>
-                      <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                      <div className="card-text"><small className="card-text">Last updated 3 mins ago, Breno Marques</small></div>
-                    </div>
-                  </div>
-                </div>
+                <PostCard post={postUdacity} onClick={() => { this.setState({ url: "post/udacity" }) }} />
+                <PostCard post={postReact} onClick={() => { this.setState({ url: "post/react" }) }} />
+                <PostCard post={postRedux} onClick={() => { this.setState({ url: "post/redux" }) }} />
               </div>
             </div>
           </div>
         </div>
-        <div className="modal fade" id="postModal" tabIndex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="postModalLabel">New Post</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div className="form-group">
-                    <label htmlFor="post-titel" className="form-control-label">Title:</label>
-                    <input type="text" className="form-control" id="post-title" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="post-body" className="form-control-label">Content:</label>
-                    <textarea className="form-control" id="post-body"></textarea>
-                  </div>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-primary">Save as Udacity</button>
-                <button type="button" className="btn bg-danger">React</button>
-                <button type="button" className="btn bg-info">Redux</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PostForm categories={['udacity', 'react', 'redux']} />
         <div className="add-button">
-          <a className="post" data-toggle="modal" data-target="#postModal" data-whatever='{"title": "New Post", "postTitle":"", "postBody": ""}' >Add Post</a>
+          <PostFormButtonShow className="post" title="Add New Post" post='{"title": "New Post 123", "postTitle":"", "postBody": ""}' />
         </div>
       </div>
     )
   }
 
   postView(category) {
-    let categoryColorClass = "primary";
-    if (category === 'react') categoryColorClass = "danger";
-    if (category === 'redux') categoryColorClass = "info";
+    const categoryColorClass = getColorClass(category);
     return (
       <div className="app" >
         <nav className={"navbar navbar-expand-md fixed-top navbar-dark " + category}>
@@ -181,7 +128,11 @@ class App extends Component {
           <div className="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
-                <div className="nav-link" data-toggle="modal" data-target="#postModal" data-whatever='{"title": "Edit Post", "postTitle":"Primary card title", "postBody": "Some quick example text to build on the card title and make up the bulk of the cards content."}' >Edit</div>
+                <PostFormButtonShow
+                  className="nav-link"
+                  title="Edit"
+                  post={`{"title": "Edit Post", "category":"${category}", "postTitle":"Primary card title", "postBody": "Some quick example text to build on the card title and make up the bulk of the cards content."}`}
+                />
               </li>
               <li className="nav-item active">
                 <a className="nav-link" data-toggle="modal" data-target="#deleteModal" data-whatever='{"title": "Delete Post", "message": "Some quick example text to build on the card title and make up the bulk of the cards content."}'>Delete</a>
@@ -223,33 +174,7 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <div className="modal fade" id="postModal" tabIndex="-1" role="dialog" aria-labelledby="postModalLabel" aria-hidden="true">
-          <div className="modal-dialog" role="document">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="postModalLabel">New Post</h5>
-                <button type="button" className="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div className="modal-body">
-                <form>
-                  <div className="form-group">
-                    <label htmlFor="post-titel" className="form-control-label">Title:</label>
-                    <input type="text" className="form-control" id="post-title" />
-                  </div>
-                  <div className="form-group">
-                    <label htmlFor="post-body" className="form-control-label">Content:</label>
-                    <textarea className="form-control" id="post-body"></textarea>
-                  </div>
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary">Save</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PostForm categories={['udacity', 'react', 'redux']} />
         <div className="modal fade" id="commentModal" tabIndex="-1" role="dialog" aria-labelledby="commentModalLabel" aria-hidden="true">
           <div className="modal-dialog" role="document">
             <div className="modal-content">
@@ -299,5 +224,39 @@ class App extends Component {
     )
   }
 }
+
+const postUdacity = {
+  category: "udacity",
+  id: "7ni6ok3ym7mf1p33lnez",
+  title: "Udacity is the best place to learn technology.",
+  timestamp: 1467166872634,
+  author: "thingtwo",
+  body: "Everyone says so after all.",
+  deleted: false,
+  voteScore: 5
+}
+
+const postReact = {
+  category: "react",
+  id: "8xf0y6ziyjabvozdd253nd",
+  title: "Udacity is the best place to learn React",
+  timestamp: 1467166872634,
+  author: "thingtwo",
+  body: "Everyone says so after all.",
+  deleted: false,
+  voteScore: 5
+}
+
+const postRedux = {
+  category: "redux",
+  id: "7xf0y6ziyjabvozdd253nd",
+  title: "Udacity is the best place to learn Redux",
+  timestamp: 1467166872634,
+  author: "thingtwo",
+  body: "Everyone says so after all.",
+  deleted: false,
+  voteScore: 5
+}
+
 
 export default App;
