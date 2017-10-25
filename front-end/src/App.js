@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Moment from 'moment';
 
 class App extends Component {
 
@@ -32,6 +33,33 @@ class App extends Component {
             type="text"
             placeholder="Search by title post"
           />
+        </div>
+        <div className="main-page-content">
+          <div className="posts">
+            <h2 className="posts-title">Posts</h2>
+            <div className="posts-list ">
+              {this.state.posts.map(post => {
+                return (
+                  <div key={post.id} className="post">
+                    <div className="post-header">
+                      <div className="post-header-title">
+                        <span className={"category " + post.category} >{post.category[0].toUpperCase() + post.category.slice(1)}</span> {post.title}
+                      </div>
+                      <div className="post-header-published">
+                        <span className="published">{Moment(post.timestamp).from(new Date())}</span>
+                      </div>
+                    </div>
+                    <div className="post-header-author">by {post.author}</div>
+                    <div className="post-body">{post.body}</div>
+                    <div className="post-footer">
+                      <button className="liked" href="/"  >Liked <span>6</span></button>
+                      <button className="not-liked" href="/" >Not like</button>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
         </div>
       </div>
     )

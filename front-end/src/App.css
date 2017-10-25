@@ -1,3 +1,4 @@
+/* All pages */
 html, body, .root {
   height: 100%;
 }
@@ -9,7 +10,6 @@ body, .app {
 }
 
 /* main page */
-
 .main-page-header-title {
   flex-wrap: nowrap;
   display: flex;
@@ -47,6 +47,12 @@ body, .app {
   background-size: 20px;
 }
 
+.main-page-content {
+  padding: 0 0 80px;
+  flex: 1;
+}
+
+/* search component */
 .search-bar {
   position: absolute;
   right: 0px;
@@ -63,4 +69,133 @@ body, .app {
   color: white;
   background: #050505;
   border: #050505
+}
+
+/* search component */
+.posts {
+  padding: 0 10px 20px;
+}
+
+@media (min-width: 600px) {
+  .posts {
+    padding: 0 20px 40px;
+  }
+}
+/* posts */
+.posts-title {
+  border-bottom: 1px solid #dedede;
+}
+.posts-list {
+  text-align: left;
+}
+
+/* Post */
+.post {
+  text-align: left;
+  padding: 10px;
+  margin-bottom: 6px;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  cursor:pointer;
+}
+
+.post-header {
+  widows: 100%;
+  display: flex;
+}
+
+.post-header
+.title {
+  font-size: 1.0em;
+  border-bottom: 1px solid #dedede;
+}
+
+.post-header-title{
+  width: 80%;
+}
+
+.post-header-title
+.category {
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+}
+
+.udacity
+{
+  text-decoration: none;
+  background-color: #0062cc;
+}
+
+.react {
+  color: #fff;
+  background-color: #61DAFB;
+}
+
+.redux {
+  background-color: #dc3545;
+}
+
+.none {
+  color: #fff;
+  background-color: #868e96;
+}
+
+.post-header-published { 
+  text-align: right;
+  width: 20%;
+  align-items: flex-end;
+}
+
+.post-header-published span,
+.post-header-author {
+  color: #999;  
+}
+
+.post-body {
+  display: inline;
+}
+
+.post-footer {
+  flex: 1;
+  text-align: right;
+}
+
+.liked, .not-liked {
+  padding: 0.25em 0.4em;
+  margin: 0px 5px;
+  color: #fff;
+  font-size: 14px;
+  background-color: #464a4e;
+  border-color: #464a4e;
+}
+.liked {
+  background-color: #155724;
+  border-color: #155724;
+}
+
+.not-liked {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.liked span {
+  padding: 0.25em 0.25em;
+  font-size: 90%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  background-color:#0c4917;
 }
