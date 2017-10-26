@@ -169,7 +169,7 @@ body, .app {
   text-align: right;
 }
 
-.liked, .not-liked {
+.liked, .not-liked, .edit-button, .delete-button {
   padding: 0.25em 0.4em;
   margin: 0px 5px;
   color: #fff;
@@ -198,4 +198,83 @@ body, .app {
   vertical-align: baseline;
   border-radius: 0.25rem;
   background-color:#0c4917;
+}
+
+/* Post page */
+.post-page-header {
+  padding: 10px;
+  flex-wrap: nowrap;
+  display: flex;
+  flex-wrap: nowrap;
+  background: #050505;
+  align-items: center;
+}
+
+.post-page-header-back {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  width: 30px;
+  height: 33px;
+  background: #050505;
+  background-image: url('./icons/arrow-back.svg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 28px;
+  font-size: 0;
+}
+
+.post-page-header-title span:nth-of-type(1) {
+  margin: 0 10px 0 40px;  
+  padding: 0.6em 0.4em;
+  font-size: 75%;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+.post-page-header-title span:nth-of-type(2) {  
+  font-weight: 400;
+  color: white;
+}
+
+.post-page-header-buttons {
+  flex: 1;
+  text-align: right;
+}
+
+@media (max-width: 700px) {
+  .post-page-header  {
+    display: block;
+  }
+
+  .post-page-header-close {
+    display: flex;
+  }
+  
+  .post-page-header-buttons {
+    margin-top: 15px;
+    flex: 1;
+    text-align: center;
+  }
+}
+
+.edit-button
+{
+  text-decoration: none;
+  background-color: #0062cc;
+}
+
+.delete-button
+{
+  text-decoration: none;
+  background-color: #cc0000;
+}
+
+.post-page-content {
+  padding: 0 0 80px;
+  flex: 1;
 }

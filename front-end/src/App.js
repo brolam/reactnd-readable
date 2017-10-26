@@ -9,11 +9,47 @@ class App extends Component {
     this.state = {
       url: 'home',
       categories: ['udacity', 'react', 'redux'],
-      posts: [postUdacity, postReact, postRedux]
+      posts: [postUdacity, postReact, postRedux],
+      selectedPost: postUdacity
     };
   }
 
   render() {
+    const { url, selectedPost } = this.state
+    if (url === "home") {
+      return this.getHome();
+    } else if (url === "post") {
+      return this.getPost(selectedPost)
+    }
+  }
+  componentDidMount() { }
+
+  componentDidUpdate() { }
+
+  getPost(post) {
+    return (
+      <div className="app">
+        <div className="post-page-header">
+          <a className="post-page-header-back"
+            onClick={e => {
+              this.setState({ url: "home" })
+            }}>Back</a>
+          <div className="post-page-header-title">
+            <span className={post.category} >{post.category}</span>
+            <span>{post.title}</span>
+          </div>
+          <div className="post-page-header-buttons">
+            <button className="edit-button" href="/">Edit</button>
+            <button className="not-liked" href="/" >Delete</button>
+            <button className="liked" href="/"  >Liked <span>6</span></button>
+            <button className="not-liked" href="/" >Not like</button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  getHome() {
     return (
       <div className="app">
         <div className="main-page-header">
@@ -40,7 +76,12 @@ class App extends Component {
             <div className="posts-list ">
               {this.state.posts.map(post => {
                 return (
-                  <div key={post.id} className="post">
+                  <div key={post.id} className="post"
+                    onClick={e => {
+                      this.setState({ url: "post", selectedPost: post });
+                      console.log(post);
+                    }
+                    }>
                     <div className="post-header">
                       <div className="post-header-title">
                         <span className={"category " + post.category} >{post.category[0].toUpperCase() + post.category.slice(1)}</span> {post.title}
@@ -63,12 +104,6 @@ class App extends Component {
         </div>
       </div>
     )
-  }
-  componentDidMount() {
-  }
-
-  componentDidUpdate() {
-
   }
 }
 
