@@ -41,7 +41,10 @@ class App extends Component {
             <span>{post.title}</span>
           </div>
           <div className="post-page-header-buttons">
-            <button className="edit-button" href="/">Edit</button>
+            <button className="edit-button" href="/"
+              onClick={e => {
+                document.getElementById('editPostModal').style.display = "block";
+              }}>Edit</button>
             <button className="delete-button" href="/" >Delete</button>
             <button className="liked" href="/"  >Liked <span>{post.voteScore}</span></button>
             <button className="not-liked" href="/" >Not like</button>
@@ -72,6 +75,30 @@ class App extends Component {
         </div>
         <div className="flat-button" >
           <a className={"add " + post.category} >Add Comment</a>
+        </div>
+        <div id="editPostModal" className="modal">
+          <div className="modal-dialog">
+            <div className="modal-heard modal-post">
+              <span onClick={e => {
+                document.getElementById('editPostModal').style.display = "none";
+              }} />
+              <input
+                type="text"
+                placeholder="Title new post"
+                defaultValue={post.title}
+              />
+            </div>
+            <div className="modal-content modal-post">
+              <textarea placeholder="Body post" defaultValue={post.body} />
+              <div className="modal-footer">
+                <button className={ "save-button " + post.category } href="/"
+                  onClick={e => {
+                    document.getElementById('editPostModal').style.display = "none";
+                    console.log("Open");
+                  }}>Save</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
@@ -130,8 +157,39 @@ class App extends Component {
             </div>
           </div>
         </div>
-        <div className="flat-button" >
+        <div className="flat-button"
+          onClick={e => {
+            document.getElementById('newPostModal').style.display = "block";
+            console.log("Open");
+          }}>
           <a className="add">Add Post</a>
+        </div>
+        <div id="newPostModal" className="modal">
+          <div className="modal-dialog">
+            <div className="modal-heard modal-post">
+              <span onClick={e => {
+                document.getElementById('newPostModal').style.display = "none";
+              }} />
+              <input
+                type="text"
+                placeholder="Title new post"
+              />
+            </div>
+            <div className="modal-content modal-post">
+              <textarea placeholder="Body post" />
+              <div className="modal-footer">
+                <select onChange={e => {
+                  document.getElementById('newPostModal').style.display = "none";
+                  console.log("Open");
+                }} >
+                  <option value="none">Save as?</option>
+                  {this.state.categories.map(category => (
+                    <option className={category} key={category} value="{category}">{category[0].toUpperCase() + category.slice(1)}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )

@@ -188,14 +188,14 @@ body, .app {
   text-align: right;
 }
 
-.liked, .not-liked, .edit-button, .delete-button {
+.liked, .not-liked, .edit-button, .delete-button, .save-button {
   padding: 0.25em 0.4em;
   margin: 0px 5px;
   color: #fff;
   font-size: 14px;
-  background-color: #464a4e;
   border-color: #464a4e;
 }
+
 .liked {
   background-color: #155724;
   border-color: #155724;
@@ -327,4 +327,108 @@ body, .app {
 
 .post-comment {
   margin-bottom: 10px;
-} 
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+.modal-dialog {
+  display: block;
+  margin: 15% auto; /* 15% from the top and centered */
+  width: 70%; /* Could be more or less, depending on screen size */
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+@media (max-width: 700px) {
+  .modal-dialog  {
+    width: 90%;
+  }
+}
+
+.modal-heard {
+  margin: -1px -1px -0px -1px;
+  flex-wrap: nowrap;
+  display: flex;
+  justify-content: left;
+  flex-wrap: wrap;
+  padding: 10px 0;
+  background: #050505;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.modal-heard span {
+  width: 28px;
+  height: 28px;
+  margin-top: 2px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background-image: url('./icons/arrow-back.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+  font-size: 0;
+}
+
+.modal-heard h1 {
+  font-size: 20px;
+  margin: 0 0 0 10px;
+  color: white;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 10px;
+  width: 100%; /* Could be more or less, depending on screen size */
+}
+
+.modal-footer {
+  flex: 1;
+  text-align: right;
+}
+
+/* Modal New Post */
+.modal-post input {
+  margin-left: 3px;
+  width: 92%;
+  height: 20px;
+  padding: 15px 10px;
+  font-size: 1.25em;
+  color: white;
+  background: #050505;
+  border: #050505
+}
+
+.modal-post textarea {
+  border: #050505;
+  width: 100%;
+  height: 100px;
+  font-size: 1.25em;
+}
+
+.modal-post select {
+  width: 150px;
+  height: 28px;
+  font-size: 18px;
+  color: white;
+  background: #868e96;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 25px;
+
+}
+
