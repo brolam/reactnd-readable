@@ -18,6 +18,7 @@ body, .app {
   padding: 10px 0;
   background: #050505;
 }
+
 .main-page-header-title span {
   width: 48px;
   height: 48px;
@@ -89,6 +90,26 @@ body, .app {
   text-align: left;
 }
 
+.flat-button {
+  position: fixed;
+  right: 25px;
+  bottom: 25px;
+}
+
+.add {
+  display: block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: #2e7d32;
+  background-image: url('./icons/add.svg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  font-size: 0;
+}
+
 /* Post */
 .post {
   text-align: left;
@@ -136,7 +157,6 @@ body, .app {
 }
 
 .react {
-  color: #fff;
   background-color: #61DAFB;
 }
 
@@ -145,7 +165,6 @@ body, .app {
 }
 
 .none {
-  color: #fff;
   background-color: #868e96;
 }
 
@@ -164,7 +183,7 @@ body, .app {
   display: inline;
 }
 
-.post-footer {
+.post-footer, .post-comment-footer {
   flex: 1;
   text-align: right;
 }
@@ -274,7 +293,38 @@ body, .app {
   background-color: #cc0000;
 }
 
-.post-page-content {
+.post-content {
+  margin: 15px;
+  display: block;
+}
+
+.post-page-body, .post-comment {
+  text-align: left;
+  padding: 10px;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+}
+
+.post-page-author, .post-comment-author {
+  padding-right: 10px;
+  display: block;
+  color: #999;  
+}
+
+/* posts */
+.post-comments-title {
+  margin-top: 10px;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.post-comments {
   padding: 0 0 80px;
   flex: 1;
 }
+
+.post-comment {
+  margin-bottom: 10px;
+} 

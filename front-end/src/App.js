@@ -10,40 +10,68 @@ class App extends Component {
       url: 'home',
       categories: ['udacity', 'react', 'redux'],
       posts: [postUdacity, postReact, postRedux],
+      comments: comments,
       selectedPost: postUdacity
     };
   }
 
   render() {
-    const { url, selectedPost } = this.state
+    const { url, selectedPost, comments } = this.state
     if (url === "home") {
       return this.getHome();
     } else if (url === "post") {
-      return this.getPost(selectedPost)
+      return this.getPost(selectedPost, comments.filter(comment => (comment.parentId === selectedPost.id)))
     }
   }
   componentDidMount() { }
 
   componentDidUpdate() { }
 
-  getPost(post) {
+  getPost(post, comments) {
     return (
       <div className="app">
         <div className="post-page-header">
           <a className="post-page-header-back"
             onClick={e => {
               this.setState({ url: "home" })
-            }}>Back</a>
+            }}>Back
+          </a>
           <div className="post-page-header-title">
             <span className={post.category} >{post.category}</span>
             <span>{post.title}</span>
           </div>
           <div className="post-page-header-buttons">
             <button className="edit-button" href="/">Edit</button>
-            <button className="not-liked" href="/" >Delete</button>
-            <button className="liked" href="/"  >Liked <span>6</span></button>
+            <button className="delete-button" href="/" >Delete</button>
+            <button className="liked" href="/"  >Liked <span>{post.voteScore}</span></button>
             <button className="not-liked" href="/" >Not like</button>
           </div>
+        </div>
+        <div className="post-content">
+          <div className={"post-page-body"}>
+            <div className="post-page-author" >by {post.author} {Moment(post.timestamp).from(new Date())}</div>
+            {post.body}
+          </div>
+          <div className="post-comments-title">Commentes({comments.length})</div>
+          <div className={"post-page-comments"}>
+            {comments.map(comment => (
+              <div key={comment.id} className="post-comment" >
+                <div className="post-comment-author">
+                  by {comment.author} {Moment(comment.timestamp).from(new Date())}
+                </div>
+                <div>{comment.body}</div>
+                <div className="post-comment-footer">
+                  <button className="edit-button" href="/">Edit</button>
+                  <button className="delete-button" href="/" >Delete</button>
+                  <button className="liked" href="/"  >Liked <span>{comment.voteScore}</span></button>
+                  <button className="not-liked" href="/" >Not like</button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="flat-button" >
+          <a className={"add " + post.category} >Add Comment</a>
         </div>
       </div>
     )
@@ -73,7 +101,7 @@ class App extends Component {
         <div className="main-page-content">
           <div className="posts">
             <h2 className="posts-title">Posts</h2>
-            <div className="posts-list ">
+            <div className="posts-list">
               {this.state.posts.map(post => {
                 return (
                   <div key={post.id} className="post"
@@ -93,7 +121,7 @@ class App extends Component {
                     <div className="post-header-author">by {post.author}</div>
                     <div className="post-body">{post.body}</div>
                     <div className="post-footer">
-                      <button className="liked" href="/"  >Liked <span>6</span></button>
+                      <button className="liked" href="/"  >Liked <span>{post.voteScore}</span></button>
                       <button className="not-liked" href="/" >Not like</button>
                     </div>
                   </div>
@@ -101,6 +129,9 @@ class App extends Component {
               })}
             </div>
           </div>
+        </div>
+        <div className="flat-button" >
+          <a className="add">Add Post</a>
         </div>
       </div>
     )
@@ -139,6 +170,30 @@ const postRedux = {
   deleted: false,
   voteScore: 5
 }
+
+const comments = [
+  {
+    id: '894tuq4ut84ut8v4t8wun89g',
+    parentId: "8xf0y6ziyjabvozdd253nd",
+    timestamp: 1468166872634,
+    body: 'Hi there! I am a COMMENT.',
+    author: 'thingtwo',
+    voteScore: 6,
+    deleted: false,
+    parentDeleted: false
+  },
+  {
+    id: '8tu4bsun805n8un48ve89',
+    parentId: "8xf0y6ziyjabvozdd253nd",
+    timestamp: 1469479767190,
+    body: 'Comments. Are. Cool.',
+    author: 'thingone',
+    voteScore: -5,
+    deleted: false,
+    parentDeleted: false
+  }
+]
+
 
 
 export default App;
