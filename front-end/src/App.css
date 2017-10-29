@@ -127,12 +127,6 @@ body, .app {
   display: flex;
 }
 
-.post-header
-.title {
-  font-size: 1.0em;
-  border-bottom: 1px solid #dedede;
-}
-
 .post-header-title{
   width: 80%;
 }
@@ -189,11 +183,10 @@ body, .app {
 }
 
 .liked, .not-liked, .edit-button, .delete-button, .save-button {
-  padding: 0.25em 0.4em;
-  margin: 0px 5px;
+  padding: 0.35em 0.5em;
+  margin: 0px 3px;
   color: #fff;
   font-size: 14px;
-  border-color: #464a4e;
 }
 
 .liked {
@@ -283,14 +276,14 @@ body, .app {
 
 .edit-button
 {
-  text-decoration: none;
   background-color: #0062cc;
+  border-color: #0062cc;
 }
 
 .delete-button
 {
-  text-decoration: none;
   background-color: #cc0000;
+  border-color: #cc0000;
 }
 
 .post-content {
@@ -330,7 +323,7 @@ body, .app {
 }
 
 /* The Modal (background) */
-.modal {
+.modal, .modal-short {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1; /* Sit on top */
@@ -432,3 +425,48 @@ body, .app {
 
 }
 
+/*Modal short Menssages and Question */
+.modal-short{
+  background-color: transparent;
+}
+
+.modal-short-dialog {
+  display: block;
+  text-align: center;
+  margin: 15% auto; /* 15% from the top and centered */
+  width: 60%; /* Could be more or less, depending on screen size */
+  height: align-self;
+  border: 1px solid rgba(0, 0, 0, 0.125);
+  border-radius: 0.25rem;
+  background-color: rgb(39, 32, 32);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 28px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  font-size: 0;
+}
+
+@media (max-width: 700px) {
+  .modal-short-dialog  {
+    width: 90%;
+  }
+}
+
+
+.modal-short-dialog h1 {
+  font-size: 14px;
+  margin: 10px;
+  color: white;
+}
+
+.modal-short-dialog .yes {
+  font-size: 14px;
+  margin: 10px;
+  color: #0062cc;
+}
+
+.modal-short-dialog .no {
+  font-size: 14px;
+  margin: 10px;
+  color: #dc3545;
+}

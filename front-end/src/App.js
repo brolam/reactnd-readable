@@ -45,7 +45,14 @@ class App extends Component {
               onClick={e => {
                 document.getElementById('editPostModal').style.display = "block";
               }}>Edit</button>
-            <button className="delete-button" href="/" >Delete</button>
+            <button className="delete-button" href="/"
+              onClick={e => {
+                const delPostQuestionModal = document.getElementById('delPostQuestionModal');
+                delPostQuestionModal.style.display = "block";
+                setTimeout(function () {
+                  delPostQuestionModal.style.display = "none";
+                }, 7000);
+              }} >Delete</button>
             <button className="liked" href="/"  >Liked <span>{post.voteScore}</span></button>
             <button className="not-liked" href="/" >Not like</button>
           </div>
@@ -71,9 +78,15 @@ class App extends Component {
                       const body = document.getElementById('commentModalBody');
                       body.value = comment.body;
                       body.focus();
-                    }}
-                  >Edit</button>
-                  <button className="delete-button" href="/" >Delete</button>
+                    }}>Edit</button>
+                  <button className="delete-button"
+                    onClick={e => {
+                      const delCommentQuestionModal = document.getElementById('delCommentQuestionModal');
+                      delCommentQuestionModal.style.display = "block";
+                      setTimeout(function () {
+                        delCommentQuestionModal.style.display = "none";
+                      }, 7000);
+                    }}>Delete</button>
                   <button className="liked" href="/"  >Liked <span>{comment.voteScore}</span></button>
                   <button className="not-liked" href="/" >Not like</button>
                 </div>
@@ -127,6 +140,22 @@ class App extends Component {
                   }}>Save</button>
               </div>
             </div>
+          </div>
+        </div>
+        <div id="delPostQuestionModal" className="modal-short"
+          onClick={e => {
+            e.target.style.display = "none";
+          }}>
+          <div className="modal-short-dialog">
+            <h1>Are you sure? Do you want delete this post?  <a className="yes" href="/">Yes?</a>  or  <a className="no" href="/">No?</a> </h1>
+          </div>
+        </div>
+        <div id="delCommentQuestionModal" className="modal-short"
+          onClick={e => {
+            e.target.style.display = "none";
+          }}>
+          <div className="modal-short-dialog">
+            <h1>Are you sure? Do you want delete this comment?  <a className="yes" href="/">Yes?</a>  or  <a className="no" href="/">No?</a> </h1>
           </div>
         </div>
       </div>
