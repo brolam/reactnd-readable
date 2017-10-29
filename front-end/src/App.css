@@ -401,7 +401,7 @@ body, .app {
   text-align: right;
 }
 
-/* Modal New Post */
+/* Modal New Post and Comment */
 .modal-post input {
   margin-left: 3px;
   width: 92%;
@@ -413,7 +413,7 @@ body, .app {
   border: #050505
 }
 
-.modal-post textarea {
+.modal-post textarea, .modal-comment textarea {
   border: #050505;
   width: 100%;
   height: 100px;

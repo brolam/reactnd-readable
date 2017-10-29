@@ -64,7 +64,15 @@ class App extends Component {
                 </div>
                 <div>{comment.body}</div>
                 <div className="post-comment-footer">
-                  <button className="edit-button" href="/">Edit</button>
+                  <button className="edit-button" href="/"
+                    onClick={e => {
+                      document.getElementById('commentModal').style.display = "block";
+                      document.getElementById('commentModalTitle').innerText = `Edit comment by ${comment.author} ${Moment(comment.timestamp).from(new Date())}`;
+                      const body = document.getElementById('commentModalBody');
+                      body.value = comment.body;
+                      body.focus();
+                    }}
+                  >Edit</button>
                   <button className="delete-button" href="/" >Delete</button>
                   <button className="liked" href="/"  >Liked <span>{comment.voteScore}</span></button>
                   <button className="not-liked" href="/" >Not like</button>
@@ -73,7 +81,9 @@ class App extends Component {
             ))}
           </div>
         </div>
-        <div className="flat-button" >
+        <div className="flat-button" onClick={e => {
+          document.getElementById('commentModal').style.display = "block";
+        }} >
           <a className={"add " + post.category} >Add Comment</a>
         </div>
         <div id="editPostModal" className="modal">
@@ -91,10 +101,29 @@ class App extends Component {
             <div className="modal-content modal-post">
               <textarea placeholder="Body post" defaultValue={post.body} />
               <div className="modal-footer">
-                <button className={ "save-button " + post.category } href="/"
+                <button className={"save-button " + post.category} href="/"
                   onClick={e => {
                     document.getElementById('editPostModal').style.display = "none";
                     console.log("Open");
+                  }}>Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="commentModal" className="modal">
+          <div className="modal-dialog">
+            <div className="modal-heard">
+              <span onClick={e => {
+                document.getElementById('commentModal').style.display = "none";
+              }} />
+              <h1 id="commentModalTitle" >New comment</h1>
+            </div>
+            <div className="modal-content modal-comment">
+              <textarea id="commentModalBody" placeholder="Body comment" />
+              <div className="modal-footer">
+                <button className={"save-button " + post.category} href="/"
+                  onClick={e => {
+                    document.getElementById('commentModal').style.display = "none";
                   }}>Save</button>
               </div>
             </div>
@@ -134,7 +163,6 @@ class App extends Component {
                   <div key={post.id} className="post"
                     onClick={e => {
                       this.setState({ url: "post", selectedPost: post });
-                      console.log(post);
                     }
                     }>
                     <div className="post-header">
@@ -180,7 +208,6 @@ class App extends Component {
               <div className="modal-footer">
                 <select onChange={e => {
                   document.getElementById('newPostModal').style.display = "none";
-                  console.log("Open");
                 }} >
                   <option value="none">Save as?</option>
                   {this.state.categories.map(category => (
