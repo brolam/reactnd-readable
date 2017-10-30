@@ -62,7 +62,15 @@ class App extends Component {
             <div className="post-page-author" >by {post.author} {Moment(post.timestamp).from(new Date())}</div>
             {post.body}
           </div>
-          <div className="post-comments-title">Commentes({comments.length})</div>
+          <div className="post-comments-title">
+            <span>Commentes({comments.length})</span>
+            <div className="order-options">
+              <select>
+                <option value="voteScore" > Vote Score</option>
+                <option value="publishedDate" >Published date</option>
+              </select>
+            </div>
+          </div>
           <div className={"post-page-comments"}>
             {comments.map(comment => (
               <div key={comment.id} className="post-comment" >
@@ -185,7 +193,15 @@ class App extends Component {
         </div>
         <div className="main-page-content">
           <div className="posts">
-            <h2 className="posts-title">Posts</h2>
+            <div className="posts-title">
+              <span>Posts</span>
+              <div className="order-options">
+                <select>
+                  <option value="voteScore" > Vote Score</option>
+                  <option value="publishedDate" >Published date</option>
+                </select>
+              </div>
+            </div>
             <div className="posts-list">
               {this.state.posts.map(post => {
                 return (

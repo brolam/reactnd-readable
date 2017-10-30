@@ -13,10 +13,10 @@ body, .app {
 .main-page-header-title {
   flex-wrap: nowrap;
   display: flex;
-  justify-content: left;
   flex-wrap: wrap;
   padding: 10px 0;
   background: #050505;
+  text-align: center;
 }
 
 .main-page-header-title span {
@@ -39,7 +39,8 @@ body, .app {
 .main-page-header-title select {
   margin-left: 25px;
   width: 200px;
-  height: 48px;
+  margin-top: 7px;
+  height: 34px;
   font-size: 18px;
   color: white;
   background: #60ac5d;
@@ -83,9 +84,18 @@ body, .app {
   }
 }
 /* posts */
-.posts-title {
-  border-bottom: 1px solid #dedede;
+.posts-title, .post-comments-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  flex-wrap: nowrap;
+  display: flex;
 }
+
+.posts-title span, .post-comments-title span {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
 .posts-list {
   text-align: left;
 }
@@ -108,6 +118,24 @@ body, .app {
   background-size: 28px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   font-size: 0;
+}
+
+
+.order-options {
+  width: 100%;
+  text-align: right;
+}
+
+.order-options select {
+  margin-left: 25px;
+  width: 150px;
+  height: 24px;
+  font-size: 12px;
+  color: white;
+  background: #60ac5d;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 20px;
 }
 
 /* Post */
@@ -307,11 +335,6 @@ body, .app {
 }
 
 /* posts */
-.post-comments-title {
-  margin-top: 10px;
-  margin-bottom: 5px;
-  font-weight: bold;
-}
 
 .post-comments {
   padding: 0 0 80px;
@@ -451,7 +474,6 @@ body, .app {
     width: 90%;
   }
 }
-
 
 .modal-short-dialog h1 {
   font-size: 14px;
