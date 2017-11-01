@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`last Snapshot 1`] = `
+Array [
+  <button
+    className="liked"
+    href="/"
+>
+    Liked 
+    <span>
+        5
+    </span>
+</button>,
+  <button
+    className="not-liked"
+    href="/"
+>
+    Not like
+</button>,
+]
+`;

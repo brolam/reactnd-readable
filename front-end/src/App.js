@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Moment from 'moment';
+import VoteScore from './components/VoteScore'
 
 class App extends Component {
 
@@ -53,8 +54,11 @@ class App extends Component {
                   delPostQuestionModal.style.display = "none";
                 }, 7000);
               }} >Delete</button>
-            <button className="liked" href="/"  >Liked <span>{post.voteScore}</span></button>
-            <button className="not-liked" href="/" >Not like</button>
+            <VoteScore
+              entityType="Post"
+              entityId={post.id}
+              voteScore={post.voteScore}
+            />
           </div>
         </div>
         <div className="post-content">
@@ -95,8 +99,11 @@ class App extends Component {
                         delCommentQuestionModal.style.display = "none";
                       }, 7000);
                     }}>Delete</button>
-                  <button className="liked" href="/"  >Liked <span>{comment.voteScore}</span></button>
-                  <button className="not-liked" href="/" >Not like</button>
+                  <VoteScore
+                    entityType="Post"
+                    entityId={comment.id}
+                    voteScore={comment.voteScore}
+                  />
                 </div>
               </div>
             ))}
@@ -221,8 +228,11 @@ class App extends Component {
                     <div className="post-header-author">by {post.author}</div>
                     <div className="post-body">{post.body}</div>
                     <div className="post-footer">
-                      <button className="liked" href="/"  >Liked <span>{post.voteScore}</span></button>
-                      <button className="not-liked" href="/" >Not like</button>
+                      <VoteScore
+                        entityType="Post"
+                        entityId={post.id}
+                        voteScore={post.voteScore}
+                      />
                     </div>
                   </div>
                 )
