@@ -1,24 +1,51 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import renderer from 'react-test-renderer'
 import { mount } from 'enzyme';
 import PostComment from '../components/PostComment'
 
 test('render without error', () => {
-  ReactDOM.render(<PostComment comment={comment} />, document.createElement('div'));
+  ReactDOM.render(
+    <PostComment
+      comment={comment}
+      onClickEditButton={e => { }}
+      onClickDeleteButton={e => { }}
+    />, document.createElement('div'));
 })
 
 test('on click Edit button', () => {
   let isClickedEditButton = false;
-  const postComment = mount(<PostComment comment={comment} onClickEditButton={e => { isClickedEditButton = true }} />);
+  const postComment = mount(
+    <PostComment
+      comment={comment}
+      onClickEditButton={e => { isClickedEditButton = true }}
+      onClickDeleteButton={e => { }}
+    />);
   postComment.find('button [className="edit-button"]').simulate('click')
   expect(isClickedEditButton).toBe(true);
 })
 
 test('on click Delete button', () => {
   let isClickedDeleteButton = false;
-  const postComment = mount(<PostComment comment={comment} onClickDeleteButton={e => { isClickedDeleteButton = true }} />);
+  const postComment = mount(
+    <PostComment
+      comment={comment}
+      onClickDeleteButton={e => { isClickedDeleteButton = true }}
+      onClickEditButton={e => { }}
+    />);
   postComment.find('button [className="delete-button"]').simulate('click')
   expect(isClickedDeleteButton).toBe(true);
+})
+
+test('last Snapshot', () => {
+  const postComment = renderer.create(
+    <PostComment
+      comment={comment}
+      onClickEditButton={e => { }}
+      onClickDeleteButton={e => { }}
+    />);
+  let tree = postComment.toJSON();
+  expect(tree).toMatchSnapshot();
 })
 
 

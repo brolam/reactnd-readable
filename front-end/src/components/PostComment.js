@@ -28,7 +28,9 @@ PostComment.propTypes = {
     body: PropTypes.string.isRequired,
     author: PropTypes.string.isRequired,
     voteScore: PropTypes.number.isRequired,
-  })
+  }),
+  onClickEditButton: PropTypes.func.isRequired,
+  onClickDeleteButton: PropTypes.func.isRequired,
 }
 
 export default PostComment

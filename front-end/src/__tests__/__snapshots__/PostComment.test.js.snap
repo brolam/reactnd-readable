@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`last Snapshot 1`] = `
+<div
+  className="post-comment"
+>
+  <div
+    className="post-comment-author"
+  >
+    by 
+    thingtwo
+     
+    a year ago
+  </div>
+  <div>
+    Hi there! I am a COMMENT.
+  </div>
+  <div
+    className="post-comment-footer"
+  >
+    <button
+      className="edit-button"
+      href="/"
+      onClick={[Function]}
+    >
+      Edit
+    </button>
+    <button
+      className="delete-button"
+      onClick={[Function]}
+    >
+      Delete
+    </button>
+    <button
+      className="liked"
+      onClick={undefined}
+    >
+      Liked 
+      <span>
+        6
+      </span>
+    </button>
+    <button
+      className="not-liked"
+      onClick={undefined}
+    >
+      Not like
+    </button>
+  </div>
+</div>
+`;
