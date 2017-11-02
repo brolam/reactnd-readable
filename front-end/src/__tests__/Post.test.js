@@ -7,6 +7,12 @@ test('render without error', () => {
   ReactDOM.render(<Post post={postUdacity} onSelected={ e =>{} } />, document.createElement('div'));
 })
 
+test('last Snapshot', () => {
+  const post = renderer.create(<Post post={postUdacity} onSelected={ e =>{} } />);
+  let tree = post.toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
 const postUdacity = {
   category: "udacity",
   id: "7ni6ok3ym7mf1p33lnez",
