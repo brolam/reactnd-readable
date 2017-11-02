@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Moment from 'moment';
 import VoteScore from './VoteScore'
 
-function Comment(props) {
+function PostComment(props) {
   const { comment } = props
   return (
     <div className="post-comment" >
@@ -12,7 +12,7 @@ function Comment(props) {
       </div>
       <div>{comment.body}</div>
       <div className="post-comment-footer">
-        <button className="edit-button" href="/" onClick={e => { }}>Edit</button>
+        <button className="edit-button" href="/" onClick={props.onClickEditButton}>Edit</button>
         <button className="delete-button" onClick={e => { }}>Delete</button>
         <VoteScore voteScore={comment.voteScore}
         />
@@ -21,7 +21,7 @@ function Comment(props) {
   )
 }
 
-Comment.propTypes = {
+PostComment.propTypes = {
   comment: PropTypes.shape({
     id: PropTypes.string.isRequired,
     timestamp: PropTypes.number.isRequired,
@@ -31,4 +31,4 @@ Comment.propTypes = {
   })
 }
 
-export default Comment
+export default PostComment
