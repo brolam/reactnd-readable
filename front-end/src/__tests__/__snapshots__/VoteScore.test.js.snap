@@ -4,7 +4,7 @@ exports[`last Snapshot 1`] = `
 Array [
   <button
     className="liked"
-    href="/"
+    onClick={undefined}
 >
     Liked 
     <span>
@@ -13,7 +13,7 @@ Array [
 </button>,
   <button
     className="not-liked"
-    href="/"
+    onClick={undefined}
 >
     Not like
 </button>,
