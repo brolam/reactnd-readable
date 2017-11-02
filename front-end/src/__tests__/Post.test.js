@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import renderer from 'react-test-renderer'
+import { mount } from 'enzyme';
 import Post from '../components/Post'
 
 test('render without error', () => {
@@ -11,6 +12,13 @@ test('last Snapshot', () => {
   const post = renderer.create(<Post post={postUdacity} onSelected={ e =>{} } />);
   let tree = post.toJSON();
   expect(tree).toMatchSnapshot();
+})
+
+test('on selected post', () => {
+  let isSelectedPost = false;
+  const post = mount(<Post post={postUdacity} onSelected={ e =>{ isSelectedPost = true} } />);
+  post.find('div [className="post"]').simulate('click')
+  expect(isSelectedPost).toBe(true);
 })
 
 const postUdacity = {
