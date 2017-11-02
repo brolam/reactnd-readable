@@ -6,7 +6,7 @@ import VoteScore from './VoteScore'
 function PostCategoriesFilter(props) {
   const { categories } = props
   return (
-    <select >
+    <select onChange={props.onSelected} >
       <option value="none">All Categories</option>
       {categories.map(category => (
         <option key={category} value="{category}">{category[0].toUpperCase() + category.slice(1)}</option>
