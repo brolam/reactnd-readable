@@ -13,7 +13,7 @@ function PostComment(props) {
       <div>{comment.body}</div>
       <div className="post-comment-footer">
         <button className="edit-button" href="/" onClick={props.onClickEditButton}>Edit</button>
-        <button className="delete-button" onClick={e => { }}>Delete</button>
+        <button className="delete-button" onClick={props.onClickDeleteButton} >Delete</button>
         <VoteScore voteScore={comment.voteScore}
         />
       </div>
