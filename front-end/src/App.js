@@ -4,6 +4,7 @@ import Moment from 'moment';
 import VoteScore from './components/VoteScore'
 import Post from './components/Post'
 import PostComment from './components/PostComment'
+import PostCategoriesFilter from './components/PostCategoriesFilter'
 
 class App extends Component {
 
@@ -170,12 +171,7 @@ class App extends Component {
           <div className="main-page-header-title">
             <span />
             <h1>Readable</h1>
-            <select >
-              <option value="none">All Categories</option>
-              {this.state.categories.map(category => (
-                <option key={category} value="{category}">{category[0].toUpperCase() + category.slice(1)}</option>
-              ))}
-            </select>
+            <PostCategoriesFilter categories={this.state.categories} onSelected={e =>{}} />
           </div>
         </div>
         <div className="search-bar">
