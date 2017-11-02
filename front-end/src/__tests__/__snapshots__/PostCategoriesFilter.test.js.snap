@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`last Snapshot 1`] = `
+<select
+  onChange={[Function]}
+>
+  <option
+    value="none"
+  >
+    All Categories
+  </option>
+  <option
+    value="{category}"
+  >
+    Udacity
+  </option>
+  <option
+    value="{category}"
+  >
+    React
+  </option>
+  <option
+    value="{category}"
+  >
+    Redux
+  </option>
+</select>
+`;
