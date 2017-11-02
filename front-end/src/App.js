@@ -3,6 +3,7 @@ import './App.css';
 import Moment from 'moment';
 import VoteScore from './components/VoteScore'
 import Post from './components/Post'
+import PostComment from './components/PostComment'
 
 class App extends Component {
 
@@ -74,32 +75,23 @@ class App extends Component {
           </div>
           <div className={"post-page-comments"}>
             {comments.map(comment => (
-              <div key={comment.id} className="post-comment" >
-                <div className="post-comment-author">
-                  by {comment.author} {Moment(comment.timestamp).from(new Date())}
-                </div>
-                <div>{comment.body}</div>
-                <div className="post-comment-footer">
-                  <button className="edit-button" href="/"
-                    onClick={e => {
-                      document.getElementById('commentModal').style.display = "block";
-                      document.getElementById('commentModalTitle').innerText = `Edit comment by ${comment.author} ${Moment(comment.timestamp).from(new Date())}`;
-                      const body = document.getElementById('commentModalBody');
-                      body.value = comment.body;
-                      body.focus();
-                    }}>Edit</button>
-                  <button className="delete-button"
-                    onClick={e => {
-                      const delCommentQuestionModal = document.getElementById('delCommentQuestionModal');
-                      delCommentQuestionModal.style.display = "block";
-                      setTimeout(function () {
-                        delCommentQuestionModal.style.display = "none";
-                      }, 7000);
-                    }}>Delete</button>
-                  <VoteScore voteScore={comment.voteScore}
-                  />
-                </div>
-              </div>
+              <PostComment
+                comment={comment}
+                onClickEditButton={e => {
+                  document.getElementById('commentModal').style.display = "block";
+                  document.getElementById('commentModalTitle').innerText = `Edit comment by ${comment.author} ${Moment(comment.timestamp).from(new Date())}`;
+                  const body = document.getElementById('commentModalBody');
+                  body.value = comment.body;
+                  body.focus();
+                }}
+                onClickDeleteButton={e => {
+                  const delCommentQuestionModal = document.getElementById('delCommentQuestionModal');
+                  delCommentQuestionModal.style.display = "block";
+                  setTimeout(function () {
+                    delCommentQuestionModal.style.display = "none";
+                  }, 7000);
+                }}
+              />
             ))}
           </div>
         </div>
