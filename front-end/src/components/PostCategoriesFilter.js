@@ -1,7 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Moment from 'moment';
-import VoteScore from './VoteScore'
 
 function PostCategoriesFilter(props) {
   const { categories } = props

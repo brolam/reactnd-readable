@@ -5,6 +5,7 @@ import VoteScore from './components/VoteScore'
 import Post from './components/Post'
 import PostComment from './components/PostComment'
 import PostCategoriesFilter from './components/PostCategoriesFilter'
+import SearchBar from './components/SearchBar'
 
 class App extends Component {
 
@@ -174,12 +175,7 @@ class App extends Component {
             <PostCategoriesFilter categories={this.state.categories} onSelected={e =>{}} />
           </div>
         </div>
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder="Search by title post"
-          />
-        </div>
+        <SearchBar placeholder="Search by title post"/>
         <div className="main-page-content">
           <div className="posts">
             <div className="posts-title">
