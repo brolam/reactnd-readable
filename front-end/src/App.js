@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Moment from 'moment';
 import VoteScore from './components/VoteScore'
+import Post from './components/Post'
 
 class App extends Component {
 
@@ -54,11 +55,7 @@ class App extends Component {
                   delPostQuestionModal.style.display = "none";
                 }, 7000);
               }} >Delete</button>
-            <VoteScore
-              entityType="Post"
-              entityId={post.id}
-              voteScore={post.voteScore}
-            />
+            <VoteScore voteScore={post.voteScore} />
           </div>
         </div>
         <div className="post-content">
@@ -99,10 +96,7 @@ class App extends Component {
                         delCommentQuestionModal.style.display = "none";
                       }, 7000);
                     }}>Delete</button>
-                  <VoteScore
-                    entityType="Post"
-                    entityId={comment.id}
-                    voteScore={comment.voteScore}
+                  <VoteScore voteScore={comment.voteScore}
                   />
                 </div>
               </div>
@@ -212,29 +206,7 @@ class App extends Component {
             <div className="posts-list">
               {this.state.posts.map(post => {
                 return (
-                  <div key={post.id} className="post"
-                    onClick={e => {
-                      this.setState({ url: "post", selectedPost: post });
-                    }
-                    }>
-                    <div className="post-header">
-                      <div className="post-header-title">
-                        <span className={"category " + post.category} >{post.category[0].toUpperCase() + post.category.slice(1)}</span> {post.title}
-                      </div>
-                      <div className="post-header-published">
-                        <span className="published">{Moment(post.timestamp).from(new Date())}</span>
-                      </div>
-                    </div>
-                    <div className="post-header-author">by {post.author}</div>
-                    <div className="post-body">{post.body}</div>
-                    <div className="post-footer">
-                      <VoteScore
-                        entityType="Post"
-                        entityId={post.id}
-                        voteScore={post.voteScore}
-                      />
-                    </div>
-                  </div>
+                  <Post key={post.id} post={post} onSelected={e => { this.setState({ url: "post", selectedPost: post }); }} />
                 )
               })}
             </div>
