@@ -8,6 +8,7 @@ import PostCategoriesFilter from './components/PostCategoriesFilter'
 import SearchBar from './components/SearchBar'
 import OrderOptions from './components/OrderOptions'
 import PostModal from './components/PostModal'
+import PostCommentModal from './components/PostCommentModal'
 
 class App extends Component {
 
@@ -18,7 +19,8 @@ class App extends Component {
       categories: ['udacity', 'react', 'redux'],
       posts: [postUdacity, postReact, postRedux],
       comments: comments,
-      selectedPost: postUdacity
+      selectedPost: postUdacity,
+      isEditComment: null
     };
   }
 
@@ -78,13 +80,7 @@ class App extends Component {
               <PostCommentItem
                 key={comment.id}
                 comment={comment}
-                onClickEditButton={e => {
-                  document.getElementById('commentModal').style.display = "block";
-                  document.getElementById('commentModalTitle').innerText = `Edit comment by ${comment.author} ${Moment(comment.timestamp).from(new Date())}`;
-                  const body = document.getElementById('commentModalBody');
-                  body.value = comment.body;
-                  body.focus();
-                }}
+                onClickEditButton={e => { this.setState({ isEditComment: comment }) }}
                 onClickDeleteButton={e => {
                   const delCommentQuestionModal = document.getElementById('delCommentQuestionModal');
                   delCommentQuestionModal.style.display = "block";
@@ -96,31 +92,18 @@ class App extends Component {
             ))}
           </div>
         </div>
-        <div className="flat-button" onClick={e => {
-          document.getElementById('commentModal').style.display = "block";
-        }} >
+        <div className="flat-button" onClick={e => { this.setState({ isNewComment: true }) }} >
           <a className={"add " + post.category} >Add Comment</a>
         </div>
+        {(this.state.isNewComment || this.state.isEditComment) && (
+          <PostCommentModal
+            post={post}
+            comment={this.state.isEditComment ? this.state.isEditComment : {}}
+            onClickBackButton={e => this.setState({ isNewComment: false, isEditComment: null })}
+            onSave={e => this.setState({ isNewComment: false, isEditComment: null })}
 
-        <div id="commentModal" className="modal">
-          <div className="modal-dialog">
-            <div className="modal-heard">
-              <span onClick={e => {
-                document.getElementById('commentModal').style.display = "none";
-              }} />
-              <h1 id="commentModalTitle" >New comment</h1>
-            </div>
-            <div className="modal-content modal-comment">
-              <textarea id="commentModalBody" placeholder="Body comment" />
-              <div className="modal-footer">
-                <button className={"save-button " + post.category} href="/"
-                  onClick={e => {
-                    document.getElementById('commentModal').style.display = "none";
-                  }}>Save</button>
-              </div>
-            </div>
-          </div>
-        </div>
+          />
+        )}
         <div id="delPostQuestionModal" className="modal-short"
           onClick={e => {
             e.target.style.display = "none";
@@ -141,9 +124,9 @@ class App extends Component {
           <PostModal
             post={post}
             categories={this.state.categories}
-            onClickBackButton={e => { this.setState({ isEditPost: false }) }} 
+            onClickBackButton={e => { this.setState({ isEditPost: false }) }}
             onSave={e => { this.setState({ isEditPost: false }) }}
-            />
+          />
         )}
       </div>
     )
@@ -192,7 +175,7 @@ class App extends Component {
               categories={this.state.categories}
               onClickBackButton={e => { this.setState({ isNewPost: false }) }}
               onSave={e => { this.setState({ isNewPost: false }) }}
-               />
+            />
           )
         }
       </div>

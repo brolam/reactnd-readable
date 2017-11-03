@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import Moment from 'moment';
 
 function PostCommentModal(props) {
   const { post, comment, onClickBackButton , onSave } = props
@@ -9,11 +10,14 @@ function PostCommentModal(props) {
         <div className="modal-heard">
           <span onClick={onClickBackButton} />
           <h1>
-            {isNewComment(comment) ? 'New comment' : 'Edit comment'}
+            {isNewComment(comment) ? 'New comment' : `Edit comment by ${comment.author} ${Moment(comment.timestamp).from(new Date())}`}
           </h1>
         </div>
         <div className="modal-content modal-comment">
-          <textarea id="commentModalBody" placeholder="Body comment" />
+          <textarea 
+          placeholder="Body comment"
+          defaultValue={comment.body}
+           />
           <div className="modal-footer">
             <button className={"save-button " + post.category} href="/"
               onClick={onSave}>Save</button>
@@ -25,7 +29,7 @@ function PostCommentModal(props) {
 }
 
 function isNewComment(comment) {
-  return comment.id ? true : false
+  return comment.id ? false : true
 }
 
 PostCommentModal.propTypes = {

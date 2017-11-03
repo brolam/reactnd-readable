@@ -15,14 +15,14 @@ exports[`last Snapshot to edit comment 1`] = `
         onClick={[Function]}
       />
       <h1>
-        New comment
+        Edit comment by thingtwo a year ago
       </h1>
     </div>
     <div
       className="modal-content modal-comment"
     >
       <textarea
-        id="commentModalBody"
+        defaultValue="Hi there! I am a COMMENT."
         placeholder="Body comment"
       />
       <div
@@ -56,14 +56,14 @@ exports[`last Snapshot to new comment 1`] = `
         onClick={[Function]}
       />
       <h1>
-        Edit comment
+        New comment
       </h1>
     </div>
     <div
       className="modal-content modal-comment"
     >
       <textarea
-        id="commentModalBody"
+        defaultValue={undefined}
         placeholder="Body comment"
       />
       <div
