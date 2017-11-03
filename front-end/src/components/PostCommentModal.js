@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function PostCommentModal(props) {
   const { post, comment } = props
@@ -19,6 +20,13 @@ function PostCommentModal(props) {
       </div>
     </div>
   )
+}
+
+PostCommentModal.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    category: PropTypes.string.isRequired,
+  }),
 }
 
 export default PostCommentModal

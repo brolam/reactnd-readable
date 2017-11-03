@@ -1,9 +1,20 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import renderer from 'react-test-renderer'
 import PostCommentModal from '../components/PostCommentModal'
 
 test('render without error', () => {
   ReactDOM.render(<PostCommentModal post={postUdacity} comment={comment} />, document.createElement('div'));
+})
+
+test('last Snapshot to new comment', () => {
+  const postCommentModal = renderer.create(
+    <PostCommentModal
+      post={postUdacity}
+      comment={{}}
+    />);
+  let tree = postCommentModal.toJSON();
+  expect(tree).toMatchSnapshot();
 })
 
 const comment = {
