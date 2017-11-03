@@ -33,7 +33,7 @@ exports[`last Snapshot to edit Post 1`] = `
         <button
           className="save-button udacity"
           href="/"
-          onClick={undefined}
+          onClick={[Function]}
         >
           Save
         </button>

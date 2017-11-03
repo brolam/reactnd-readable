@@ -64,6 +64,19 @@ test('on save event to new Post', () => {
   expect(wasSaveEnvent).toBe(true);
 })
 
+test('on save event to Edit Post', () => {
+  let wasSaveEnvent = false;
+  const postModal = mount(
+    <PostModal
+      post={postUdacity}
+      categories={categories}
+      onClickBackButton={e => { }}
+      onSave={e => { wasSaveEnvent = true }}
+    />);
+  postModal.find('button [className="save-button udacity"]').simulate('click');
+  expect(wasSaveEnvent).toBe(true);
+})
+
 const categories = ['udacity', 'react', 'redux']
 
 const postUdacity = {
