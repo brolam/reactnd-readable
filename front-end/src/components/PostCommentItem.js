@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Moment from 'moment';
 import VoteScore from './VoteScore'
 
-function PostComment(props) {
+function PostCommentItem(props) {
   const { comment } = props
   return (
     <div className="post-comment" >
@@ -21,7 +21,7 @@ function PostComment(props) {
   )
 }
 
-PostComment.propTypes = {
+PostCommentItem.propTypes = {
   comment: PropTypes.shape({
     id: PropTypes.string.isRequired,
     timestamp: PropTypes.number.isRequired,
@@ -33,4 +33,4 @@ PostComment.propTypes = {
   onClickDeleteButton: PropTypes.func.isRequired,
 }
 
-export default PostComment
+export default PostCommentItem

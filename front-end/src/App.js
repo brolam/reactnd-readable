@@ -3,7 +3,7 @@ import './App.css';
 import Moment from 'moment';
 import VoteScore from './components/VoteScore'
 import PostItem from './components/PostItem'
-import PostComment from './components/PostComment'
+import PostCommentItem from './components/PostCommentItem'
 import PostCategoriesFilter from './components/PostCategoriesFilter'
 import SearchBar from './components/SearchBar'
 import OrderOptions from './components/OrderOptions'
@@ -75,7 +75,7 @@ class App extends Component {
           </div>
           <div className={"post-page-comments"}>
             {comments.map(comment => (
-              <PostComment
+              <PostCommentItem
                 key={comment.id}
                 comment={comment}
                 onClickEditButton={e => {
