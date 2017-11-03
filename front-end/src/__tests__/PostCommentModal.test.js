@@ -5,7 +5,13 @@ import { mount } from 'enzyme'
 import PostCommentModal from '../components/PostCommentModal'
 
 test('render without error', () => {
-  ReactDOM.render(<PostCommentModal post={postUdacity} comment={comment} />, document.createElement('div'));
+  ReactDOM.render(
+    <PostCommentModal
+      post={postUdacity}
+      comment={comment}
+      onClickBackButton={e => { }}
+      onSave={e => { }}
+    />, document.createElement('div'));
 })
 
 test('last Snapshot to new comment', () => {
@@ -13,6 +19,8 @@ test('last Snapshot to new comment', () => {
     <PostCommentModal
       post={postUdacity}
       comment={{}}
+      onClickBackButton={e => { }}
+      onSave={e => { }}
     />);
   let tree = postCommentModal.toJSON();
   expect(tree).toMatchSnapshot();
@@ -23,6 +31,8 @@ test('last Snapshot to edit comment', () => {
     <PostCommentModal
       post={postUdacity}
       comment={comment}
+      onClickBackButton={e => { }}
+      onSave={e => { }}
     />);
   let tree = postCommentModal.toJSON();
   expect(tree).toMatchSnapshot();
@@ -39,6 +49,19 @@ test('on click back button', () => {
     />);
   postCommentModal.find('div [className="modal-heard"] span').simulate('click')
   expect(isClikedBackButton).toBe(true);
+})
+
+test('on save event', () => {
+  let wasSaveEnvent = false;
+  const postCommentModal = mount(
+    <PostCommentModal
+      post={postUdacity}
+      comment={comment}
+      onClickBackButton={e => { }}
+      onSave={e => { wasSaveEnvent = true }}
+    />);
+  postCommentModal.find('button [className="save-button udacity"]').simulate('click')
+  expect(wasSaveEnvent).toBe(true);
 })
 
 const comment = {

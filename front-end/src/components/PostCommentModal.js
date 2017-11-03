@@ -2,12 +2,12 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 function PostCommentModal(props) {
-  const { post, comment } = props
+  const { post, comment, onClickBackButton , onSave } = props
   return (
     <div id="commentModal" className="modal modal-open">
       <div className="modal-dialog">
         <div className="modal-heard">
-          <span onClick={props.onClickBackButton} />
+          <span onClick={onClickBackButton} />
           <h1>
             {isNewComment(comment) ? 'New comment' : 'Edit comment'}
           </h1>
@@ -16,7 +16,7 @@ function PostCommentModal(props) {
           <textarea id="commentModalBody" placeholder="Body comment" />
           <div className="modal-footer">
             <button className={"save-button " + post.category} href="/"
-              onClick={e => { }}>Save</button>
+              onClick={onSave}>Save</button>
           </div>
         </div>
       </div>
@@ -33,7 +33,9 @@ PostCommentModal.propTypes = {
     id: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
   }),
-  comment: PropTypes.shape({}).isRequired
+  comment: PropTypes.shape({}).isRequired,
+  onClickBackButton: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired
 }
 
 export default PostCommentModal
