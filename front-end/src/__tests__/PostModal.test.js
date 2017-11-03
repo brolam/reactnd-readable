@@ -1,11 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PostModal from '../components/PostModal'
+import renderer from 'react-test-renderer'
 
 test('render without error', () => {
   ReactDOM.render(<PostModal post={postUdacity} categories={categories} />, document.createElement('div'));
 })
 
+test('last Snapshot to Post', () => {
+  const postModal = renderer.create(<PostModal post={{}} categories={categories} />);
+  let tree = postModal.toJSON();
+  expect(tree).toMatchSnapshot();
+})
 
 const categories = ['udacity', 'react', 'redux']
 
