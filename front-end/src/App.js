@@ -6,6 +6,8 @@ import Post from './components/Post'
 import PostComment from './components/PostComment'
 import PostCategoriesFilter from './components/PostCategoriesFilter'
 import SearchBar from './components/SearchBar'
+import OrderOptions from './components/OrderOptions'
+import PostPersist from './components/PostPersist'
 
 class App extends Component {
 
@@ -48,7 +50,8 @@ class App extends Component {
           <div className="post-page-header-buttons">
             <button className="edit-button" href="/"
               onClick={e => {
-                document.getElementById('editPostModal').style.display = "block";
+                //document.getElementById('editPostModal').style.display = "block";
+                this.setState({ isEditPost: true })
               }}>Edit</button>
             <button className="delete-button" href="/"
               onClick={e => {
@@ -68,16 +71,12 @@ class App extends Component {
           </div>
           <div className="post-comments-title">
             <span>Commentes({comments.length})</span>
-            <div className="order-options">
-              <select>
-                <option value="voteScore" > Vote Score</option>
-                <option value="publishedDate" >Published date</option>
-              </select>
-            </div>
+            <OrderOptions />
           </div>
           <div className={"post-page-comments"}>
             {comments.map(comment => (
               <PostComment
+                key={comment.id}
                 comment={comment}
                 onClickEditButton={e => {
                   document.getElementById('commentModal').style.display = "block";
@@ -102,30 +101,7 @@ class App extends Component {
         }} >
           <a className={"add " + post.category} >Add Comment</a>
         </div>
-        <div id="editPostModal" className="modal">
-          <div className="modal-dialog">
-            <div className="modal-heard modal-post">
-              <span onClick={e => {
-                document.getElementById('editPostModal').style.display = "none";
-              }} />
-              <input
-                type="text"
-                placeholder="Title new post"
-                defaultValue={post.title}
-              />
-            </div>
-            <div className="modal-content modal-post">
-              <textarea placeholder="Body post" defaultValue={post.body} />
-              <div className="modal-footer">
-                <button className={"save-button " + post.category} href="/"
-                  onClick={e => {
-                    document.getElementById('editPostModal').style.display = "none";
-                    console.log("Open");
-                  }}>Save</button>
-              </div>
-            </div>
-          </div>
-        </div>
+
         <div id="commentModal" className="modal">
           <div className="modal-dialog">
             <div className="modal-heard">
@@ -161,6 +137,12 @@ class App extends Component {
             <h1>Are you sure? Do you want delete this comment?  <a className="yes" href="/">Yes?</a>  or  <a className="no" href="/">No?</a> </h1>
           </div>
         </div>
+        {this.state.isEditPost && (
+          <PostPersist
+            post={post}
+            categories={this.state.categories}
+            onClickBack={e => { this.setState({ isEditPost: false }) }} />
+        )}
       </div>
     )
   }
@@ -172,20 +154,15 @@ class App extends Component {
           <div className="main-page-header-title">
             <span />
             <h1>Readable</h1>
-            <PostCategoriesFilter categories={this.state.categories} onSelected={e =>{}} />
+            <PostCategoriesFilter categories={this.state.categories} onSelected={e => { }} />
           </div>
         </div>
-        <SearchBar placeholder="Search by title post"/>
+        <SearchBar placeholder="Search by title post" />
         <div className="main-page-content">
           <div className="posts">
             <div className="posts-title">
               <span>Posts</span>
-              <div className="order-options">
-                <select>
-                  <option value="voteScore" > Vote Score</option>
-                  <option value="publishedDate" >Published date</option>
-                </select>
-              </div>
+              <OrderOptions />
             </div>
             <div className="posts-list">
               {this.state.posts.map(post => {
@@ -198,37 +175,18 @@ class App extends Component {
         </div>
         <div className="flat-button"
           onClick={e => {
-            document.getElementById('newPostModal').style.display = "block";
-            console.log("Open");
+            this.setState({ isNewPost: true })
           }}>
           <a className="add">Add Post</a>
         </div>
-        <div id="newPostModal" className="modal">
-          <div className="modal-dialog">
-            <div className="modal-heard modal-post">
-              <span onClick={e => {
-                document.getElementById('newPostModal').style.display = "none";
-              }} />
-              <input
-                type="text"
-                placeholder="Title new post"
-              />
-            </div>
-            <div className="modal-content modal-post">
-              <textarea placeholder="Body post" />
-              <div className="modal-footer">
-                <select onChange={e => {
-                  document.getElementById('newPostModal').style.display = "none";
-                }} >
-                  <option value="none">Save as?</option>
-                  {this.state.categories.map(category => (
-                    <option className={category} key={category} value="{category}">{category[0].toUpperCase() + category.slice(1)}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
+        {
+          this.state.isNewPost && (
+            <PostPersist
+              post={{}}
+              categories={this.state.categories}
+              onClickBack={e => { this.setState({ isNewPost: false }) }} />
+          )
+        }
       </div>
     )
   }
