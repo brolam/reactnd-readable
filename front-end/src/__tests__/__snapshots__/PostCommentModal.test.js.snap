@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`last Snapshot to new comment 1`] = `
+exports[`last Snapshot to edit comment 1`] = `
 <div
   className="modal modal-open"
   id="commentModal"
@@ -16,6 +16,47 @@ exports[`last Snapshot to new comment 1`] = `
       />
       <h1>
         New comment
+      </h1>
+    </div>
+    <div
+      className="modal-content modal-comment"
+    >
+      <textarea
+        id="commentModalBody"
+        placeholder="Body comment"
+      />
+      <div
+        className="modal-footer"
+      >
+        <button
+          className="save-button udacity"
+          href="/"
+          onClick={[Function]}
+        >
+          Save
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`last Snapshot to new comment 1`] = `
+<div
+  className="modal modal-open"
+  id="commentModal"
+>
+  <div
+    className="modal-dialog"
+  >
+    <div
+      className="modal-heard"
+    >
+      <span
+        onClick={[Function]}
+      />
+      <h1>
+        Edit comment
       </h1>
     </div>
     <div

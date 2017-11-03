@@ -17,6 +17,16 @@ test('last Snapshot to new comment', () => {
   expect(tree).toMatchSnapshot();
 })
 
+test('last Snapshot to edit comment', () => {
+  const postCommentModal = renderer.create(
+    <PostCommentModal
+      post={postUdacity}
+      comment={comment}
+    />);
+  let tree = postCommentModal.toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
 const comment = {
   id: '894tuq4ut84ut8v4t8wun89g',
   parentId: "7ni6ok3ym7mf1p33lnez",
