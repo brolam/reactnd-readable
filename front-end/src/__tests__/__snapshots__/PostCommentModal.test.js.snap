@@ -12,7 +12,7 @@ exports[`last Snapshot to edit comment 1`] = `
       className="modal-heard"
     >
       <span
-        onClick={[Function]}
+        onClick={undefined}
       />
       <h1>
         New comment
@@ -53,7 +53,7 @@ exports[`last Snapshot to new comment 1`] = `
       className="modal-heard"
     >
       <span
-        onClick={[Function]}
+        onClick={undefined}
       />
       <h1>
         Edit comment

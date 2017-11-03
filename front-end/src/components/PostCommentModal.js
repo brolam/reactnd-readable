@@ -7,7 +7,7 @@ function PostCommentModal(props) {
     <div id="commentModal" className="modal modal-open">
       <div className="modal-dialog">
         <div className="modal-heard">
-          <span onClick={e => { }} />
+          <span onClick={props.onClickBackButton} />
           <h1>
             {isNewComment(comment) ? 'New comment' : 'Edit comment'}
           </h1>
@@ -33,6 +33,7 @@ PostCommentModal.propTypes = {
     id: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
   }),
+  comment: PropTypes.shape({}).isRequired
 }
 
 export default PostCommentModal

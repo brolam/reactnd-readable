@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import renderer from 'react-test-renderer'
+import { mount } from 'enzyme'
 import PostCommentModal from '../components/PostCommentModal'
 
 test('render without error', () => {
@@ -25,6 +26,19 @@ test('last Snapshot to edit comment', () => {
     />);
   let tree = postCommentModal.toJSON();
   expect(tree).toMatchSnapshot();
+})
+
+test('on click back button', () => {
+  let isClikedBackButton = false;
+  const postCommentModal = mount(
+    <PostCommentModal
+      post={postUdacity}
+      comment={comment}
+      onClickBackButton={e => { isClikedBackButton = true }}
+      onSave={e => { }}
+    />);
+  postCommentModal.find('div [className="modal-heard"] span').simulate('click')
+  expect(isClikedBackButton).toBe(true);
 })
 
 const comment = {
