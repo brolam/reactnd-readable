@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PostPersist from '../components/PostPersist'
+import PostModal from '../components/PostModal'
 
 test('render without error', () => {
-  ReactDOM.render(<PostPersist post={postUdacity} categories={categories} />, document.createElement('div'));
+  ReactDOM.render(<PostModal post={postUdacity} categories={categories} />, document.createElement('div'));
 })
 
 

@@ -7,7 +7,7 @@ import PostCommentItem from './components/PostCommentItem'
 import PostCategoriesFilter from './components/PostCategoriesFilter'
 import SearchBar from './components/SearchBar'
 import OrderOptions from './components/OrderOptions'
-import PostPersist from './components/PostPersist'
+import PostModal from './components/PostModal'
 
 class App extends Component {
 
@@ -138,7 +138,7 @@ class App extends Component {
           </div>
         </div>
         {this.state.isEditPost && (
-          <PostPersist
+          <PostModal
             post={post}
             categories={this.state.categories}
             onClickBack={e => { this.setState({ isEditPost: false }) }} />
@@ -185,7 +185,7 @@ class App extends Component {
         </div>
         {
           this.state.isNewPost && (
-            <PostPersist
+            <PostModal
               post={{}}
               categories={this.state.categories}
               onClickBack={e => { this.setState({ isNewPost: false }) }} />

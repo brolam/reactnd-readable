@@ -1,9 +1,9 @@
 import React from 'react'
 
-function PostPersist(props) {
+function PostModal(props) {
   const { post, categories } = props
   return (
-    <div id="postPersistModal" className="modal modal-open" >
+    <div id="postModal" className="modal modal-open" >
       <div className="modal-dialog">
         <div className="modal-heard modal-post">
           <span onClick={props.onClickBack} />
@@ -18,7 +18,7 @@ function PostPersist(props) {
           placeholder="Body post"
           defaultValue={post.body} />
           <div className="modal-footer">
-            {post.category ?
+            {isNewPost(post)?
               getFooterIfEditPost(post, props.onClickBack)
               :
               getFooterIfNewPost(categories, props.onClickBack)}
@@ -27,6 +27,10 @@ function PostPersist(props) {
       </div>
     </div>
   )
+}
+
+function isNewPost(post) {
+  return post.category? true : false;
 }
 
 function getFooterIfNewPost(categories, onSave) {
@@ -48,4 +52,4 @@ function getFooterIfEditPost(post, onSave) {
   )
 }
 
-export default PostPersist
+export default PostModal
