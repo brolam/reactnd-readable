@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Moment from 'moment';
 import VoteScore from './components/VoteScore'
-import Post from './components/Post'
+import PostItem from './components/PostItem'
 import PostComment from './components/PostComment'
 import PostCategoriesFilter from './components/PostCategoriesFilter'
 import SearchBar from './components/SearchBar'
@@ -167,7 +167,11 @@ class App extends Component {
             <div className="posts-list">
               {this.state.posts.map(post => {
                 return (
-                  <Post key={post.id} post={post} onSelected={e => { this.setState({ url: "post", selectedPost: post }); }} />
+                  <PostItem
+                    key={post.id}
+                    post={post}
+                    onSelected={e => { this.setState({ url: "post", selectedPost: post }); }}
+                  />
                 )
               })}
             </div>

@@ -2,22 +2,22 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import renderer from 'react-test-renderer'
 import { mount } from 'enzyme';
-import Post from '../components/Post'
+import PostItem from '../components/PostItem'
 
 test('render without error', () => {
-  ReactDOM.render(<Post post={postUdacity} onSelected={ e =>{} } />, document.createElement('div'));
+  ReactDOM.render(<PostItem post={postUdacity} onSelected={ e =>{} } />, document.createElement('div'));
 })
 
 test('last Snapshot', () => {
-  const post = renderer.create(<Post post={postUdacity} onSelected={ e =>{} } />);
-  let tree = post.toJSON();
+  const postItem = renderer.create(<PostItem post={postUdacity} onSelected={ e =>{} } />);
+  let tree = postItem.toJSON();
   expect(tree).toMatchSnapshot();
 })
 
 test('on selected post', () => {
   let isSelectedPost = false;
-  const post = mount(<Post post={postUdacity} onSelected={ e =>{ isSelectedPost = true} } />);
-  post.find('div [className="post"]').simulate('click')
+  const postItem = mount(<PostItem post={postUdacity} onSelected={ e =>{ isSelectedPost = true} } />);
+  postItem.find('div [className="post"]').simulate('click')
   expect(isSelectedPost).toBe(true);
 })
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import Moment from 'moment';
 import VoteScore from './VoteScore'
 
-function Post(props) {
+function PostItem(props) {
   const { post } = props
   return (
     <div className="post" onClick={props.onSelected}>
@@ -24,7 +24,7 @@ function Post(props) {
   )
 }
 
-Post.propTypes = {
+PostItem.propTypes = {
   post: PropTypes.shape({
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
@@ -35,4 +35,4 @@ Post.propTypes = {
   onSelected: PropTypes.func.isRequired
 }
 
-export default Post
+export default PostItem
