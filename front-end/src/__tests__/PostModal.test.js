@@ -2,6 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PostModal from '../components/PostModal'
 import renderer from 'react-test-renderer'
+import {mount} from 'enzyme'
 
 test('render without error', () => {
   ReactDOM.render(
@@ -35,6 +36,13 @@ test('last Snapshot to edit Post', () => {
     />);
   let tree = postModal.toJSON();
   expect(tree).toMatchSnapshot();
+})
+
+test('on click back button', () => {
+  let isClikedBackButton = false;
+  const postModal = mount(<PostModal post={postUdacity} onClickBackButton={ e =>{ isClikedBackButton = true}} onSave={e=>{}} />);
+  postModal.find('div [className="modal-heard modal-post"] span').simulate('click')
+  expect(isClikedBackButton).toBe(true);
 })
 
 const categories = ['udacity', 'react', 'redux']
