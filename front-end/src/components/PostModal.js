@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 function PostModal(props) {
   const { post, categories } = props
@@ -6,7 +7,7 @@ function PostModal(props) {
     <div id="postModal" className="modal modal-open" >
       <div className="modal-dialog">
         <div className="modal-heard modal-post">
-          <span onClick={props.onClickBack} />
+          <span onClick={props.onClickBackButton} />
           <input
             type="text"
             placeholder="Title post"
@@ -14,14 +15,15 @@ function PostModal(props) {
           />
         </div>
         <div className="modal-content modal-post">
-          <textarea 
-          placeholder="Body post"
-          defaultValue={post.body} />
+          <textarea
+            placeholder="Body post"
+            defaultValue={post.body} />
           <div className="modal-footer">
-            {isNewPost(post)?
-              getFooterIfEditPost(post, props.onClickBack)
+            {isNewPost(post) ?
+              getFooterToNewPost(categories, props.onClickBack)
               :
-              getFooterIfNewPost(categories, props.onClickBack)}
+              getFooterToEditPost(post, props.onClickBack)
+            }
           </div>
         </div>
       </div>
@@ -30,10 +32,10 @@ function PostModal(props) {
 }
 
 function isNewPost(post) {
-  return post.category? true : false;
+  return post.category ? false : true;
 }
 
-function getFooterIfNewPost(categories, onSave) {
+function getFooterToNewPost(categories, onSave) {
   return (
     <select onChange={onSave} >
       <option value="none">Save as?</option>
@@ -44,12 +46,17 @@ function getFooterIfNewPost(categories, onSave) {
   )
 }
 
-function getFooterIfEditPost(post, onSave) {
+function getFooterToEditPost(post, onSave) {
   return (
     <button className={"save-button " + post.category} href="/"
       onClick={onSave}>Save
     </button>
   )
+}
+
+PostModal.propTypes = {
+  onClickBackButton: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired
 }
 
 export default PostModal

@@ -4,11 +4,35 @@ import PostModal from '../components/PostModal'
 import renderer from 'react-test-renderer'
 
 test('render without error', () => {
-  ReactDOM.render(<PostModal post={postUdacity} categories={categories} />, document.createElement('div'));
+  ReactDOM.render(
+    <PostModal
+      post={postUdacity}
+      categories={categories}
+      onClickBackButton={e => { }}
+      onSave={e => { }}
+    />, document.createElement('div'));
 })
 
-test('last Snapshot to Post', () => {
-  const postModal = renderer.create(<PostModal post={{}} categories={categories} />);
+test('last Snapshot to new Post', () => {
+  const postModal = renderer.create(
+    <PostModal
+      post={{}}
+      categories={categories}
+      onClickBackButton={e => { }}
+      onSave={e => { }}
+    />);
+  let tree = postModal.toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
+test('last Snapshot to edit Post', () => {
+  const postModal = renderer.create(
+    <PostModal
+      post={postUdacity}
+      categories={categories}
+      onClickBackButton={e => { }}
+      onSave={e => { }}
+    />);
   let tree = postModal.toJSON();
   expect(tree).toMatchSnapshot();
 })
