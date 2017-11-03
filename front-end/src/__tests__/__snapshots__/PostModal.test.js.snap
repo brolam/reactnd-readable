@@ -74,7 +74,7 @@ exports[`last Snapshot to new Post 1`] = `
         className="modal-footer"
       >
         <select
-          onChange={undefined}
+          onChange={[Function]}
         >
           <option
             value="none"

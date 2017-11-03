@@ -20,9 +20,9 @@ function PostModal(props) {
             defaultValue={post.body} />
           <div className="modal-footer">
             {isNewPost(post) ?
-              getFooterToNewPost(categories, props.onClickBack)
+              getFooterToNewPost(categories, props.onSave)
               :
-              getFooterToEditPost(post, props.onClickBack)
+              getFooterToEditPost(post,  props.onSave)
             }
           </div>
         </div>
@@ -55,6 +55,7 @@ function getFooterToEditPost(post, onSave) {
 }
 
 PostModal.propTypes = {
+  categories: PropTypes.array.isRequired,
   onClickBackButton: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired
 }

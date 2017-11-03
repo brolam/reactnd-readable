@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PostModal from '../components/PostModal'
 import renderer from 'react-test-renderer'
-import {mount} from 'enzyme'
+import { mount } from 'enzyme'
 
 test('render without error', () => {
   ReactDOM.render(
@@ -40,9 +40,28 @@ test('last Snapshot to edit Post', () => {
 
 test('on click back button', () => {
   let isClikedBackButton = false;
-  const postModal = mount(<PostModal post={postUdacity} onClickBackButton={ e =>{ isClikedBackButton = true}} onSave={e=>{}} />);
+  const postModal = mount(
+    <PostModal
+      post={postUdacity}
+      onClickBackButton={e => { isClikedBackButton = true }}
+      categories={categories}
+      onSave={e => { }}
+    />);
   postModal.find('div [className="modal-heard modal-post"] span').simulate('click')
   expect(isClikedBackButton).toBe(true);
+})
+
+test('on save event to new Post', () => {
+  let wasSaveEnvent = false;
+  const postModal = mount(
+    <PostModal
+      post={{}}
+      categories={categories}
+      onClickBackButton={e => { }}
+      onSave={e => { wasSaveEnvent = true }}
+    />);
+  postModal.find('select').simulate('change');
+  expect(wasSaveEnvent).toBe(true);
 })
 
 const categories = ['udacity', 'react', 'redux']

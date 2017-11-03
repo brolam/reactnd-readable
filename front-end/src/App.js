@@ -141,7 +141,9 @@ class App extends Component {
           <PostModal
             post={post}
             categories={this.state.categories}
-            onClickBack={e => { this.setState({ isEditPost: false }) }} />
+            onClickBackButton={e => { this.setState({ isEditPost: false }) }} 
+            onSave={e => { this.setState({ isEditPost: false }) }}
+            />
         )}
       </div>
     )
@@ -188,7 +190,9 @@ class App extends Component {
             <PostModal
               post={{}}
               categories={this.state.categories}
-              onClickBack={e => { this.setState({ isNewPost: false }) }} />
+              onClickBackButton={e => { this.setState({ isNewPost: false }) }}
+              onSave={e => { this.setState({ isNewPost: false }) }}
+               />
           )
         }
       </div>
