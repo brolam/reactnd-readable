@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`last Snapshot 1`] = `
+<div
+  className="modal-short"
+>
+  <div
+    className="modal-short-dialog"
+  >
+    <h1>
+      Question?
+       
+      <a
+        className="yes"
+        href="/"
+      >
+        Yes?
+      </a>
+        or  
+      <a
+        className="no"
+        href="/"
+      >
+        No?
+      </a>
+    </h1>
+  </div>
+</div>
+`;
