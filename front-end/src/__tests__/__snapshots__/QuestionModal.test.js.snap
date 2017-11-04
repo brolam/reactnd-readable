@@ -3,6 +3,7 @@
 exports[`last Snapshot 1`] = `
 <div
   className="modal-short"
+  onClick={[Function]}
 >
   <div
     className="modal-short-dialog"
