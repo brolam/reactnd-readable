@@ -1,11 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import renderer from 'react-test-renderer'
 import PostCommentBody from '../components/PostCommentBody'
 
 test('render without error', () => {
   ReactDOM.render(
     <PostCommentBody post={postRedux} />, document.createElement('div'));
 })
+
+test('last Snapshot', () => {
+  const postCommentBody = renderer.create(<PostCommentBody post={postRedux} />);
+  let tree = postCommentBody.toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
 
 const postRedux = {
   category: "redux",
