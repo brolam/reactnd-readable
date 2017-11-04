@@ -1,13 +1,22 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import renderer from 'react-test-renderer'
 import Home from '../components/Home'
 
 
 test('render without error', () => {
   ReactDOM.render(
-    <Home posts={posts} />,
+    <Home posts={posts} categories={categories} />,
     document.createElement('div'));
 })
+
+test('last Snapshot', () => {
+  const home = renderer.create(<Home posts={posts} categories={categories} />);
+  let tree = home.toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
+const categories = ['udacity', 'react', 'redux']
 
 const posts = [{
   category: "udacity",
