@@ -20,6 +20,9 @@ function PostList(props) {
           )
         })}
       </div>
+      <div className="flat-button">
+        <a className="add">Add Post</a>
+      </div>
     </div>
   )
 }

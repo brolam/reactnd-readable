@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Moment from 'moment';
 import VoteScore from './components/VoteScore'
-import PostItem from './components/PostItem'
+import PostList from './components/PostList'
 import PostCommentItem from './components/PostCommentItem'
 import PostCategoriesFilter from './components/PostCategoriesFilter'
 import SearchBar from './components/SearchBar'
@@ -87,15 +87,16 @@ class App extends Component {
         <div className="flat-button" onClick={e => { this.setState({ isNewComment: true }) }} >
           <a className={"add " + post.category} >Add Comment</a>
         </div>
-        {(this.state.isNewComment || this.state.isEditComment) && (
-          <PostCommentModal
-            post={post}
-            comment={this.state.isEditComment ? this.state.isEditComment : {}}
-            onClickBackButton={e => this.setState({ isNewComment: false, isEditComment: null })}
-            onSave={e => this.setState({ isNewComment: false, isEditComment: null })}
+        {
+          (this.state.isNewComment || this.state.isEditComment) && (
+            <PostCommentModal
+              post={post}
+              comment={this.state.isEditComment ? this.state.isEditComment : {}}
+              onClickBackButton={e => this.setState({ isNewComment: false, isEditComment: null })}
+              onSave={e => this.setState({ isNewComment: false, isEditComment: null })}
 
-          />
-        )}
+            />
+          )}
         {
           this.state.showDeletePostQuestionModal && (
             <QuestionModal
@@ -104,9 +105,7 @@ class App extends Component {
               onYesAnswer={e => this.setState({ showDeletePostQuestionModal: false })}
               onNoAnswer={e => this.setState({ showDeletePostQuestionModal: false })}
             />
-          )
-        }
-
+          )}
         {
           this.state.showDeleteCommentQuestionModal && (
             <QuestionModal
@@ -115,25 +114,16 @@ class App extends Component {
               onYesAnswer={e => this.setState({ showDeleteCommentQuestionModal: false })}
               onNoAnswer={e => this.setState({ showDeleteCommentQuestionModal: false })}
             />
-          )
-        }
-
-        <div id="delCommentQuestionModal" className="modal-short"
-          onClick={e => {
-            e.target.style.display = "none";
-          }}>
-          <div className="modal-short-dialog">
-            <h1>Are you sure? Do you want delete this comment?  <a className="yes" href="/">Yes?</a>  or  <a className="no" href="/">No?</a> </h1>
-          </div>
-        </div>
-        {this.state.isEditPost && (
-          <PostModal
-            post={post}
-            categories={this.state.categories}
-            onClickBackButton={e => { this.setState({ isEditPost: false }) }}
-            onSave={e => { this.setState({ isEditPost: false }) }}
-          />
-        )}
+          )}
+        {
+          this.state.isEditPost && (
+            <PostModal
+              post={post}
+              categories={this.state.categories}
+              onClickBackButton={e => { this.setState({ isEditPost: false }) }}
+              onSave={e => { this.setState({ isEditPost: false }) }}
+            />
+          )}
       </div>
     )
   }
@@ -150,29 +140,7 @@ class App extends Component {
         </div>
         <SearchBar placeholder="Search by title post" />
         <div className="main-page-content">
-          <div className="posts">
-            <div className="posts-title">
-              <span>Posts</span>
-              <OrderOptions />
-            </div>
-            <div className="posts-list">
-              {this.state.posts.map(post => {
-                return (
-                  <PostItem
-                    key={post.id}
-                    post={post}
-                    onSelected={e => { this.setState({ url: "post", selectedPost: post }); }}
-                  />
-                )
-              })}
-            </div>
-          </div>
-        </div>
-        <div className="flat-button"
-          onClick={e => {
-            this.setState({ isNewPost: true })
-          }}>
-          <a className="add">Add Post</a>
+          <PostList posts={this.state.posts} />
         </div>
         {
           this.state.isNewPost && (
