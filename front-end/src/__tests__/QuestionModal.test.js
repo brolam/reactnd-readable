@@ -10,9 +10,9 @@ test('render without error', () => {
       message={"A question was render without error"}
       onYesAnswer={e => { }}
       onNoAnswer={e => { }}
+      timeout={3000}
     />, document.createElement('div'));
 })
-
 
 test('last Snapshot', () => {
   const questionModal = renderer.create(
@@ -20,6 +20,7 @@ test('last Snapshot', () => {
       message={"Question?"}
       onYesAnswer={e => { }}
       onNoAnswer={e => { }}
+      timeout={3000}
     />);
   let tree = questionModal.toJSON();
   expect(tree).toMatchSnapshot();
@@ -32,7 +33,24 @@ test('when clicking anywhere and not on yes or no', () => {
       message={"Question?"}
       onYesAnswer={e => { }}
       onNoAnswer={e => { isClikedNoAnswer = true }}
+      timeout={3000}
     />);
   questionModal.find('div [className="modal-short"]').simulate('click')
   expect(isClikedNoAnswer).toBe(true);
+})
+
+test('close automatic on default timeout', () => {
+  jest.useFakeTimers();
+  let isClikedNoAnswer = false;
+  const questionModal = mount(
+    <QuestionModal
+      message={"Question?"}
+      onYesAnswer={e => { }}
+      onNoAnswer={e => { isClikedNoAnswer = true }}
+      timeout={3000}
+    />);
+  setTimeout(() => {
+    expect(isClikedNoAnswer).toBe(true);
+  }, 5000);
+  jest.runAllTimers();
 })
