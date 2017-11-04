@@ -20,6 +20,7 @@ exports[`last Snapshot 1`] = `
        or 
       <a
         className="no"
+        onClick={[Function]}
       >
         No?
       </a>

@@ -67,3 +67,16 @@ test('on click yes answer', () => {
   questionModal.find('a [className="yes"]').simulate('click')
   expect(isClikedYesAnswer).toBe(true);
 })
+
+test('on click no answer', () => {
+  let isClikedNoAnswer = false;
+  const questionModal = mount(
+    <QuestionModal
+      message={"Question?"}
+      onYesAnswer={e => { }}
+      onNoAnswer={e => { isClikedNoAnswer = true }}
+      timeout={3000}
+    />);
+  questionModal.find('a [className="no"]').simulate('click')
+  expect(isClikedNoAnswer).toBe(true);
+})
