@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 import Moment from 'moment';
 import VoteScore from './components/VoteScore'
-import PostList from './components/PostList'
 import PostCommentItem from './components/PostCommentItem'
-import PostCategoriesFilter from './components/PostCategoriesFilter'
-import SearchBar from './components/SearchBar'
 import OrderOptions from './components/OrderOptions'
 import PostModal from './components/PostModal'
 import PostCommentModal from './components/PostCommentModal'
 import QuestionModal from './components/QuestionModal'
+import Home from './components/Home'
 
 class App extends Component {
 
@@ -28,9 +26,9 @@ class App extends Component {
   }
 
   render() {
-    const { url, selectedPost, comments } = this.state
+    const { url, selectedPost, posts, categories, comments } = this.state
     if (url === "home") {
-      return this.getHome();
+      return (<Home posts={posts} categories={categories} />)
     } else if (url === "post") {
       return this.getPost(selectedPost, comments.filter(comment => (comment.parentId === selectedPost.id)))
     }
@@ -124,34 +122,6 @@ class App extends Component {
               onSave={e => { this.setState({ isEditPost: false }) }}
             />
           )}
-      </div>
-    )
-  }
-
-  getHome() {
-    return (
-      <div className="app">
-        <div className="main-page-header">
-          <div className="main-page-header-title">
-            <span />
-            <h1>Readable</h1>
-            <PostCategoriesFilter categories={this.state.categories} onSelected={e => { }} />
-          </div>
-        </div>
-        <SearchBar placeholder="Search by title post" />
-        <div className="main-page-content">
-          <PostList posts={this.state.posts} />
-        </div>
-        {
-          this.state.isNewPost && (
-            <PostModal
-              post={{}}
-              categories={this.state.categories}
-              onClickBackButton={e => { this.setState({ isNewPost: false }) }}
-              onSave={e => { this.setState({ isNewPost: false }) }}
-            />
-          )
-        }
       </div>
     )
   }
