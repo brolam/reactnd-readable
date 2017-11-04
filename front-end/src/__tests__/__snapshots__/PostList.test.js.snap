@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`last Snapshot 1`] = `
+<div
+  className="posts"
+>
+  <div
+    className="posts-title"
+  >
+    <span>
+      Posts
+    </span>
+    <div
+      className="order-options"
+    >
+      <select>
+        <option
+          value="voteScore"
+        >
+          Vote Score
+        </option>
+        <option
+          value="publishedDate"
+        >
+          Published date
+        </option>
+      </select>
+    </div>
+  </div>
+  <div
+    className="posts-list"
+  >
+    <div
+      className="post"
+      onClick={[Function]}
+    >
+      <div
+        className="post-header"
+      >
+        <div
+          className="post-header-title"
+        >
+          <span
+            className="category udacity"
+          >
+            Udacity
+          </span>
+           
+          Udacity is the best place to learn technology.
+        </div>
+        <div
+          className="post-header-published"
+        >
+          <span
+            className="published"
+          >
+            a year ago
+          </span>
+        </div>
+      </div>
+      <div
+        className="post-header-author"
+      >
+        by 
+        thingtwo
+      </div>
+      <div
+        className="post-body"
+      >
+        Everyone says so after all.
+      </div>
+      <div
+        className="post-footer"
+      >
+        <button
+          className="liked"
+          onClick={undefined}
+        >
+          Liked 
+          <span>
+            5
+          </span>
+        </button>
+        <button
+          className="not-liked"
+          onClick={undefined}
+        >
+          Not like
+        </button>
+      </div>
+    </div>
+    <div
+      className="post"
+      onClick={[Function]}
+    >
+      <div
+        className="post-header"
+      >
+        <div
+          className="post-header-title"
+        >
+          <span
+            className="category react"
+          >
+            React
+          </span>
+           
+          Udacity is the best place to learn React
+        </div>
+        <div
+          className="post-header-published"
+        >
+          <span
+            className="published"
+          >
+            a year ago
+          </span>
+        </div>
+      </div>
+      <div
+        className="post-header-author"
+      >
+        by 
+        thingtwo
+      </div>
+      <div
+        className="post-body"
+      >
+        Everyone says so after all.
+      </div>
+      <div
+        className="post-footer"
+      >
+        <button
+          className="liked"
+          onClick={undefined}
+        >
+          Liked 
+          <span>
+            5
+          </span>
+        </button>
+        <button
+          className="not-liked"
+          onClick={undefined}
+        >
+          Not like
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;

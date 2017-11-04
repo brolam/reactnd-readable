@@ -1,11 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import renderer from 'react-test-renderer'
 import PostList from '../components/PostList'
+
 
 test('render without error', () => {
   ReactDOM.render(
     <PostList posts={posts} />,
     document.createElement('div'));
+})
+
+test('last Snapshot', () => {
+  const postList = renderer.create(<PostList posts={posts} />);
+  let tree = postList.toJSON();
+  expect(tree).toMatchSnapshot();
 })
 
 const posts = [{
