@@ -1,11 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import renderer from 'react-test-renderer'
 import PostCommentList from '../components/PostCommentList'
 
 test('render without error', () => {
   ReactDOM.render(
     <PostCommentList post={postRedux} comments={postReduxComments} />,
     document.createElement('div'));
+})
+
+test('last Snapshot', () => {
+  const postCommentList = renderer.create(<PostCommentList post={postRedux} comments={postReduxComments} />);
+  let tree = postCommentList.toJSON();
+  expect(tree).toMatchSnapshot();
 })
 
 const postRedux = {
