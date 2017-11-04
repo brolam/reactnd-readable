@@ -35,7 +35,7 @@ test('when clicking anywhere and not on yes or no', () => {
       onNoAnswer={e => { isClikedNoAnswer = true }}
       timeout={3000}
     />);
-  questionModal.find('div [className="modal-short"]').simulate('click')
+  questionModal.find('div [className="modal-short modal-open"]').simulate('click')
   expect(isClikedNoAnswer).toBe(true);
 })
 

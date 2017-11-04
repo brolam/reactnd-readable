@@ -9,6 +9,7 @@ import SearchBar from './components/SearchBar'
 import OrderOptions from './components/OrderOptions'
 import PostModal from './components/PostModal'
 import PostCommentModal from './components/PostCommentModal'
+import QuestionModal from './components/QuestionModal'
 
 class App extends Component {
 
@@ -20,7 +21,9 @@ class App extends Component {
       posts: [postUdacity, postReact, postRedux],
       comments: comments,
       selectedPost: postUdacity,
-      isEditComment: null
+      isEditComment: null,
+      showDeletePostQuestionModal: false,
+      showDeleteCommentQuestionModal: null,
     };
   }
 
@@ -52,17 +55,12 @@ class App extends Component {
           <div className="post-page-header-buttons">
             <button className="edit-button" href="/"
               onClick={e => {
-                //document.getElementById('editPostModal').style.display = "block";
                 this.setState({ isEditPost: true })
               }}>Edit</button>
-            <button className="delete-button" href="/"
+            <button className="delete-button"
               onClick={e => {
-                const delPostQuestionModal = document.getElementById('delPostQuestionModal');
-                delPostQuestionModal.style.display = "block";
-                setTimeout(function () {
-                  delPostQuestionModal.style.display = "none";
-                }, 7000);
-              }} >Delete</button>
+                this.setState({ showDeletePostQuestionModal: true })
+              }}>Delete</button>
             <VoteScore voteScore={post.voteScore} />
           </div>
         </div>
@@ -80,14 +78,8 @@ class App extends Component {
               <PostCommentItem
                 key={comment.id}
                 comment={comment}
-                onClickEditButton={e => { this.setState({ isEditComment: comment }) }}
-                onClickDeleteButton={e => {
-                  const delCommentQuestionModal = document.getElementById('delCommentQuestionModal');
-                  delCommentQuestionModal.style.display = "block";
-                  setTimeout(function () {
-                    delCommentQuestionModal.style.display = "none";
-                  }, 7000);
-                }}
+                onClickEditButton={e => this.setState({ isEditComment: comment })}
+                onClickDeleteButton={e => this.setState({ showDeleteCommentQuestionModal: true })}
               />
             ))}
           </div>
@@ -104,14 +96,28 @@ class App extends Component {
 
           />
         )}
-        <div id="delPostQuestionModal" className="modal-short"
-          onClick={e => {
-            e.target.style.display = "none";
-          }}>
-          <div className="modal-short-dialog">
-            <h1>Are you sure? Do you want delete this post?  <a className="yes" href="/">Yes?</a>  or  <a className="no" href="/">No?</a> </h1>
-          </div>
-        </div>
+        {
+          this.state.showDeletePostQuestionModal && (
+            <QuestionModal
+              message={"Are you sure? Do you want delete this post? "}
+              timeout={7000}
+              onYesAnswer={e => this.setState({ showDeletePostQuestionModal: false })}
+              onNoAnswer={e => this.setState({ showDeletePostQuestionModal: false })}
+            />
+          )
+        }
+
+        {
+          this.state.showDeleteCommentQuestionModal && (
+            <QuestionModal
+              message={"Are you sure? Do you want delete this comment?"}
+              timeout={7000}
+              onYesAnswer={e => this.setState({ showDeleteCommentQuestionModal: false })}
+              onNoAnswer={e => this.setState({ showDeleteCommentQuestionModal: false })}
+            />
+          )
+        }
+
         <div id="delCommentQuestionModal" className="modal-short"
           onClick={e => {
             e.target.style.display = "none";

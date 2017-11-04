@@ -1,22 +1,35 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+let questionModalTimeout
+
 function QuestionModal(props) {
   const { message, onYesAnswer, onNoAnswer, timeout } = props
   doNoAnswerEventWhenTimeout(timeout, onNoAnswer)
   return (
-    <div className="modal-short" onClick={onNoAnswer}>
+    <div className="modal-short modal-open" onClick={
+      e => clearTimeoutAndDoEvent(e, onNoAnswer)
+    }>
       <div className="modal-short-dialog">
         <h1>
-          {message} <a className="yes" onClick={onYesAnswer}>Yes? </a> or <a className="no" onClick={onNoAnswer} >No?</a>
+          {message} <a className="yes" onClick={
+            e => clearTimeoutAndDoEvent(e, onYesAnswer)
+          }>Yes? </a> or <a className="no" onClick={
+            e => clearTimeoutAndDoEvent(e, onNoAnswer)
+          } >No?</a>
         </h1>
       </div>
     </div>
   )
 }
 
+function clearTimeoutAndDoEvent(e, eventTag) {
+  clearTimeout(questionModalTimeout)
+  eventTag(e)
+}
+
 function doNoAnswerEventWhenTimeout(timeout, onNoAnswer) {
-  setTimeout(() => {
+  questionModalTimeout = setTimeout(() => {
     onNoAnswer();
   }, timeout);
 }

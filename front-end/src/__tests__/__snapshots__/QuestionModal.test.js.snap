@@ -2,7 +2,7 @@
 
 exports[`last Snapshot 1`] = `
 <div
-  className="modal-short"
+  className="modal-short modal-open"
   onClick={[Function]}
 >
   <div
