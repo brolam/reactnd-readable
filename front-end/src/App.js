@@ -2,23 +2,22 @@ import React, { Component } from 'react';
 import './App.css';
 import Moment from 'moment';
 import VoteScore from './components/VoteScore'
-import PostCommentItem from './components/PostCommentItem'
-import OrderOptions from './components/OrderOptions'
 import PostModal from './components/PostModal'
 import PostCommentModal from './components/PostCommentModal'
 import QuestionModal from './components/QuestionModal'
 import Home from './components/Home'
+import PostCommentList from './components/PostCommentList'
 
 class App extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      url: 'home',
+      url: 'post',
       categories: ['udacity', 'react', 'redux'],
       posts: [postUdacity, postReact, postRedux],
       comments: comments,
-      selectedPost: postUdacity,
+      selectedPost: postReact,
       isEditComment: null,
       showDeletePostQuestionModal: false,
       showDeleteCommentQuestionModal: null,
@@ -67,23 +66,7 @@ class App extends Component {
             <div className="post-page-author" >by {post.author} {Moment(post.timestamp).from(new Date())}</div>
             {post.body}
           </div>
-          <div className="post-comments-title">
-            <span>Commentes({comments.length})</span>
-            <OrderOptions />
-          </div>
-          <div className={"post-page-comments"}>
-            {comments.map(comment => (
-              <PostCommentItem
-                key={comment.id}
-                comment={comment}
-                onClickEditButton={e => this.setState({ isEditComment: comment })}
-                onClickDeleteButton={e => this.setState({ showDeleteCommentQuestionModal: true })}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="flat-button" onClick={e => { this.setState({ isNewComment: true }) }} >
-          <a className={"add " + post.category} >Add Comment</a>
+          <PostCommentList post={post} comments={comments} />
         </div>
         {
           (this.state.isNewComment || this.state.isEditComment) && (
