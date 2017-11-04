@@ -54,3 +54,16 @@ test('close automatic on default timeout', () => {
   }, 5000);
   jest.runAllTimers();
 })
+
+test('on click yes answer', () => {
+  let isClikedYesAnswer = false;
+  const questionModal = mount(
+    <QuestionModal
+      message={"Question?"}
+      onYesAnswer={e => { isClikedYesAnswer = true }}
+      onNoAnswer={e => { }}
+      timeout={3000}
+    />);
+  questionModal.find('a [className="yes"]').simulate('click')
+  expect(isClikedYesAnswer).toBe(true);
+})

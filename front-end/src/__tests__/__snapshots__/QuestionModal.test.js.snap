@@ -13,14 +13,13 @@ exports[`last Snapshot 1`] = `
        
       <a
         className="yes"
-        href="/"
+        onClick={[Function]}
       >
-        Yes?
+        Yes? 
       </a>
-        or  
+       or 
       <a
         className="no"
-        href="/"
       >
         No?
       </a>

@@ -8,7 +8,7 @@ function QuestionModal(props) {
     <div className="modal-short" onClick={onNoAnswer}>
       <div className="modal-short-dialog">
         <h1>
-          {message} <a className="yes" href="/">Yes?</a>  or  <a className="no" href="/">No?</a>
+          {message} <a className="yes" onClick={onYesAnswer}>Yes? </a> or <a className="no" >No?</a>
         </h1>
       </div>
     </div>
