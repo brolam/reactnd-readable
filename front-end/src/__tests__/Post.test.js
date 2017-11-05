@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import renderer from 'react-test-renderer'
 import Post from '../components/Post'
 
 
@@ -7,6 +8,12 @@ test('render without error', () => {
   ReactDOM.render(
     <Post post={postRedux} comments={postReduxComments} />,
     document.createElement('div'));
+})
+
+test('last Snapshot', () => {
+  const post = renderer.create(<Post post={postRedux} comments={postReduxComments} />);
+  let tree = post.toJSON();
+  expect(tree).toMatchSnapshot();
 })
 
 const postRedux = {
