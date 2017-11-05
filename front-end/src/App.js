@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import Moment from 'moment';
 import VoteScore from './components/VoteScore'
 import PostModal from './components/PostModal'
 import PostCommentModal from './components/PostCommentModal'
 import QuestionModal from './components/QuestionModal'
 import Home from './components/Home'
 import PostCommentList from './components/PostCommentList'
+import PostCommentBody from './components/PostCommentBody'
 
 class App extends Component {
 
@@ -62,10 +62,7 @@ class App extends Component {
           </div>
         </div>
         <div className="post-content">
-          <div className={"post-page-body"}>
-            <div className="post-page-author" >by {post.author} {Moment(post.timestamp).from(new Date())}</div>
-            {post.body}
-          </div>
+          <PostCommentBody post={post} />
           <PostCommentList post={post} comments={comments} />
         </div>
         {
