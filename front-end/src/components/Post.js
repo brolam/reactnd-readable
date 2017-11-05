@@ -4,6 +4,7 @@ import PostCommentBody from '../components/PostCommentBody'
 import PostCommentList from '../components/PostCommentList'
 import PostModal from '../components/PostModal'
 import PostCommentModal from '../components/PostCommentModal'
+import QuestionModal from '../components/QuestionModal'
 
 function Post(
   { post,
@@ -13,7 +14,7 @@ function Post(
     isEditComment = false,
     selectedComment = {},
     showDeletePostQuestionModal = false,
-    showDeleteCommentQuestionModal = false
+    isShowQuestionDelComment = false
     }) {
   return (
     <div className="app">
@@ -56,7 +57,7 @@ function Post(
           />
         )}
       {
-        showDeleteCommentQuestionModal && (
+        isShowQuestionDelComment && (
           <QuestionModal
             message={"Are you sure? Do you want delete this comment?"}
             timeout={7000}
