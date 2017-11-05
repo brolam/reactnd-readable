@@ -16,6 +16,16 @@ test('last Snapshot', () => {
   expect(tree).toMatchSnapshot();
 })
 
+test('last Snapshot - Edit Post', () => {
+  const post = renderer.create(<Post 
+  post={postRedux} 
+  comments={postReduxComments}
+  isEditPost={true} />);
+  let tree = post.toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
+
 const postRedux = {
   category: "redux",
   id: "7xf0y6ziyjabvozdd253nd",

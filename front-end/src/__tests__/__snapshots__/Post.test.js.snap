@@ -1,5 +1,256 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`last Snapshot - Edit Post 1`] = `
+<div
+  className="app"
+>
+  <div
+    className="post-page-header"
+  >
+    <a
+      className="post-page-header-back"
+      onClick={[Function]}
+    >
+      Back
+    </a>
+    <div
+      className="post-page-header-title"
+    >
+      <span
+        className="redux"
+      >
+        redux
+      </span>
+      <span>
+        Udacity is the best place to learn Redux
+      </span>
+    </div>
+    <div
+      className="post-page-header-buttons"
+    >
+      <button
+        className="edit-button"
+        href="/"
+        onClick={[Function]}
+      >
+        Edit
+      </button>
+      <button
+        className="delete-button"
+        onClick={[Function]}
+      >
+        Delete
+      </button>
+      <button
+        className="liked"
+        onClick={undefined}
+      >
+        Liked 
+        <span>
+          5
+        </span>
+      </button>
+      <button
+        className="not-liked"
+        onClick={undefined}
+      >
+        Not like
+      </button>
+    </div>
+  </div>
+  <div
+    className="post-content"
+  >
+    <div
+      className="post-page-body"
+    >
+      <div
+        className="post-page-author"
+      >
+        by 
+        thingtwo
+         
+        a year ago
+      </div>
+      Everyone says so after all.
+    </div>
+    <div
+      className="post-comments-title"
+    >
+      <span>
+        Commentes(
+        2
+        )
+      </span>
+      <div
+        className="order-options"
+      >
+        <select>
+          <option
+            value="voteScore"
+          >
+            Vote Score
+          </option>
+          <option
+            value="publishedDate"
+          >
+            Published date
+          </option>
+        </select>
+      </div>
+    </div>
+    <div
+      className="post-page-comments"
+    >
+      <div
+        className="post-comment"
+      >
+        <div
+          className="post-comment-author"
+        >
+          by 
+          thingtwo
+           
+          a year ago
+        </div>
+        <div>
+          Hi there! I am a COMMENT.
+        </div>
+        <div
+          className="post-comment-footer"
+        >
+          <button
+            className="edit-button"
+            href="/"
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+          <button
+            className="delete-button"
+            onClick={[Function]}
+          >
+            Delete
+          </button>
+          <button
+            className="liked"
+            onClick={undefined}
+          >
+            Liked 
+            <span>
+              6
+            </span>
+          </button>
+          <button
+            className="not-liked"
+            onClick={undefined}
+          >
+            Not like
+          </button>
+        </div>
+      </div>
+      <div
+        className="post-comment"
+      >
+        <div
+          className="post-comment-author"
+        >
+          by 
+          thingone
+           
+          a year ago
+        </div>
+        <div>
+          Comments. Are. Cool.
+        </div>
+        <div
+          className="post-comment-footer"
+        >
+          <button
+            className="edit-button"
+            href="/"
+            onClick={[Function]}
+          >
+            Edit
+          </button>
+          <button
+            className="delete-button"
+            onClick={[Function]}
+          >
+            Delete
+          </button>
+          <button
+            className="liked"
+            onClick={undefined}
+          >
+            Liked 
+            <span>
+              -5
+            </span>
+          </button>
+          <button
+            className="not-liked"
+            onClick={undefined}
+          >
+            Not like
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="flat-button"
+      onClick={[Function]}
+    >
+      <a
+        className="add redux"
+      >
+        Add Comment
+      </a>
+    </div>
+  </div>
+  <div
+    className="modal modal-open"
+    id="postModal"
+  >
+    <div
+      className="modal-dialog"
+    >
+      <div
+        className="modal-heard modal-post"
+      >
+        <span
+          onClick={[Function]}
+        />
+        <input
+          defaultValue="Udacity is the best place to learn Redux"
+          placeholder="Title post"
+          type="text"
+        />
+      </div>
+      <div
+        className="modal-content modal-post"
+      >
+        <textarea
+          defaultValue="Everyone says so after all."
+          placeholder="Body post"
+        />
+        <div
+          className="modal-footer"
+        >
+          <button
+            className="save-button redux"
+            href="/"
+            onClick={[Function]}
+          >
+            Save
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`last Snapshot 1`] = `
 <div
   className="app"

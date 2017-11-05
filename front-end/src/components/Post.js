@@ -2,6 +2,7 @@ import React from 'react'
 import VoteScore from '../components/VoteScore'
 import PostCommentBody from '../components/PostCommentBody'
 import PostCommentList from '../components/PostCommentList'
+import PostModal from '../components/PostModal'
 
 
 function Post(
@@ -66,9 +67,9 @@ function Post(
         isEditPost && (
           <PostModal
             post={post}
-            categories={categories}
-            onClickBackButton={e => { this.setState({ isEditPost: false }) }}
-            onSave={e => { this.setState({ isEditPost: false }) }}
+            categories={[]}
+            onClickBackButton={e => { }}
+            onSave={e => { }}
           />
         )}
     </div>
