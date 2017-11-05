@@ -1,42 +1,36 @@
 import React, { Component } from 'react';
+import { Switch, Route } from 'react-router-dom'
 import './App.css';
 import Home from './components/Home'
-import Post from './components/Post'
 
 class App extends Component {
-
+  GO_HOME = '/';
+  
   constructor(props) {
     super(props);
     this.state = {
-      url: 'post',
       categories: ['udacity', 'react', 'redux'],
       posts: [postUdacity, postReact, postRedux],
-      comments: comments,
-      selectedPost: postReact,
-      isEditComment: null,
-      showDeletePostQuestionModal: false,
-      showDeleteCommentQuestionModal: null,
     };
   }
 
   render() {
-    const { url, selectedPost, posts, categories, comments } = this.state
-    if (url === "home") {
-      return (
-        <Home
-          posts={posts}
-          categories={categories}
-        />)
-    } else if (url === "post") {
-      return (
-        <Post
-          post={selectedPost}
-          comments={comments.filter(comment => (comment.parentId === selectedPost.id))}
-        />
-      )
-    }
+    const { posts, categories } = this.state
+    return (
+      <Switch>
+        <Route exact path={this.GO_HOME} render={({ history }) => (
+          <Home
+            posts={posts}
+            categories={categories}
+          />)
+        } >
+        </Route>
+      </Switch >
+    )
   }
-  componentDidMount() { }
+
+  componentDidMount() {
+  }
 
   componentDidUpdate() { }
 }
@@ -73,30 +67,5 @@ const postRedux = {
   deleted: false,
   voteScore: 5
 }
-
-const comments = [
-  {
-    id: '894tuq4ut84ut8v4t8wun89g',
-    parentId: "8xf0y6ziyjabvozdd253nd",
-    timestamp: 1468166872634,
-    body: 'Hi there! I am a COMMENT.',
-    author: 'thingtwo',
-    voteScore: 6,
-    deleted: false,
-    parentDeleted: false
-  },
-  {
-    id: '8tu4bsun805n8un48ve89',
-    parentId: "8xf0y6ziyjabvozdd253nd",
-    timestamp: 1469479767190,
-    body: 'Comments. Are. Cool.',
-    author: 'thingone',
-    voteScore: -5,
-    deleted: false,
-    parentDeleted: false
-  }
-]
-
-
 
 export default App;
