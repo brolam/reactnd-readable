@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 import renderer from 'react-test-renderer'
 import Post from '../components/Post'
 
-
 test('render without error', () => {
   ReactDOM.render(
     <Post post={postRedux} comments={postReduxComments} />,
@@ -17,14 +16,23 @@ test('last Snapshot', () => {
 })
 
 test('last Snapshot - Edit Post', () => {
-  const post = renderer.create(<Post 
-  post={postRedux} 
-  comments={postReduxComments}
-  isEditPost={true} />);
+  const post = renderer.create(<Post
+    post={postRedux}
+    comments={postReduxComments}
+    isEditPost={true} />);
   let tree = post.toJSON();
   expect(tree).toMatchSnapshot();
 })
 
+test('last Snapshot - New Comment', () => {
+  const post = renderer.create(<Post
+    post={postRedux}
+    comments={postReduxComments}
+    isNewComment={true}
+  />);
+  let tree = post.toJSON();
+  expect(tree).toMatchSnapshot();
+})
 
 const postRedux = {
   category: "redux",

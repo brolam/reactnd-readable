@@ -3,7 +3,7 @@ import VoteScore from '../components/VoteScore'
 import PostCommentBody from '../components/PostCommentBody'
 import PostCommentList from '../components/PostCommentList'
 import PostModal from '../components/PostModal'
-
+import PostCommentModal from '../components/PostCommentModal'
 
 function Post(
   { post,
