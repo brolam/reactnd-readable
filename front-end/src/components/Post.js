@@ -13,7 +13,7 @@ function Post(
     isNewComment = false,
     isEditComment = false,
     selectedComment = {},
-    showDeletePostQuestionModal = false,
+    isShowQuestionDelPost = false,
     isShowQuestionDelComment = false
     }) {
   return (
@@ -48,7 +48,7 @@ function Post(
           />
         )}
       {
-        showDeletePostQuestionModal && (
+        isShowQuestionDelPost && (
           <QuestionModal
             message={"Are you sure? Do you want delete this post? "}
             timeout={7000}

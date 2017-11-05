@@ -56,6 +56,16 @@ test('last Snapshot - show question delete comment', () => {
   expect(tree).toMatchSnapshot();
 })
 
+test('last Snapshot - show question delete post', () => {
+  const post = renderer.create(<Post
+    post={postRedux}
+    comments={postReduxComments}
+    isShowQuestionDelPost={true}
+  />);
+  let tree = post.toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
 const postRedux = {
   category: "redux",
   id: "7xf0y6ziyjabvozdd253nd",
