@@ -11,6 +11,7 @@ function Post(
     isEditPost = false,
     isNewComment = false,
     isEditComment = false,
+    selectedComment = {},
     showDeletePostQuestionModal = false,
     showDeleteCommentQuestionModal = false
     }) {
@@ -40,7 +41,7 @@ function Post(
         (isNewComment || isEditComment) && (
           <PostCommentModal
             post={post}
-            comment={isEditComment ? isEditComment : {}}
+            comment={isNewComment ? {} : selectedComment}
             onClickBackButton={e => { }}
             onSave={e => { }}
           />
