@@ -498,12 +498,12 @@ body, .app {
 }
 
 /*Wait process modal */
-.wait-preocess-open-dialog {
+.wait-process-dialog {
   display: block;
   width: 30%;
 }
 
-.wait-preocess-open-dialog h1 {
+.wait-process-dialog h1 {
   font-size: 16px;
   font-weight: normal;
   margin: 10px;
@@ -511,7 +511,7 @@ body, .app {
 }
 
 @media (max-width: 700px) {
-  .wait-preocess-open-dialog {
+  .wait-process-dialog {
     display: block;
     width: 90%;
   }

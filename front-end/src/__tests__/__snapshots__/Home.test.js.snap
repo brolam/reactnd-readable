@@ -80,7 +80,7 @@ exports[`last Snapshot - show message wait process modal 1`] = `
     className="modal-short modal-open"
   >
     <div
-      className="modal-short-dialog wait-preocess-open-dialog"
+      className="modal-short-dialog wait-process-dialog"
     >
       <h1>
         Please wait while the information is updated.

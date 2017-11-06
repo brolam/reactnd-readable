@@ -5,7 +5,7 @@ function WaitProcessModal(props) {
   const { message } = props
   return (
     <div className="modal-short modal-open">
-      <div className="modal-short-dialog wait-preocess-open-dialog">
+      <div className="modal-short-dialog wait-process-dialog">
         <h1>{message}</h1>
       </div>
     </div>
