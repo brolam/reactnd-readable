@@ -17,6 +17,17 @@ test('last Snapshot', () => {
   expect(tree).toMatchSnapshot();
 })
 
+test('last Snapshot - show message wait process modal', () => {
+  const home = renderer.create(
+  <Home 
+  posts={[]} 
+  categories={[]}
+  isShowWaitProcessModal={true}
+   />);
+  let tree = home.toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
 const posts = [{
   category: "udacity",
   id: "7ni6ok3ym7mf1p33lnez",

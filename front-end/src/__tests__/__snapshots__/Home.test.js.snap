@@ -1,5 +1,95 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`last Snapshot - show message wait process modal 1`] = `
+<div
+  className="app"
+>
+  <div
+    className="main-page-header"
+  >
+    <div
+      className="main-page-header-title"
+    >
+      <span />
+      <h1>
+        Readable
+      </h1>
+      <select
+        onChange={[Function]}
+      >
+        <option
+          value="none"
+        >
+          All Categories
+        </option>
+      </select>
+    </div>
+  </div>
+  <div
+    className="search-bar"
+  >
+    <input
+      placeholder="Search by title post"
+      type="text"
+    />
+  </div>
+  <div
+    className="main-page-content"
+  >
+    <div
+      className="posts"
+    >
+      <div
+        className="posts-title"
+      >
+        <span>
+          Posts
+        </span>
+        <div
+          className="order-options"
+        >
+          <select>
+            <option
+              value="voteScore"
+            >
+              Vote Score
+            </option>
+            <option
+              value="publishedDate"
+            >
+              Published date
+            </option>
+          </select>
+        </div>
+      </div>
+      <div
+        className="posts-list"
+      />
+      <div
+        className="flat-button"
+      >
+        <a
+          className="add"
+        >
+          Add Post
+        </a>
+      </div>
+    </div>
+  </div>
+  <div
+    className="modal-short modal-open"
+  >
+    <div
+      className="modal-short-dialog wait-preocess-open-dialog"
+    >
+      <h1>
+        Please wait while the information is updated.
+      </h1>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`last Snapshot 1`] = `
 <div
   className="app"
