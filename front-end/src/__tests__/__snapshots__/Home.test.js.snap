@@ -23,17 +23,17 @@ exports[`last Snapshot 1`] = `
           All Categories
         </option>
         <option
-          value="{category}"
+          value="udacity"
         >
           Udacity
         </option>
         <option
-          value="{category}"
+          value="react"
         >
           React
         </option>
         <option
-          value="{category}"
+          value="redux"
         >
           Redux
         </option>

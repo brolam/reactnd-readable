@@ -5,6 +5,7 @@ import renderer from 'react-test-renderer'
 import { mount } from 'enzyme'
 import PostCategoriesFilter from '../components/PostCategoriesFilter'
 
+const categories = global.dataForTest.categories
 
 test('render without error', () => {
   ReactDOM.render(<PostCategoriesFilter categories={categories} />, document.createElement('div'));
@@ -38,5 +39,3 @@ test('last Snapshot', () => {
   let tree = postCategoriesFilter.toJSON();
   expect(tree).toMatchSnapshot();
 })
-
-const categories = ['udacity', 'react', 'redux']

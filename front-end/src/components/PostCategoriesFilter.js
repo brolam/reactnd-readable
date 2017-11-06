@@ -7,7 +7,7 @@ function PostCategoriesFilter(props) {
     <select onChange={props.onSelected} >
       <option value="none">All Categories</option>
       {categories.map(category => (
-        <option key={category} value="{category}">{category[0].toUpperCase() + category.slice(1)}</option>
+        <option key={category.name} value={category.path} >{category.name[0].toUpperCase() + category.name.slice(1)}</option>
       ))}
     </select>
   )

@@ -17,7 +17,7 @@ it('renders without crashing', () => {
     </Provider>, div);
 });
 
-const categories = ['udacity', 'react', 'redux']
+const categories = global.dataForTest.categories
 
 const posts = [{
   category: "udacity",

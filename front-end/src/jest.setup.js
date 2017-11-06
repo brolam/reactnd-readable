@@ -14,3 +14,20 @@ const localStorageMock = {
 };
 
 global.localStorage = localStorageMock;
+
+global.dataForTest = {
+  categories: [
+    {
+      name: 'udacity',
+      path: 'udacity'
+    },
+    {
+      name: 'react',
+      path: 'react'
+    },
+    {
+      name: 'redux',
+      path: 'redux'
+    }
+  ]
+}

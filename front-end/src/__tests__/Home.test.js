@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import renderer from 'react-test-renderer'
 import Home from '../components/Home'
 
+const categories = global.dataForTest.categories
 
 test('render without error', () => {
   ReactDOM.render(
@@ -15,8 +16,6 @@ test('last Snapshot', () => {
   let tree = home.toJSON();
   expect(tree).toMatchSnapshot();
 })
-
-const categories = ['udacity', 'react', 'redux']
 
 const posts = [{
   category: "udacity",
