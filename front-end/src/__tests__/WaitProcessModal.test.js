@@ -10,3 +10,12 @@ test('render without error', () => {
       message={"Please wait while the information is updated."}
     />, document.createElement('div'));
 })
+
+test('last Snapshot', () => {
+  const waitProcessModal = renderer.create(
+    <WaitProcessModal
+      message={"Please wait while the information is updated."}
+    />);
+  let tree = waitProcessModal.toJSON();
+  expect(tree).toMatchSnapshot();
+})
