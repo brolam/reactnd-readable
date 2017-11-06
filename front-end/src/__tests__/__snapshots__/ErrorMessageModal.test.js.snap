@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`last Snapshot 1`] = `
+<div
+  className="modal-short modal-open"
+>
+  <div
+    className="modal-short-dialog error-message-dialog"
+  >
+    <h1>
+      An error happened, please try again.
+    </h1>
+  </div>
+</div>
+`;

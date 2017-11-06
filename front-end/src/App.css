@@ -516,3 +516,24 @@ body, .app {
     width: 90%;
   }
 }
+
+/*Error message modal */
+.error-message-dialog {
+  background-color: #dc3545;
+  display: block;
+  width: 30%;
+}
+
+.error-message-dialog h1 {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 10px;
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .error-message-dialog {
+    display: block;
+    width: 90%;
+  }
+}
