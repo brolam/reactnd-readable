@@ -3,8 +3,9 @@ import PostCategoriesFilter from '../components/PostCategoriesFilter'
 import SearchBar from '../components/SearchBar'
 import PostList from '../components/PostList'
 import PostModal from '../components/PostModal'
+import WaitProcessModal from '../components/WaitProcessModal'
 
-function Home({ posts, categories, isNewPost }) {
+function Home({ posts, categories, isNewPost, isShowWaitProcessModal }) {
   return (
     <div className="app">
       <div className="main-page-header">
@@ -25,6 +26,13 @@ function Home({ posts, categories, isNewPost }) {
             categories={categories}
             onClickBackButton={e => { }}
             onSave={e => { }}
+          />
+        )
+      }
+      {
+        isShowWaitProcessModal && (
+          <WaitProcessModal
+            message="Please wait while the information is updated."
           />
         )
       }

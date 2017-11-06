@@ -4,7 +4,7 @@ import store from '../store'
 const HOME_INITIAL_STATE = {
   posts: [],
   categories: [],
-  isShowWaitMessage: false,
+  isShowWaitProcessModal: false,
 };
 
 test('home store initial state', () => {

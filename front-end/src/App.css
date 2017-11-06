@@ -496,3 +496,23 @@ body, .app {
   margin: 10px;
   color: #dc3545;
 }
+
+/*Wait process modal */
+.wait-preocess-open-dialog {
+  display: block;
+  width: 30%;
+}
+
+.wait-preocess-open-dialog h1 {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 10px;
+  color: white;
+}
+
+@media (max-width: 700px) {
+  .wait-preocess-open-dialog {
+    display: block;
+    width: 90%;
+  }
+}

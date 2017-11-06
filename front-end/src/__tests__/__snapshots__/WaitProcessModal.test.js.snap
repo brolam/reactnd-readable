@@ -5,7 +5,7 @@ exports[`last Snapshot 1`] = `
   className="modal-short modal-open"
 >
   <div
-    className="modal-short-dialog"
+    className="modal-short-dialog wait-preocess-open-dialog"
   >
     <h1>
       Please wait while the information is updated.

@@ -20,11 +20,12 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path={this.GO_HOME} render={({ history }) => {
-          const { posts, categories } = this.props
+          const { posts, categories, isShowWaitProcessModal } = this.props
           return (
             <Home
               posts={posts}
               categories={categories}
+              isShowWaitProcessModal = {isShowWaitProcessModal}
             />)
         }}>
         </Route>
