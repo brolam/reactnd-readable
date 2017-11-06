@@ -5,10 +5,8 @@ import './App.css';
 import Home from './components/Home'
 import { requestPosts } from './store/actions'
 
-
 class App extends Component {
   GO_HOME = '/';
-
   constructor(props) {
     super(props);
     this.state = {};
