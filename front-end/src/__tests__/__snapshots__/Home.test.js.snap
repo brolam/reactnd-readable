@@ -171,6 +171,336 @@ exports[`last Snapshot - show message wait process modal 1`] = `
 </div>
 `;
 
+exports[`last Snapshot - show new post form modal 1`] = `
+<div
+  className="app"
+>
+  <div
+    className="main-page-header"
+  >
+    <div
+      className="main-page-header-title"
+    >
+      <span />
+      <h1>
+        Readable
+      </h1>
+      <select
+        onChange={[Function]}
+      >
+        <option
+          value="none"
+        >
+          All Categories
+        </option>
+        <option
+          value="udacity"
+        >
+          Udacity
+        </option>
+        <option
+          value="react"
+        >
+          React
+        </option>
+        <option
+          value="redux"
+        >
+          Redux
+        </option>
+      </select>
+    </div>
+  </div>
+  <div
+    className="search-bar"
+  >
+    <input
+      placeholder="Search by title post"
+      type="text"
+    />
+  </div>
+  <div
+    className="main-page-content"
+  >
+    <div
+      className="posts"
+    >
+      <div
+        className="posts-title"
+      >
+        <span>
+          Posts
+        </span>
+        <div
+          className="order-options"
+        >
+          <select>
+            <option
+              value="voteScore"
+            >
+              Vote Score
+            </option>
+            <option
+              value="publishedDate"
+            >
+              Published date
+            </option>
+          </select>
+        </div>
+      </div>
+      <div
+        className="posts-list"
+      >
+        <div
+          className="post"
+          onClick={[Function]}
+        >
+          <div
+            className="post-header"
+          >
+            <div
+              className="post-header-title"
+            >
+              <span
+                className="category udacity"
+              >
+                Udacity
+              </span>
+               
+              Udacity is the best place to learn technology.
+            </div>
+            <div
+              className="post-header-published"
+            >
+              <span
+                className="published"
+              >
+                a year ago
+              </span>
+            </div>
+          </div>
+          <div
+            className="post-header-author"
+          >
+            by 
+            thingtwo
+          </div>
+          <div
+            className="post-body"
+          >
+            Everyone says so after all.
+          </div>
+          <div
+            className="post-footer"
+          >
+            <button
+              className="liked"
+              onClick={undefined}
+            >
+              Liked 
+              <span>
+                5
+              </span>
+            </button>
+            <button
+              className="not-liked"
+              onClick={undefined}
+            >
+              Not like
+            </button>
+          </div>
+        </div>
+        <div
+          className="post"
+          onClick={[Function]}
+        >
+          <div
+            className="post-header"
+          >
+            <div
+              className="post-header-title"
+            >
+              <span
+                className="category react"
+              >
+                React
+              </span>
+               
+              Udacity is the best place to learn React
+            </div>
+            <div
+              className="post-header-published"
+            >
+              <span
+                className="published"
+              >
+                a year ago
+              </span>
+            </div>
+          </div>
+          <div
+            className="post-header-author"
+          >
+            by 
+            thingtwo
+          </div>
+          <div
+            className="post-body"
+          >
+            Everyone says so after all.
+          </div>
+          <div
+            className="post-footer"
+          >
+            <button
+              className="liked"
+              onClick={undefined}
+            >
+              Liked 
+              <span>
+                5
+              </span>
+            </button>
+            <button
+              className="not-liked"
+              onClick={undefined}
+            >
+              Not like
+            </button>
+          </div>
+        </div>
+        <div
+          className="post"
+          onClick={[Function]}
+        >
+          <div
+            className="post-header"
+          >
+            <div
+              className="post-header-title"
+            >
+              <span
+                className="category redux"
+              >
+                Redux
+              </span>
+               
+              Udacity is the best place to learn Redux
+            </div>
+            <div
+              className="post-header-published"
+            >
+              <span
+                className="published"
+              >
+                a year ago
+              </span>
+            </div>
+          </div>
+          <div
+            className="post-header-author"
+          >
+            by 
+            thingtwo
+          </div>
+          <div
+            className="post-body"
+          >
+            Everyone says so after all.
+          </div>
+          <div
+            className="post-footer"
+          >
+            <button
+              className="liked"
+              onClick={undefined}
+            >
+              Liked 
+              <span>
+                5
+              </span>
+            </button>
+            <button
+              className="not-liked"
+              onClick={undefined}
+            >
+              Not like
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="modal modal-open"
+    id="postModal"
+  >
+    <div
+      className="modal-dialog"
+    >
+      <div
+        className="modal-heard modal-post"
+      >
+        <span
+          onClick={[Function]}
+        />
+        <input
+          defaultValue={undefined}
+          placeholder="Title post"
+          type="text"
+        />
+      </div>
+      <div
+        className="modal-content modal-post"
+      >
+        <textarea
+          defaultValue={undefined}
+          placeholder="Body post"
+        />
+        <div
+          className="modal-footer"
+        >
+          <select
+            onChange={[Function]}
+          >
+            <option
+              value="none"
+            >
+              Save as?
+            </option>
+            <option
+              value="udacity"
+            >
+              UDACITYdacity
+            </option>
+            <option
+              value="react"
+            >
+              REACTeact
+            </option>
+            <option
+              value="redux"
+            >
+              REDUXedux
+            </option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="flat-button"
+    onClick={undefined}
+  >
+    <a
+      className="add"
+    >
+      Add Post
+    </a>
+  </div>
+</div>
+`;
+
 exports[`last Snapshot 1`] = `
 <div
   className="app"
@@ -327,6 +657,65 @@ exports[`last Snapshot 1`] = `
               </span>
                
               Udacity is the best place to learn React
+            </div>
+            <div
+              className="post-header-published"
+            >
+              <span
+                className="published"
+              >
+                a year ago
+              </span>
+            </div>
+          </div>
+          <div
+            className="post-header-author"
+          >
+            by 
+            thingtwo
+          </div>
+          <div
+            className="post-body"
+          >
+            Everyone says so after all.
+          </div>
+          <div
+            className="post-footer"
+          >
+            <button
+              className="liked"
+              onClick={undefined}
+            >
+              Liked 
+              <span>
+                5
+              </span>
+            </button>
+            <button
+              className="not-liked"
+              onClick={undefined}
+            >
+              Not like
+            </button>
+          </div>
+        </div>
+        <div
+          className="post"
+          onClick={[Function]}
+        >
+          <div
+            className="post-header"
+          >
+            <div
+              className="post-header-title"
+            >
+              <span
+                className="category redux"
+              >
+                Redux
+              </span>
+               
+              Udacity is the best place to learn Redux
             </div>
             <div
               className="post-header-published"
