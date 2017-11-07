@@ -21,7 +21,7 @@ it('renders without crashing', () => {
     </Provider>, div);
 });
 
-it('show new post form modal', () => {
+describe("Show and Close new post form", () => {
   fetch.mockResponseOnce(JSON.stringify(posts))
   fetch.mockResponseOnce(JSON.stringify({ categories }))
   const app = mount(
@@ -30,8 +30,18 @@ it('show new post form modal', () => {
         <App />
       </BrowserRouter>
     </Provider>)
-  const newPostButton = app.find('.flat-button');
-  expect(newPostButton.length).toEqual(1);
-  newPostButton.simulate('click');
-  expect(app.find('div [id="postModal"]').length).toEqual(1);
-})
+
+  it('show new post form modal', () => {
+    const newPostButton = app.find('.flat-button');
+    expect(newPostButton.length).toEqual(1);
+    newPostButton.simulate('click');
+    expect(app.find('div [id="postModal"]').length).toEqual(1);
+  })
+
+  it('close new post form modal', () => {
+    const backButton = app.find('div [className="modal-heard modal-post"] span');
+    expect(backButton.length).toEqual(1);
+    backButton.simulate('click');
+    expect(app.find('div [id="postModal"]').length).toEqual(0);
+  })
+});

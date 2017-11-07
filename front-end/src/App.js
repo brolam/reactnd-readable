@@ -42,6 +42,7 @@ function mapDispatchToProps(dispatch, ownProps) {
   return {
     dispatchRequestPosts: (search) => dispatch(requestPosts(search)),
     onClickNewPost: (e) => ownProps.history.push(GO_POST_NEW),
+    goHome: (e) => ownProps.history.push(GO_HOME),
   }
 }
 

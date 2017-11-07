@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import PostCategoriesFilter from '../components/PostCategoriesFilter'
 import SearchBar from '../components/SearchBar'
 import PostList from '../components/PostList'
@@ -8,9 +9,10 @@ import WaitProcessModal from '../components/WaitProcessModal'
 function Home({
   posts,
   categories,
-  isNewPost,
-  isShowWaitProcessModal,
-  onClickNewPost }) {
+  isNewPost = false,
+  isShowWaitProcessModal = false ,
+  onClickNewPost = e=>{},
+  goHome = e=>{} }) {
   return (
     <div className="app">
       <div className="main-page-header">
@@ -29,7 +31,7 @@ function Home({
           <PostModal
             post={{}}
             categories={categories}
-            onClickBackButton={e => { }}
+            onClickBackButton={goHome}
             onSave={e => { }}
           />
         )
@@ -46,6 +48,11 @@ function Home({
       </div>
     </div>
   )
+}
+
+Home.propTypes = {
+  posts: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
 }
 
 export default Home
