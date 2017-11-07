@@ -15,6 +15,7 @@ exports[`last Snapshot to edit Post 1`] = `
         onClick={[Function]}
       />
       <input
+        autoFocus={true}
         defaultValue="Udacity is the best place to learn technology."
         placeholder="Title post"
         type="text"
@@ -58,6 +59,7 @@ exports[`last Snapshot to new Post 1`] = `
         onClick={[Function]}
       />
       <input
+        autoFocus={true}
         defaultValue={undefined}
         placeholder="Title post"
         type="text"

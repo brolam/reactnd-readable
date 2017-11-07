@@ -471,6 +471,7 @@ exports[`last Snapshot - Edit Post 1`] = `
           onClick={[Function]}
         />
         <input
+          autoFocus={true}
           defaultValue="Udacity is the best place to learn Redux"
           placeholder="Title post"
           type="text"

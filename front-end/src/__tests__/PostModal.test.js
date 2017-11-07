@@ -40,6 +40,20 @@ test('last Snapshot to edit Post', () => {
   expect(tree).toMatchSnapshot();
 })
 
+test('input title is focusing', () => {
+  let isClikedBackButton = false;
+  const postModal = mount(
+    <PostModal
+      post={postUdacity}
+      onClickBackButton={e => { isClikedBackButton = true }}
+      categories={categories}
+      onSave={e => { }}
+    />);
+  const inputTitle = postModal.find('div [className="modal-heard modal-post"] input')
+  const elementFocusing  = document.activeElement
+  expect(inputTitle.instance() === elementFocusing).toBe(true);
+})
+
 test('on click back button', () => {
   let isClikedBackButton = false;
   const postModal = mount(

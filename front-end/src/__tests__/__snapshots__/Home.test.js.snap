@@ -445,6 +445,7 @@ exports[`last Snapshot - show new post form modal 1`] = `
           onClick={[Function]}
         />
         <input
+          autoFocus={true}
           defaultValue={undefined}
           placeholder="Title post"
           type="text"
