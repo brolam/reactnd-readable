@@ -5,7 +5,12 @@ import PostList from '../components/PostList'
 import PostModal from '../components/PostModal'
 import WaitProcessModal from '../components/WaitProcessModal'
 
-function Home({ posts, categories, isNewPost, isShowWaitProcessModal }) {
+function Home({
+  posts,
+  categories,
+  isNewPost,
+  isShowWaitProcessModal,
+  onClickNewPost }) {
   return (
     <div className="app">
       <div className="main-page-header">
@@ -36,6 +41,9 @@ function Home({ posts, categories, isNewPost, isShowWaitProcessModal }) {
           />
         )
       }
+      <div className="flat-button" onClick={onClickNewPost}>
+        <a className="add">Add Post</a>
+      </div>
     </div>
   )
 }

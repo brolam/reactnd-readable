@@ -65,16 +65,17 @@ exports[`last Snapshot - show error message modal 1`] = `
       <div
         className="posts-list"
       />
-      <div
-        className="flat-button"
-      >
-        <a
-          className="add"
-        >
-          Add Post
-        </a>
-      </div>
     </div>
+  </div>
+  <div
+    className="flat-button"
+    onClick={undefined}
+  >
+    <a
+      className="add"
+    >
+      Add Post
+    </a>
   </div>
 </div>
 `;
@@ -144,15 +145,6 @@ exports[`last Snapshot - show message wait process modal 1`] = `
       <div
         className="posts-list"
       />
-      <div
-        className="flat-button"
-      >
-        <a
-          className="add"
-        >
-          Add Post
-        </a>
-      </div>
     </div>
   </div>
   <div
@@ -165,6 +157,16 @@ exports[`last Snapshot - show message wait process modal 1`] = `
         Please wait while the information is updated.
       </h1>
     </div>
+  </div>
+  <div
+    className="flat-button"
+    onClick={undefined}
+  >
+    <a
+      className="add"
+    >
+      Add Post
+    </a>
   </div>
 </div>
 `;
@@ -368,16 +370,17 @@ exports[`last Snapshot 1`] = `
           </div>
         </div>
       </div>
-      <div
-        className="flat-button"
-      >
-        <a
-          className="add"
-        >
-          Add Post
-        </a>
-      </div>
     </div>
+  </div>
+  <div
+    className="flat-button"
+    onClick={undefined}
+  >
+    <a
+      className="add"
+    >
+      Add Post
+    </a>
   </div>
 </div>
 `;
