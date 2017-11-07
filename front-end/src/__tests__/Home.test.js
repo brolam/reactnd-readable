@@ -28,6 +28,17 @@ test('last Snapshot - show message wait process modal', () => {
   expect(tree).toMatchSnapshot();
 })
 
+test('last Snapshot - show error message modal', () => {
+  const home = renderer.create(
+  <Home 
+  posts={[]} 
+  categories={[]}
+  isShowErrorMessageModal={{message:"An error happened, please try again."}}
+   />);
+  let tree = home.toJSON();
+  expect(tree).toMatchSnapshot();
+})
+
 const posts = [{
   category: "udacity",
   id: "7ni6ok3ym7mf1p33lnez",
