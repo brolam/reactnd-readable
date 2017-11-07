@@ -40,7 +40,7 @@ function getFooterToNewPost(categories, onSave) {
     <select onChange={onSave} >
       <option value="none">Save as?</option>
       {categories.map(category => (
-        <option className={category} key={category} value="{category}">{category[0].toUpperCase() + category.slice(1)}</option>
+        <option key={category.path} value={category.path} >{category.name.toUpperCase() + category.name.slice(1)}</option>
       ))}
     </select>
   )

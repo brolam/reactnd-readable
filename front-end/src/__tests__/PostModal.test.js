@@ -4,6 +4,8 @@ import PostModal from '../components/PostModal'
 import renderer from 'react-test-renderer'
 import { mount } from 'enzyme'
 
+const categories = global.dataForTest.categories
+
 test('render without error', () => {
   ReactDOM.render(
     <PostModal
@@ -76,8 +78,6 @@ test('on save event to Edit Post', () => {
   postModal.find('button [className="save-button udacity"]').simulate('click');
   expect(wasSaveEnvent).toBe(true);
 })
-
-const categories = ['udacity', 'react', 'redux']
 
 const postUdacity = {
   category: "udacity",

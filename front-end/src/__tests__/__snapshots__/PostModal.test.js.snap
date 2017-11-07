@@ -82,22 +82,19 @@ exports[`last Snapshot to new Post 1`] = `
             Save as?
           </option>
           <option
-            className="udacity"
-            value="{category}"
+            value="udacity"
           >
-            Udacity
+            UDACITYdacity
           </option>
           <option
-            className="react"
-            value="{category}"
+            value="react"
           >
-            React
+            REACTeact
           </option>
           <option
-            className="redux"
-            value="{category}"
+            value="redux"
           >
-            Redux
+            REDUXedux
           </option>
         </select>
       </div>
