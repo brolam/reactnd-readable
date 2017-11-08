@@ -472,17 +472,17 @@ exports[`last Snapshot - show new post form modal 1`] = `
             <option
               value="udacity"
             >
-              UDACITYdacity
+              Udacity
             </option>
             <option
               value="react"
             >
-              REACTeact
+              React
             </option>
             <option
               value="redux"
             >
-              REDUXedux
+              Redux
             </option>
           </select>
         </div>
