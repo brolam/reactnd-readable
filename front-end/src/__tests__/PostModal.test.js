@@ -68,10 +68,28 @@ describe("New Post to valid and to save", () => {
     expect(inputTitle.instance() === elementFocusing).toBe(true);
   })
 
-  test('title is required and not valid', () => {
+  test('title is required', () => {
     inputTitle.instance().value = ' '
     postModal.find('select').simulate('change');
     expect(areTheFieldsValidated).toBe(false);
+  })
+
+  test('title must be longer than 10 characters', () => {
+    inputTitle.instance().value = '123456789'
+    postModal.find('select').simulate('change');
+    expect(areTheFieldsValidated, ).toEqual(false);
+  })
+
+  test('title must be less than 80 characters', () => {
+    inputTitle.instance().value = '1'.repeat(81)
+    postModal.find('select').simulate('change');
+    expect(areTheFieldsValidated).toEqual(false);
+  })
+
+  test('title must be valid', () => {
+    inputTitle.instance().value = '1'.repeat(80)
+    postModal.find('select').simulate('change');
+    expect(areTheFieldsValidated).toEqual(true);
   })
 
   test('on save event to new Post', () => {

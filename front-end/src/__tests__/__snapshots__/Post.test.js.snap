@@ -473,6 +473,8 @@ exports[`last Snapshot - Edit Post 1`] = `
         <input
           autoFocus={true}
           defaultValue="Udacity is the best place to learn Redux"
+          maxLength="80"
+          minLength="10"
           placeholder="Title post"
           required={true}
           type="text"

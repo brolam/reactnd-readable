@@ -22,8 +22,10 @@ function PostModal(props) {
             type="text"
             placeholder="Title post"
             defaultValue={post.title}
-            autoFocus={true}
+            autoFocus
             required
+            minLength="10"
+            maxLength="80"
           />
         </div>
         <div className="modal-content modal-post">
