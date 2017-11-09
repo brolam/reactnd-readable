@@ -4,14 +4,18 @@ import { parseReportValidityMethod } from './utils/FormReportValidity'
 
 let inputTitle
 let inputBody
+let selecCategory
 
 function PostModal(props) {
   const { post, categories } = props
   function parseFields(e) {
+    if ((selecCategory) && (selecCategory.value === 'none')) return
     parseReportValidityMethod(inputTitle)
     parseReportValidityMethod(inputBody)
     if (inputTitle.reportValidity() && inputBody.reportValidity()) {
       props.onSave(true)
+    } else {
+      if (selecCategory) selecCategory.value = 'none'
     }
   }
   return (
@@ -38,7 +42,7 @@ function PostModal(props) {
             required
             minLength="2"
             maxLength="500"
-           />
+          />
           <div className="modal-footer">
             {isNewPost(post) ?
               getFooterToNewPost(categories, parseFields)
@@ -58,7 +62,7 @@ function isNewPost(post) {
 
 function getFooterToNewPost(categories, parseFields) {
   return (
-    <select onChange={parseFields} >
+    <select ref={(select) => { selecCategory = select; }} onChange={parseFields} >
       <option value="none">Save as?</option>
       {categories.map(category => (
         <option key={category.path} value={category.path} >{category.name[0].toUpperCase() + category.name.slice(1)}</option>

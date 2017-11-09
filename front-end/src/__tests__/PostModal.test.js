@@ -42,9 +42,7 @@ test('last Snapshot to edit Post', () => {
 })
 
 describe("New Post to valid and to save", () => {
-  let postModal
-  let inputTitle
-  let inputBody
+  let postModal, inputTitle, inputBody, buttonSave
   let { isClikedBackButton, didTheSaveEvent, areTheFieldsValidated } = false
 
   beforeEach(() => {
@@ -63,6 +61,8 @@ describe("New Post to valid and to save", () => {
     areTheFieldsValidated = false;
     inputTitle = postModal.find('div [className="modal-heard modal-post"] input')
     inputBody = postModal.find('div [className="modal-content modal-post"] textarea')
+    buttonSave = postModal.find('div [className="modal-footer"] select')
+    buttonSave.instance().value = 'udacity'
   });
 
   test('input title is focusing', () => {
@@ -148,4 +148,33 @@ test('on save event to Edit Post', () => {
     />);
   postModal.find('button [className="save-button udacity"]').simulate('click');
   expect(didTheSaveEvent).toBe(true);
+})
+
+describe("save button", () => {
+
+  let postModal, inputTitle, inputBody, buttonSave
+
+  beforeEach(() => {
+    postModal = mount(
+      <PostModal
+        post={{}}
+        onClickBackButton={e => { }}
+        categories={categories}
+        onSave={fieldsWasValidated => { }}
+      />);
+    inputTitle = postModal.find('div [className="modal-heard modal-post"] input')
+    inputBody = postModal.find('div [className="modal-content modal-post"] textarea')
+    buttonSave = postModal.find('div [className="modal-footer"] select')
+  })
+
+  it('default value is none', () => {
+    expect(buttonSave.instance().value).toEqual('none');
+  })
+
+  it('return value to none on invalid save', () => {
+    buttonSave.instance().value = 'udacity'
+    postModal.find('select').simulate('change', { target: { value: 'udacity' } });
+    expect(buttonSave.instance().value).toEqual('none');
+  })
+
 })
