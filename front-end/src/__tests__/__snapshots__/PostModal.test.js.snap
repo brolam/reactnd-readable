@@ -29,7 +29,10 @@ exports[`last Snapshot to edit Post 1`] = `
     >
       <textarea
         defaultValue="Everyone says so after all."
+        maxLength="500"
+        minLength="2"
         placeholder="Body post"
+        required={true}
       />
       <div
         className="modal-footer"
@@ -76,7 +79,10 @@ exports[`last Snapshot to new Post 1`] = `
     >
       <textarea
         defaultValue={undefined}
+        maxLength="500"
+        minLength="2"
         placeholder="Body post"
+        required={true}
       />
       <div
         className="modal-footer"

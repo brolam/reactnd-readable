@@ -558,10 +558,10 @@ fieldset {
   box-sizing: border-box;
 }
 
-input:invalid {
+input:invalid, textarea:invalid {
   box-shadow: 0 0 5px 1px red;
 }
 
-input:focus:invalid {
+input:focus:invalid, textarea:invalid {
   outline: none;
 }

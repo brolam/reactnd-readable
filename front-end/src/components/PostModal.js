@@ -2,13 +2,15 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { parseReportValidityMethod } from './utils/FormReportValidity'
 
-let titleInput
+let inputTitle
+let inputBody
 
 function PostModal(props) {
   const { post, categories } = props
   function parseFields(e) {
-    parseReportValidityMethod(titleInput)
-    if (titleInput.reportValidity()) {
+    parseReportValidityMethod(inputTitle)
+    parseReportValidityMethod(inputBody)
+    if (inputTitle.reportValidity() && inputBody.reportValidity()) {
       props.onSave(true)
     }
   }
@@ -18,7 +20,7 @@ function PostModal(props) {
         <div className="modal-heard modal-post">
           <span onClick={props.onClickBackButton} />
           <input
-            ref={(input) => { titleInput = input; }}
+            ref={(input) => { inputTitle = input; }}
             type="text"
             placeholder="Title post"
             defaultValue={post.title}
@@ -30,8 +32,13 @@ function PostModal(props) {
         </div>
         <div className="modal-content modal-post">
           <textarea
+            ref={(textarea) => { inputBody = textarea; }}
             placeholder="Body post"
-            defaultValue={post.body} />
+            defaultValue={post.body}
+            required
+            minLength="2"
+            maxLength="500"
+           />
           <div className="modal-footer">
             {isNewPost(post) ?
               getFooterToNewPost(categories, parseFields)

@@ -44,6 +44,7 @@ test('last Snapshot to edit Post', () => {
 describe("New Post to valid and to save", () => {
   let postModal
   let inputTitle
+  let inputBody
   let { isClikedBackButton, didTheSaveEvent, areTheFieldsValidated } = false
 
   beforeEach(() => {
@@ -61,6 +62,7 @@ describe("New Post to valid and to save", () => {
     didTheSaveEvent = false;
     areTheFieldsValidated = false;
     inputTitle = postModal.find('div [className="modal-heard modal-post"] input')
+    inputBody = postModal.find('div [className="modal-content modal-post"] textarea')
   });
 
   test('input title is focusing', () => {
@@ -88,12 +90,42 @@ describe("New Post to valid and to save", () => {
 
   test('title must be valid', () => {
     inputTitle.instance().value = '1'.repeat(80)
+    inputBody.instance().value = '1'.repeat(500)
+    postModal.find('select').simulate('change');
+    expect(areTheFieldsValidated).toEqual(true);
+  })
+
+  test('body is required', () => {
+    inputTitle.instance().value = '1'.repeat(80)
+    inputBody.instance().value = ' '
+    postModal.find('select').simulate('change');
+    expect(areTheFieldsValidated).toBe(false);
+  })
+
+  test('body must be longer than 2 characters', () => {
+    inputTitle.instance().value = '1'.repeat(80)
+    inputBody.instance().value = '1'
+    postModal.find('select').simulate('change');
+    expect(areTheFieldsValidated, ).toEqual(false);
+  })
+
+  test('body must be less than 500 characters', () => {
+    inputTitle.instance().value = '1'.repeat(80)
+    inputBody.instance().value = '1'.repeat(501)
+    postModal.find('select').simulate('change');
+    expect(areTheFieldsValidated).toEqual(false);
+  })
+
+  test('body must be valid', () => {
+    inputTitle.instance().value = '1'.repeat(80)
+    inputBody.instance().value = '1'.repeat(50)
     postModal.find('select').simulate('change');
     expect(areTheFieldsValidated).toEqual(true);
   })
 
   test('on save event to new Post', () => {
     inputTitle.instance().value = 'Udacity is the best place to learn technology.'
+    inputBody.instance().value = '1'.repeat(500)
     postModal.find('select').simulate('change');
     expect(didTheSaveEvent).toBe(true);
     expect(areTheFieldsValidated).toBe(true);
