@@ -13,7 +13,7 @@ function PostModal(props) {
     parseReportValidityMethod(inputTitle)
     parseReportValidityMethod(inputBody)
     if (inputTitle.reportValidity() && inputBody.reportValidity()) {
-      props.onSave(true)
+      props.onSavePost(true)
     } else {
       if (selecCategory) selecCategory.value = 'none'
     }
@@ -82,7 +82,7 @@ function getFooterToEditPost(post, parseFields) {
 PostModal.propTypes = {
   categories: PropTypes.array.isRequired,
   onClickBackButton: PropTypes.func.isRequired,
-  onSave: PropTypes.func.isRequired
+  onSavePost: PropTypes.func.isRequired
 }
 
 export default PostModal

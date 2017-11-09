@@ -10,9 +10,10 @@ function Home({
   posts,
   categories,
   isNewPost = false,
-  isShowWaitProcessModal = false ,
-  onClickNewPost = e=>{},
-  goHome = e=>{} }) {
+  isShowWaitProcessModal = false,
+  onClickNewPost = e => { },
+  goHome = e => { },
+  onSavePost = fieldsWasValidated => { } }) {
   return (
     <div className="app">
       <div className="main-page-header">
@@ -32,7 +33,7 @@ function Home({
             post={{}}
             categories={categories}
             onClickBackButton={goHome}
-            onSave={e => { }}
+            onSavePost={onSavePost}
           />
         )
       }

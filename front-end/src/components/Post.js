@@ -71,7 +71,7 @@ function Post(
             post={post}
             categories={[]}
             onClickBackButton={e => { }}
-            onSave={e => { }}
+            onSavePost={e => { }}
           />
         )}
     </div>

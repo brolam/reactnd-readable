@@ -21,7 +21,7 @@ it('renders without crashing', () => {
     </Provider>, div);
 });
 
-describe("Show and Close new post form", () => {
+describe("New post", () => {
   fetch.mockResponseOnce(JSON.stringify(posts))
   fetch.mockResponseOnce(JSON.stringify({ categories }))
   const app = mount(
@@ -43,5 +43,29 @@ describe("Show and Close new post form", () => {
     expect(backButton.length).toEqual(1);
     backButton.simulate('click');
     expect(app.find('div [id="postModal"]').length).toEqual(0);
+  })
+
+  it('save a post', () => {
+    app.find('.flat-button').simulate('click'); //Show modal new post
+    const inputTitle = app.find('div [className="modal-heard modal-post"] input')
+    const inputBody = app.find('div [className="modal-content modal-post"] textarea')
+    const buttonSave = app.find('div [className="modal-footer"] select')
+    inputTitle.instance().value = '1'.repeat(80) // valid Title
+    inputBody.instance().value = '1'.repeat(500) // valid Body
+    buttonSave.instance().value = 'udacity';
+    buttonSave.simulate('change');
+    expect(app.find('div [id="postModal"]').length).toEqual(0);
+  })
+
+  it('do not save post', () => {
+    app.find('.flat-button').simulate('click'); //Show modal new post
+    const inputTitle = app.find('div [className="modal-heard modal-post"] input')
+    const inputBody = app.find('div [className="modal-content modal-post"] textarea')
+    const buttonSave = app.find('div [className="modal-footer"] select')
+    inputTitle.instance().value = '1'.repeat(81) // invalid title  
+    inputBody.instance().value = '1'.repeat(501) // invalid body
+    buttonSave.instance().value = 'udacity';
+    buttonSave.simulate('change');
+    expect(app.find('div [id="postModal"]').length).toEqual(1);
   })
 });
