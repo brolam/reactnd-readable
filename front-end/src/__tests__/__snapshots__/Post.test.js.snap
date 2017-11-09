@@ -474,6 +474,7 @@ exports[`last Snapshot - Edit Post 1`] = `
           autoFocus={true}
           defaultValue="Udacity is the best place to learn Redux"
           placeholder="Title post"
+          required={true}
           type="text"
         />
       </div>

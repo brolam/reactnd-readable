@@ -18,6 +18,7 @@ exports[`last Snapshot to edit Post 1`] = `
         autoFocus={true}
         defaultValue="Udacity is the best place to learn technology."
         placeholder="Title post"
+        required={true}
         type="text"
       />
     </div>
@@ -62,6 +63,7 @@ exports[`last Snapshot to new Post 1`] = `
         autoFocus={true}
         defaultValue={undefined}
         placeholder="Title post"
+        required={true}
         type="text"
       />
     </div>

@@ -448,6 +448,7 @@ exports[`last Snapshot - show new post form modal 1`] = `
           autoFocus={true}
           defaultValue={undefined}
           placeholder="Title post"
+          required={true}
           type="text"
         />
       </div>

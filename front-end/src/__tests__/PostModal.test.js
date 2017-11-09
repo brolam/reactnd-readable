@@ -5,6 +5,7 @@ import renderer from 'react-test-renderer'
 import { mount } from 'enzyme'
 
 const categories = global.dataForTest.categories
+const postUdacity = global.dataForTest.posts[0]
 
 test('render without error', () => {
   ReactDOM.render(
@@ -40,66 +41,61 @@ test('last Snapshot to edit Post', () => {
   expect(tree).toMatchSnapshot();
 })
 
-test('input title is focusing', () => {
-  let isClikedBackButton = false;
-  const postModal = mount(
-    <PostModal
-      post={postUdacity}
-      onClickBackButton={e => { isClikedBackButton = true }}
-      categories={categories}
-      onSave={e => { }}
-    />);
-  const inputTitle = postModal.find('div [className="modal-heard modal-post"] input')
-  const elementFocusing  = document.activeElement
-  expect(inputTitle.instance() === elementFocusing).toBe(true);
-})
+describe("New Post to valid and to save", () => {
+  let postModal
+  let inputTitle
+  let { isClikedBackButton, didTheSaveEvent, areTheFieldsValidated } = false
 
-test('on click back button', () => {
-  let isClikedBackButton = false;
-  const postModal = mount(
-    <PostModal
-      post={postUdacity}
-      onClickBackButton={e => { isClikedBackButton = true }}
-      categories={categories}
-      onSave={e => { }}
-    />);
-  postModal.find('div [className="modal-heard modal-post"] span').simulate('click')
-  expect(isClikedBackButton).toBe(true);
-})
+  beforeEach(() => {
+    postModal = mount(
+      <PostModal
+        post={{}}
+        onClickBackButton={e => { isClikedBackButton = true }}
+        categories={categories}
+        onSave={fieldsWasValidated => {
+          didTheSaveEvent = true
+          areTheFieldsValidated = fieldsWasValidated
+        }}
+      />);
+    isClikedBackButton = false;
+    didTheSaveEvent = false;
+    areTheFieldsValidated = false;
+    inputTitle = postModal.find('div [className="modal-heard modal-post"] input')
+  });
 
-test('on save event to new Post', () => {
-  let wasSaveEnvent = false;
-  const postModal = mount(
-    <PostModal
-      post={{}}
-      categories={categories}
-      onClickBackButton={e => { }}
-      onSave={e => { wasSaveEnvent = true }}
-    />);
-  postModal.find('select').simulate('change');
-  expect(wasSaveEnvent).toBe(true);
+  test('input title is focusing', () => {
+    const elementFocusing = document.activeElement
+    expect(inputTitle.instance() === elementFocusing).toBe(true);
+  })
+
+  test('title is required and not valid', () => {
+    inputTitle.instance().value = ' '
+    postModal.find('select').simulate('change');
+    expect(areTheFieldsValidated).toBe(false);
+  })
+
+  test('on save event to new Post', () => {
+    inputTitle.instance().value = 'Udacity is the best place to learn technology.'
+    postModal.find('select').simulate('change');
+    expect(didTheSaveEvent).toBe(true);
+    expect(areTheFieldsValidated).toBe(true);
+  })
+
+  test('on click back button', () => {
+    postModal.find('div [className="modal-heard modal-post"] span').simulate('click')
+    expect(isClikedBackButton).toBe(true);
+  })
 })
 
 test('on save event to Edit Post', () => {
-  let wasSaveEnvent = false;
+  let didTheSaveEvent = false;
   const postModal = mount(
     <PostModal
       post={postUdacity}
       categories={categories}
       onClickBackButton={e => { }}
-      onSave={e => { wasSaveEnvent = true }}
+      onSave={e => { didTheSaveEvent = true }}
     />);
   postModal.find('button [className="save-button udacity"]').simulate('click');
-  expect(wasSaveEnvent).toBe(true);
+  expect(didTheSaveEvent).toBe(true);
 })
-
-const postUdacity = {
-  category: "udacity",
-  id: "7ni6ok3ym7mf1p33lnez",
-  title: "Udacity is the best place to learn technology.",
-  timestamp: 1467166872634,
-  author: "thingtwo",
-  body: "Everyone says so after all.",
-  deleted: false,
-  voteScore: 5
-}
