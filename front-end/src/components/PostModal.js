@@ -13,7 +13,10 @@ function PostModal(props) {
     parseReportValidityMethod(inputTitle)
     parseReportValidityMethod(inputBody)
     if (inputTitle.reportValidity() && inputBody.reportValidity()) {
-      props.onSavePost(true)
+      props.onSavePost(
+        true,
+        newPost(inputTitle.value, inputBody.value, selecCategory.value)
+      )
     } else {
       if (selecCategory) selecCategory.value = 'none'
     }
@@ -58,6 +61,19 @@ function PostModal(props) {
 
 function isNewPost(post) {
   return post.category ? false : true;
+}
+
+export function newPost(title, body, category) {
+  return {
+    id: Math.random().toString(36).substr(-15),
+    title,
+    body,
+    category,
+    author: 'Breno Marques',
+    timestamp: new Date(),
+    voteScore: 1,
+    deleted: false
+  }
 }
 
 function getFooterToNewPost(categories, parseFields) {

@@ -3,7 +3,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import './App.css';
 import Home from './components/Home'
-import { requestPosts } from './store/actions'
+import { requestPosts, requestSavePost, cleanRedirectUrl } from './store/actions'
 
 const GO_HOME = '/';
 const GO_POST_NEW = '/post/new';
@@ -31,10 +31,17 @@ class App extends Component {
       </Switch >
     )
   }
-  componentDidUpdate() { }
+
+  componentWillReceiveProps() {
+    if (!this.props.redirectUrl) return
+    if (this.props.redirectUrl !== this.props.location.pathname) {
+      this.props.cleanRedirectUrl()
+      this.props.history.push(this.props.redirectUrl)
+    }
+  }
 }
 
-function mapStateToProps({ home }) {
+function mapStateToProps({ home }, ownProps) {
   return home;
 }
 
@@ -43,7 +50,10 @@ function mapDispatchToProps(dispatch, ownProps) {
     dispatchRequestPosts: (search) => dispatch(requestPosts(search)),
     onClickNewPost: (e) => ownProps.history.push(GO_POST_NEW),
     goHome: (e) => ownProps.history.push(GO_HOME),
-    onSavePost: (fieldsWasValidated) => (fieldsWasValidated && ownProps.history.push(GO_HOME)),
+    cleanRedirectUrl: () => dispatch(cleanRedirectUrl()),
+    onSavePost: (fieldsWasValidated, post) => {
+      fieldsWasValidated && dispatch(requestSavePost(post, GO_HOME))
+    },
   }
 }
 

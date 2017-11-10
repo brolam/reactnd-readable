@@ -5,6 +5,7 @@ import { mount, shallow } from 'enzyme'
 import App from '../App';
 import { Provider } from 'react-redux'
 import store from '../store'
+import { newPost } from '../components/PostModal'
 
 const categories = global.dataForTest.categories
 const posts = global.dataForTest.posts
@@ -22,8 +23,9 @@ it('renders without crashing', () => {
 });
 
 describe("New post", () => {
-  fetch.mockResponseOnce(JSON.stringify(posts))
+  fetch.mockResponseOnce(JSON.stringify([...posts]))
   fetch.mockResponseOnce(JSON.stringify({ categories }))
+
   const app = mount(
     <Provider store={store}>
       <BrowserRouter>
@@ -50,11 +52,19 @@ describe("New post", () => {
     const inputTitle = app.find('div [className="modal-heard modal-post"] input')
     const inputBody = app.find('div [className="modal-content modal-post"] textarea')
     const buttonSave = app.find('div [className="modal-footer"] select')
-    inputTitle.instance().value = '1'.repeat(80) // valid Title
-    inputBody.instance().value = '1'.repeat(500) // valid Body
-    buttonSave.instance().value = 'udacity';
-    buttonSave.simulate('change');
-    expect(app.find('div [id="postModal"]').length).toEqual(0);
+    inputTitle.instance().value = '1'.repeat(80)
+    inputBody.instance().value = '1'.repeat(500)
+    buttonSave.instance().value = 'udacity'
+    const post = newPost(inputTitle.instance().value, inputBody.instance().value, buttonSave.instance().value)
+    fetch.mockResponseOnce(JSON.stringify(post))
+    fetch.mockResponseOnce(JSON.stringify([...posts, post]))
+    fetch.mockResponseOnce(JSON.stringify({ categories }))
+    buttonSave.simulate('change') //Save post
+  })
+
+  it('save a post', () => {
+    app.find('.flat-button').simulate('click');
+    expect(app.find('div [className="post"]').length).toBe(4) //test number of posts
   })
 
   it('do not save post', () => {
@@ -66,6 +76,7 @@ describe("New post", () => {
     inputBody.instance().value = '1'.repeat(501) // invalid body
     buttonSave.instance().value = 'udacity';
     buttonSave.simulate('change');
-    expect(app.find('div [id="postModal"]').length).toEqual(1);
+    expect(app.find('div [id="postModal"]').length).toEqual(1); //Modal Form new Post still opening
+    expect(app.find('div [className="post"]').length).toBe(4); //test number of posts
   })
 });

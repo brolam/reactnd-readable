@@ -18,10 +18,21 @@ ReadableAPI.getPosts = (search) =>
     .then(data => data)
 
 ReadableAPI.getCategories = () =>
-    fetch(`${api}categories/`, { headers })
-      .then(res => res.json())
-      .then(data => data)
-  
+  fetch(`${api}categories/`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+ReadableAPI.newPost = (post) =>
+  fetch(`${api}posts/`,
+    {
+      method: 'POST',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(post)
+    }).then(response => response)
+
 
 export default ReadableAPI;
 
