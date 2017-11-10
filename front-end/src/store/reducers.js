@@ -7,6 +7,16 @@ const HOME_INITIAL_STATE = {
   redirectUrl: null
 };
 
+function app(state = {}, action) {
+  switch (action.type) {
+    case 'CLEAN_REDIRECT_URL': {
+      return { ...state, redirectUrl: null, isShowWaitProcessModal: false }
+    }
+    default:
+      return state
+  }
+}
+
 function home(state = HOME_INITIAL_STATE, action) {
   switch (action.type) {
     case 'REQUEST_POSTS': {
@@ -24,10 +34,9 @@ function home(state = HOME_INITIAL_STATE, action) {
     case 'CLEAN_REDIRECT_URL': {
       return { ...state, redirectUrl: null, isShowWaitProcessModal: false }
     }
-
     default:
       return state
   }
 }
 
-export default combineReducers({ home })
+export default combineReducers({ app, home })
