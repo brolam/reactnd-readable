@@ -49,9 +49,7 @@ describe("New post", () => {
 
   it('save a post', () => {
     app.find('.flat-button').simulate('click'); //Show modal new post
-    const inputTitle = app.find('div [className="modal-heard modal-post"] input')
-    const inputBody = app.find('div [className="modal-content modal-post"] textarea')
-    const buttonSave = app.find('div [className="modal-footer"] select')
+    const {inputTitle ,inputBody, buttonSave } = getPostModalInputs(app)
     inputTitle.instance().value = '1'.repeat(80)
     inputBody.instance().value = '1'.repeat(500)
     buttonSave.instance().value = 'udacity'
@@ -69,9 +67,7 @@ describe("New post", () => {
 
   it('do not save post', () => {
     app.find('.flat-button').simulate('click'); //Show modal new post
-    const inputTitle = app.find('div [className="modal-heard modal-post"] input')
-    const inputBody = app.find('div [className="modal-content modal-post"] textarea')
-    const buttonSave = app.find('div [className="modal-footer"] select')
+    const {inputTitle ,inputBody, buttonSave } = getPostModalInputs(app)
     inputTitle.instance().value = '1'.repeat(81) // invalid title  
     inputBody.instance().value = '1'.repeat(501) // invalid body
     buttonSave.instance().value = 'udacity';
@@ -80,3 +76,11 @@ describe("New post", () => {
     expect(app.find('div [className="post"]').length).toBe(4); //test number of posts
   })
 });
+
+function getPostModalInputs(app) {
+  return {
+    inputTitle: app.find('div [className="modal-heard modal-post"] input'),
+    inputBody: app.find('div [className="modal-content modal-post"] textarea'),
+    buttonSave: app.find('div [className="modal-footer"] select'),
+  }
+}
