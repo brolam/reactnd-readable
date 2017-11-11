@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import pathToRegexp from 'path-to-regexp'
 import './App.css';
 import HomePage from './components/HomePage'
-import Post from './components/Post'
+import PostPage from './components/PostPage'
 import { requestPosts, requestSavePost, cleanRedirectUrl, requestPost } from './store/actions'
 
 const GO_HOME = '/';
@@ -43,7 +43,7 @@ class App extends Component {
           <HomePage isNewPost={true}  {...this.props} />
         )} />
         <Route exact path={GO_POST_GET} render={({ history }) => (
-          <Post {...this.props.selectedPost}  {...this.props} />
+          <PostPage {...this.props.selectedPost}  {...this.props} />
         )} />
       </Switch >
     )

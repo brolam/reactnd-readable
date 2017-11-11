@@ -1,68 +1,68 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import renderer from 'react-test-renderer'
-import Post from '../components/Post'
+import PostPage from '../components/PostPage'
 
 test('render without error', () => {
   ReactDOM.render(
-    <Post post={postRedux} comments={postReduxComments} />,
+    <PostPage post={postRedux} comments={postReduxComments} />,
     document.createElement('div'));
 })
 
 test('last Snapshot', () => {
-  const post = renderer.create(<Post post={postRedux} comments={postReduxComments} />);
-  let tree = post.toJSON();
+  const postPage = renderer.create(<PostPage post={postRedux} comments={postReduxComments} />);
+  let tree = postPage.toJSON();
   expect(tree).toMatchSnapshot();
 })
 
 test('last Snapshot - Edit Post', () => {
-  const post = renderer.create(<Post
+  const postPage = renderer.create(<PostPage
     post={postRedux}
     comments={postReduxComments}
     isEditPost={true} />);
-  let tree = post.toJSON();
+  let tree = postPage.toJSON();
   expect(tree).toMatchSnapshot();
 })
 
 test('last Snapshot - New Comment', () => {
-  const post = renderer.create(<Post
+  const postPage = renderer.create(<PostPage
     post={postRedux}
     comments={postReduxComments}
     isNewComment={true}
   />);
-  let tree = post.toJSON();
+  let tree = postPage.toJSON();
   expect(tree).toMatchSnapshot();
 })
 
 test('last Snapshot - Edit Comment', () => {
-  const post = renderer.create(<Post
+  const postPage = renderer.create(<PostPage
     post={postRedux}
     comments={postReduxComments}
     isEditComment={true}
     selectedComment={postReduxComments[0]}
   />);
-  let tree = post.toJSON();
+  let tree = postPage.toJSON();
   expect(tree).toMatchSnapshot();
 })
 
 test('last Snapshot - show question delete comment', () => {
-  const post = renderer.create(<Post
+  const postPage = renderer.create(<PostPage
     post={postRedux}
     comments={postReduxComments}
     isShowQuestionDelComment={true}
     selectedComment={postReduxComments[0]}
   />);
-  let tree = post.toJSON();
+  let tree = postPage.toJSON();
   expect(tree).toMatchSnapshot();
 })
 
 test('last Snapshot - show question delete post', () => {
-  const post = renderer.create(<Post
+  const postPage = renderer.create(<PostPage
     post={postRedux}
     comments={postReduxComments}
     isShowQuestionDelPost={true}
   />);
-  let tree = post.toJSON();
+  let tree = postPage.toJSON();
   expect(tree).toMatchSnapshot();
 })
 

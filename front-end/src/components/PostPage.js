@@ -6,7 +6,7 @@ import PostModal from '../components/PostModal'
 import PostCommentModal from '../components/PostCommentModal'
 import QuestionModal from '../components/QuestionModal'
 
-function Post(
+function PostPage(
   { post = getEmptyPost(),
     comments = [],
     isEditPost = false,
@@ -92,4 +92,4 @@ function getEmptyPost() {
   }
 }
 
-export default Post
+export default PostPage
