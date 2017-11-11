@@ -6,7 +6,7 @@ import PostList from '../components/PostList'
 import PostModal from '../components/PostModal'
 import WaitProcessModal from '../components/WaitProcessModal'
 
-function Home({
+function HomePage({
   posts,
   categories,
   isNewPost = false,
@@ -52,9 +52,9 @@ function Home({
   )
 }
 
-Home.propTypes = {
+HomePage.propTypes = {
   posts: PropTypes.array.isRequired,
   categories: PropTypes.array.isRequired,
 }
 
-export default Home
+export default HomePage

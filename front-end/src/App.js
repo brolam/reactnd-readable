@@ -3,7 +3,7 @@ import { Switch, Route, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import pathToRegexp from 'path-to-regexp'
 import './App.css';
-import Home from './components/Home'
+import HomePage from './components/HomePage'
 import Post from './components/Post'
 import { requestPosts, requestSavePost, cleanRedirectUrl, requestPost } from './store/actions'
 
@@ -37,10 +37,10 @@ class App extends Component {
     return (
       <Switch>
         <Route exact path={GO_HOME} render={({ history }) => (
-          <Home {...this.props} />
+          <HomePage {...this.props} />
         )} />
         <Route exact path={GO_POST_NEW} render={({ history }) => (
-          <Home isNewPost={true}  {...this.props} />
+          <HomePage isNewPost={true}  {...this.props} />
         )} />
         <Route exact path={GO_POST_GET} render={({ history }) => (
           <Post {...this.props.selectedPost}  {...this.props} />
