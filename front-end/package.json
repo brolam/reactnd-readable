@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "moment": "^2.19.1",
+    "path-to-regexp": "^2.1.0",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
@@ -26,6 +27,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --setupTestFrameworkScriptFile=raf/polyfill --setupFiles='./src/jest.setup.js'",
+    "test-coverage": "react-scripts test --env=jsdom --coverage --setupTestFrameworkScriptFile=raf/polyfill --setupFiles='./src/jest.setup.js'",
     "eject": "react-scripts eject"
   },
   "jest": {

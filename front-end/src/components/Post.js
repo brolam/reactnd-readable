@@ -7,8 +7,8 @@ import PostCommentModal from '../components/PostCommentModal'
 import QuestionModal from '../components/QuestionModal'
 
 function Post(
-  { post,
-    comments,
+  { post = getEmptyPost(),
+    comments = [],
     isEditPost = false,
     isNewComment = false,
     isEditComment = false,
@@ -77,6 +77,19 @@ function Post(
     </div>
 
   )
+}
+
+function getEmptyPost() {
+  return {
+    id: null,
+    title: '',
+    body: '',
+    category: '',
+    author: '',
+    timestamp: new Date(),
+    voteScore: 0,
+    deleted: false
+  }
 }
 
 export default Post

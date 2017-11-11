@@ -1,3 +1,4 @@
+//Posts
 export function requestPosts(search, redirectUrl = null) {
   return {
     type: 'REQUEST_POSTS',
@@ -15,6 +16,15 @@ export function returnPosts(posts, categories, redirectUrl = null) {
   }
 }
 
+//Post
+export function requestPost(postId, redirectUrl = null) {
+  return {
+    type: 'REQUEST_POST',
+    postId,
+    redirectUrl
+  }
+}
+
 export function requestSavePost(post, redirectUrl = null) {
   return {
     type: 'REQUEST_SAVE_POST',
@@ -23,6 +33,16 @@ export function requestSavePost(post, redirectUrl = null) {
   }
 }
 
+export function returnPost(post, comments, redirectUrl = null) {
+  return {
+    type: 'RETURN_POST',
+    post,
+    comments,
+    redirectUrl
+  }
+}
+
+//app
 export function cleanRedirectUrl() {
   return {
     type: 'CLEAN_REDIRECT_URL',

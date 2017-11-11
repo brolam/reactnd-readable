@@ -13,7 +13,8 @@ function Home({
   isShowWaitProcessModal = false,
   onClickNewPost = e => { },
   goHome = e => { },
-  onSavePost = fieldsWasValidated => { } }) {
+  onSavePost = fieldsWasValidated => { },
+  onSelectedPost = (post)=>{}} ) {
   return (
     <div className="app">
       <div className="main-page-header">
@@ -25,7 +26,7 @@ function Home({
       </div>
       <SearchBar placeholder="Search by title post" />
       <div className="main-page-content">
-        <PostList posts={posts} />
+        <PostList posts={posts} onSelectedPost={onSelectedPost} />
       </div>
       {
         isNewPost && (

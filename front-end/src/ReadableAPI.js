@@ -33,6 +33,16 @@ ReadableAPI.newPost = (post) =>
       body: JSON.stringify(post)
     }).then(response => response)
 
+ReadableAPI.getPost = (postId) =>
+  fetch(`${api}posts/${postId}`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
+ReadableAPI.getComments = (postId) =>
+  fetch(`${api}posts/${postId}/comments`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
 
 export default ReadableAPI;
 
