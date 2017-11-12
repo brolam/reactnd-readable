@@ -14,13 +14,14 @@ function PostPage(
     isEditComment = false,
     selectedComment = {},
     isShowQuestionDelPost = false,
-    isShowQuestionDelComment = false
+    isShowQuestionDelComment = false,
+    goHome = e => { }
     }) {
   return (
     <div className="app">
       <div className="post-page-header">
         <a className="post-page-header-back"
-          onClick={e => { }}>Back
+          onClick={goHome}>Back
       </a>
         <div className="post-page-header-title">
           <span className={post.category} >{post.category}</span>

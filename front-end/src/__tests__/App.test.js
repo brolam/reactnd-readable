@@ -78,10 +78,14 @@ describe("Edit post", () => {
   })
 
   it('select first post', () => {
-    const selectedFirstPost = app.find('div [className="post"]').first()
-    selectedFirstPost.simulate('click')
-    const postPage = app.find('div [className="post-page-header"]')
-    expect(postPage.length).toBe(1)
+    selectTheFirstPost(app)
+  })
+
+  test('back to homepage', () => {
+    const backButton = app.find('[className="post-page-header-back"]')
+    backButton.simulate('click')
+    const homePage = app.find('div [className="main-page-header"]')
+    expect(homePage.length).toBe(1)
   })
 });
 
@@ -104,6 +108,13 @@ global.fetch = (url, body) => new Promise(function (then) {
   if (url === 'http://localhost:3001/posts/comments') res = { json: () => posts[0].comments }
   then(res);
 });
+
+function selectTheFirstPost(app) {
+  const selectedFirstPost = app.find('div [className="post"]').first()
+  selectedFirstPost.simulate('click')
+  const postPage = app.find('div [className="post-page-header"]')
+  expect(postPage.length).toBe(1)
+}
 
 function showFormModalNewPost(app) {
   const newPostButton = app.find('.flat-button');
