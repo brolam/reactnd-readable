@@ -15,7 +15,8 @@ function PostPage(
     selectedComment = {},
     isShowQuestionDelPost = false,
     isShowQuestionDelComment = false,
-    goHome = e => { }
+    goHome = e => { },
+    goEditPost = post => { }
     }) {
   return (
     <div className="app">
@@ -29,7 +30,7 @@ function PostPage(
         </div>
         <div className="post-page-header-buttons">
           <button className="edit-button" href="/"
-            onClick={e => { }}>Edit</button>
+            onClick={e =>goEditPost(post)}>Edit</button>
           <button className="delete-button"
             onClick={e => { }}>Delete</button>
           <VoteScore voteScore={post.voteScore} />

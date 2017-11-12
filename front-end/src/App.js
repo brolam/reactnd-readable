@@ -8,9 +8,12 @@ import PostPage from './components/PostPage'
 import { requestPosts, requestSavePost, cleanRedirectUrl, requestPost } from './store/actions'
 
 const GO_HOME = '/';
+
+//GET Post
 const GO_POST_NEW = '/post/new';
-const GO_POST_GET = '/post/:id';
-const gettUrlPost = pathToRegexp.compile(GO_POST_GET)
+const GO_POST_GET = '/post/:id/:action';
+const GO_POST_GET_ACTIONS = { get: 'get', edit: 'edit' }
+const getUrlPost = pathToRegexp.compile(GO_POST_GET)
 
 class App extends Component {
   constructor(props) {
@@ -43,10 +46,22 @@ class App extends Component {
           <HomePage isNewPost={true}  {...this.props} />
         )} />
         <Route exact path={GO_POST_GET} render={({ history }) => (
-          <PostPage {...this.props.selectedPost}  {...this.props} />
+          <PostPage
+            {...this.getPostPagePropsUrl(history.location.pathname) }
+            {...this.props.selectedPost}
+            {...this.props} />
         )} />
       </Switch >
     )
+  }
+
+  getPostPagePropsUrl(url) {
+    const params = pathToRegexp(GO_POST_GET).exec(url)
+    const action = params[2]
+    return ({
+      isEditPost: action === GO_POST_GET_ACTIONS.edit
+    })
+
   }
 
   isUserWroteUrlToGePost(currentUrl) {
@@ -87,9 +102,12 @@ function mapDispatchToProps(dispatch, ownProps) {
     //pushs
     onClickNewPost: (e) => ownProps.history.push(GO_POST_NEW),
     goHome: (e) => ownProps.history.push(GO_HOME),
+    goEditPost: post => {
+      ownProps.history.push(getUrlPost({ id: post.id, action: GO_POST_GET_ACTIONS.edit }))
+    },
     //Pushs and dispatchs
     onSelectedPost: (post) => {
-      ownProps.history.push(gettUrlPost({ id: post.id }))
+      ownProps.history.push(getUrlPost({ id: post.id, action: GO_POST_GET_ACTIONS.get }))
       dispatch(requestPost(post.id))
     },
   }

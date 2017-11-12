@@ -87,6 +87,14 @@ describe("Edit post", () => {
     const homePage = app.find('div [className="main-page-header"]')
     expect(homePage.length).toBe(1)
   })
+
+  test('show edit post form modal', () => {
+    selectTheFirstPost(app)
+    const editButton = app.find('button [className="edit-button"]')
+    editButton.simulate('click')
+    expect(app.find('div [id="postModal"]').length).toEqual(1);
+  })
+
 });
 
 const categories = global.dataForTest.categories
