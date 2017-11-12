@@ -12,7 +12,7 @@ const GO_HOME = '/';
 //GET Post
 const GO_POST_NEW = '/post/new';
 const GO_POST_GET = '/post/:id/:action';
-const GO_POST_GET_ACTIONS = { get: 'get', edit: 'edit', deletePost: 'deletePost' }
+const GO_POST_GET_ACTIONS = { get: 'get', edit: 'edit', deletePost: 'delete' }
 const getUrlPost = pathToRegexp.compile(GO_POST_GET)
 
 class App extends Component {

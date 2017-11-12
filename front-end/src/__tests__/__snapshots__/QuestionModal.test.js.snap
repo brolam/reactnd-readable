@@ -10,14 +10,13 @@ exports[`last Snapshot 1`] = `
   >
     <h1>
       Question?
-       
       <a
         className="yes"
         onClick={[Function]}
       >
         Yes? 
       </a>
-       or 
+      or 
       <a
         className="no"
         onClick={[Function]}

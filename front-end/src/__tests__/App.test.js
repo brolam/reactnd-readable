@@ -122,13 +122,15 @@ describe("Delete post", () => {
       </Provider>)
   })
 
-  test('show post delete question', () => {
-    selectTheFirstPost(app)
-    const deleteButton = app.find('button [className="delete-button"]')
-    deleteButton.simulate('click')
-    expect(app.find('h1').text()).toBe('Are you sure? Do you want delete this post?  Yes?  or No?')
+  it('show post delete question', () => {
+    showDeleteQuestionForFirstPost(app)
   })
 
+  it('click No in post delete question', () => {
+    showDeleteQuestionForFirstPost(app)
+    app.find('a [className="no"]').simulate('click')
+    expect(app.find('div [className="modal-short modal-open"] h1').length).toBe(0)
+  })
 })
 
 const categories = global.dataForTest.categories
@@ -154,6 +156,14 @@ global.fetch = (url, body) => new Promise(function (then) {
   if (url === 'http://localhost:3001/posts/comments') res = { json: () => posts[0].comments }
   then(res);
 });
+
+
+function showDeleteQuestionForFirstPost(app) {
+  selectTheFirstPost(app)
+  const deleteButton = app.find('button [className="delete-button"]')
+  deleteButton.simulate('click')
+  expect(app.find('div [className="modal-short modal-open"] h1').text()).toBe('Are you sure? Do you want delete this post? Yes? or No?')
+}
 
 function closeFormModalPost(app) {
   const backButton = app.find('div [className="modal-heard modal-post"] span');

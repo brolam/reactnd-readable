@@ -972,14 +972,13 @@ exports[`last Snapshot - show question delete comment 1`] = `
     >
       <h1>
         Are you sure? Do you want delete this comment?
-         
         <a
           className="yes"
           onClick={[Function]}
         >
           Yes? 
         </a>
-         or 
+        or 
         <a
           className="no"
           onClick={[Function]}
@@ -1209,14 +1208,13 @@ exports[`last Snapshot - show question delete post 1`] = `
     >
       <h1>
         Are you sure? Do you want delete this post? 
-         
         <a
           className="yes"
           onClick={[Function]}
         >
           Yes? 
         </a>
-         or 
+        or 
         <a
           className="no"
           onClick={[Function]}
