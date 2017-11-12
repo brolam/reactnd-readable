@@ -22,6 +22,12 @@ ReadableAPI.getCategories = () =>
     .then(res => res.json())
     .then(data => data)
 
+
+ReadableAPI.getPost = (postId) =>
+  fetch(`${api}posts/${postId}`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
 ReadableAPI.newPost = (post) =>
   fetch(`${api}posts/`,
     {
@@ -30,13 +36,19 @@ ReadableAPI.newPost = (post) =>
         ...headers,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify(post)
+      body: JSON.stringify({ id: Math.random().toString(36).substr(-15), ...post })
     }).then(response => response)
 
-ReadableAPI.getPost = (postId) =>
-  fetch(`${api}posts/${postId}`, { headers })
-    .then(res => res.json())
-    .then(data => data)
+ReadableAPI.editPost = (post) =>
+  fetch(`${api}posts/${post.id}`,
+    {
+      method: 'PUT',
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(post)
+    }).then(response => response)
 
 ReadableAPI.getComments = (postId) =>
   fetch(`${api}posts/${postId}/comments`, { headers })

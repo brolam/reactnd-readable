@@ -9,14 +9,15 @@ let selecCategory
 function PostModal(props) {
   const { post, categories } = props
   function parseFields(e) {
-    if ((selecCategory) && (selecCategory.value === 'none')) return
+    if ((isNewPost(props.post)) && (selecCategory.value === 'none')) return
     parseReportValidityMethod(inputTitle)
     parseReportValidityMethod(inputBody)
     if (inputTitle.reportValidity() && inputBody.reportValidity()) {
-      props.onSavePost(
-        true,
-        newPost(inputTitle.value, inputBody.value, selecCategory.value)
-      )
+      const postParam = isNewPost(props.post) ?
+        buildNewPost(inputTitle.value, inputBody.value, selecCategory.value)
+        :
+        buildEditPost(props.post, inputTitle.value, inputBody.value)
+      props.onSavePost(true, postParam)
     } else {
       if (selecCategory) selecCategory.value = 'none'
     }
@@ -59,13 +60,12 @@ function PostModal(props) {
   )
 }
 
-function isNewPost(post) {
-  return post.category ? false : true;
+export function isNewPost(post) {
+  return post.id ? false : true;
 }
 
-export function newPost(title, body, category) {
+export function buildNewPost(title, body, category) {
   return {
-    id: Math.random().toString(36).substr(-15),
     title,
     body,
     category,
@@ -74,6 +74,10 @@ export function newPost(title, body, category) {
     voteScore: 1,
     deleted: false
   }
+}
+
+function buildEditPost(post, title, body) {
+  return { ...post, title, body }
 }
 
 function getFooterToNewPost(categories, parseFields) {
@@ -89,7 +93,7 @@ function getFooterToNewPost(categories, parseFields) {
 
 function getFooterToEditPost(post, parseFields) {
   return (
-    <button className={"save-button " + post.category} href="/"
+    <button className={"save-button " + post.category}
       onClick={parseFields}>Save
     </button>
   )

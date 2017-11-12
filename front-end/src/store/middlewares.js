@@ -1,5 +1,6 @@
-import { requestPosts, returnPosts, returnPost } from './actions'
+import { requestPosts, returnPosts, returnPost, requestPost } from './actions'
 import ReadableAPI from '../ReadableAPI'
+import { isNewPost } from '../components/PostModal'
 
 export const appMiddleware = store => next => action => {
   switch (action.type) {
@@ -27,9 +28,12 @@ export const appMiddleware = store => next => action => {
     }
     case 'REQUEST_SAVE_POST': {
       const { post, redirectUrl } = action
-      //Post the post :)
-      ReadableAPI.newPost(post).then(response => {
-        response.ok && store.dispatch(requestPosts('', redirectUrl))
+      //Request a POST(new Post) or PUT(edit Post) method
+      const requestMethod = isNewPost(post) ? ReadableAPI.newPost : ReadableAPI.editPost
+      requestMethod(post).then(response => {
+        if (!response.ok) return
+        store.dispatch(requestPosts('', redirectUrl))
+        if (!isNewPost(post)) store.dispatch(requestPost(post.id)) //Update selected posts.
       })
       return next(action)
     }

@@ -17,7 +17,8 @@ function PostPage(
     isShowQuestionDelComment = false,
     goHome = e => { },
     goBack = e => { },
-    goEditPost = post => { }
+    goEditPost = post => { },
+    onSaveEditedPost = (fieldsWasValidated, post) => { },
     }) {
   return (
     <div className="app">
@@ -74,7 +75,7 @@ function PostPage(
             post={post}
             categories={[]}
             onClickBackButton={goBack}
-            onSavePost={e => { }}
+            onSavePost={onSaveEditedPost}
           />
         )}
     </div>

@@ -15,8 +15,8 @@ function appProps(state = HOME_INITIAL_STATE, action) {
       return { ...state, search, isShowWaitProcessModal: true, redirectUrl }
     }
     case 'REQUEST_SAVE_POST': {
-      const { post, redirectUrl } = action
-      return { ...state, post, isShowWaitProcessModal: true, redirectUrl }
+      const { redirectUrl } = action
+      return { ...state, isShowWaitProcessModal: true, redirectUrl }
     }
     case 'RETURN_POSTS': {
       const { posts, categories, redirectUrl } = action

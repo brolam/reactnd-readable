@@ -5,7 +5,7 @@ import { mount } from 'enzyme'
 import App from '../App';
 import { Provider } from 'react-redux'
 import store from '../store'
-import { newPost } from '../components/PostModal'
+import { buildNewPost } from '../components/PostModal'
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -43,7 +43,6 @@ describe("New post", () => {
     inputTitle.instance().value = '1'.repeat(80)
     inputBody.instance().value = '1'.repeat(500)
     buttonSave.instance().value = 'udacity'
-    const post = newPost(inputTitle.instance().value, inputBody.instance().value, buttonSave.instance().value)
     buttonSave.simulate('change') //Save post  
     const postAdded = posts.pop(); //Remove the last post added.
     expect(inputTitle.instance().value).toEqual(postAdded.title)
@@ -78,14 +77,14 @@ describe("Edit post", () => {
     selectTheFirstPost(app)
   })
 
-  test('back to homepage', () => {
+  it('back to homepage', () => {
     const backButton = app.find('[className="post-page-header-back"]')
     backButton.simulate('click')
     const homePage = app.find('div [className="main-page-header"]')
     expect(homePage.length).toBe(1)
   })
 
-  test('show edit post form modal', () => {
+  it('show edit post form modal', () => {
     selectTheFirstPost(app)
     showFormEditPost(app)
   })
@@ -95,6 +94,17 @@ describe("Edit post", () => {
     closeFormModalPost(app)
   })
 
+  test('edit and save first post', () => {
+    showFormEditPost(app)
+    const { inputTitle, inputBody, buttonSave } = getPostModalInputs(app)
+    inputTitle.instance().value = '1'.repeat(80)
+    inputBody.instance().value = '1'.repeat(500)
+    buttonSave.simulate('click') //Save edited post  
+    const postEdited = posts[0]; //Get the first post updated.
+    posts = [...global.dataForTest.posts] //Rollback public posts list.
+    expect(inputTitle.instance().value).toEqual(postEdited.title)
+    expect(inputBody.instance().value).toEqual(postEdited.body)
+  })
 
 });
 
@@ -102,6 +112,7 @@ const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]
 //Mocked fetch
 global.fetch = (url, body) => new Promise(function (then) {
+  //console.log(url, body)
   let res = { json: () => { } }
   //All posts 
   if (url === 'http://localhost:3001/posts/') res = { json: () => posts }
@@ -112,6 +123,9 @@ global.fetch = (url, body) => new Promise(function (then) {
   //New post
   if ((url === 'http://localhost:3001/posts/') && body.method === 'POST')
     posts = [...posts, JSON.parse(body.body)]
+  //Edit post
+  if ((url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez') && body.method === 'PUT')
+    posts[0] = { ...posts[0], ...JSON.parse(body.body) }
   //Get Post 
   if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez') res = { json: () => posts[0] }
   if (url === 'http://localhost:3001/posts/comments') res = { json: () => posts[0].comments }
@@ -145,9 +159,12 @@ function showFormModalNewPost(app) {
 }
 
 function getPostModalInputs(app) {
+  let buttonSave = app.find('div [className="modal-footer"] select');
+  if (buttonSave.length === 0) //when editing post
+    buttonSave = app.find('div [className="modal-footer"] button');
   return {
     inputTitle: app.find('div [className="modal-heard modal-post"] input'),
     inputBody: app.find('div [className="modal-content modal-post"] textarea'),
-    buttonSave: app.find('div [className="modal-footer"] select'),
+    buttonSave: buttonSave,
   }
 }

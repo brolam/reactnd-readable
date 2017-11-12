@@ -495,7 +495,6 @@ exports[`last Snapshot - Edit Post 1`] = `
         >
           <button
             className="save-button redux"
-            href="/"
             onClick={[Function]}
           >
             Save

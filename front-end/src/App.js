@@ -47,7 +47,7 @@ class App extends Component {
         )} />
         <Route exact path={GO_POST_GET} render={({ history }) => (
           <PostPage
-            {...this.getPostPagePropsUrl(history.location.pathname) }
+            {...this.getPostPagePropsByUrl(history.location.pathname) }
             {...this.props.selectedPost}
             {...this.props} />
         )} />
@@ -55,7 +55,7 @@ class App extends Component {
     )
   }
 
-  getPostPagePropsUrl(url) {
+  getPostPagePropsByUrl(url) {
     const params = pathToRegexp(GO_POST_GET).exec(url)
     const action = params[2]
     return ({
@@ -98,6 +98,10 @@ function mapDispatchToProps(dispatch, ownProps) {
     cleanRedirectUrl: () => dispatch(cleanRedirectUrl()),
     onSavePost: (fieldsWasValidated, post) => {
       fieldsWasValidated && dispatch(requestSavePost(post, GO_HOME))
+    },
+    onSaveEditedPost: (fieldsWasValidated, post) => {
+      const redirectUrl = getUrlPost({ id: post.id, action: GO_POST_GET_ACTIONS.get })
+      fieldsWasValidated && dispatch(requestSavePost(post, redirectUrl))
     },
     //pushs
     onClickNewPost: (e) => ownProps.history.push(GO_POST_NEW),
