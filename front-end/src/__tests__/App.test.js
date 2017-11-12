@@ -34,10 +34,7 @@ describe("New post", () => {
 
   it('close new post form modal', () => {
     showFormModalNewPost(app)
-    const backButton = app.find('div [className="modal-heard modal-post"] span');
-    expect(backButton.length).toEqual(1);
-    backButton.simulate('click');
-    expect(app.find('div [id="postModal"]').length).toEqual(0);
+    closeFormModalPost(app)
   })
 
   it('save a post', () => {
@@ -90,10 +87,14 @@ describe("Edit post", () => {
 
   test('show edit post form modal', () => {
     selectTheFirstPost(app)
-    const editButton = app.find('button [className="edit-button"]')
-    editButton.simulate('click')
-    expect(app.find('div [id="postModal"]').length).toEqual(1);
+    showFormEditPost(app)
   })
+
+  test('close edit post form modal', () => {
+    showFormEditPost(app)
+    closeFormModalPost(app)
+  })
+
 
 });
 
@@ -117,11 +118,23 @@ global.fetch = (url, body) => new Promise(function (then) {
   then(res);
 });
 
+function closeFormModalPost(app) {
+  const backButton = app.find('div [className="modal-heard modal-post"] span');
+  expect(backButton.length).toEqual(1);
+  backButton.simulate('click');
+}
+
 function selectTheFirstPost(app) {
   const selectedFirstPost = app.find('div [className="post"]').first()
   selectedFirstPost.simulate('click')
   const postPage = app.find('div [className="post-page-header"]')
   expect(postPage.length).toBe(1)
+}
+
+function showFormEditPost(app) {
+  const editButton = app.find('button [className="edit-button"]')
+  editButton.simulate('click')
+  expect(app.find('div [id="postModal"]').length).toEqual(1);
 }
 
 function showFormModalNewPost(app) {

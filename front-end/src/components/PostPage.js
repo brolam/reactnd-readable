@@ -16,6 +16,7 @@ function PostPage(
     isShowQuestionDelPost = false,
     isShowQuestionDelComment = false,
     goHome = e => { },
+    goBack = e => { },
     goEditPost = post => { }
     }) {
   return (
@@ -72,7 +73,7 @@ function PostPage(
           <PostModal
             post={post}
             categories={[]}
-            onClickBackButton={e => { }}
+            onClickBackButton={goBack}
             onSavePost={e => { }}
           />
         )}

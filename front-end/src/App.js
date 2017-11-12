@@ -102,6 +102,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     //pushs
     onClickNewPost: (e) => ownProps.history.push(GO_POST_NEW),
     goHome: (e) => ownProps.history.push(GO_HOME),
+    goBack: (e) => ownProps.history.goBack(),
     goEditPost: post => {
       ownProps.history.push(getUrlPost({ id: post.id, action: GO_POST_GET_ACTIONS.edit }))
     },
