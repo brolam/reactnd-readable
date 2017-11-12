@@ -12,7 +12,7 @@ const GO_HOME = '/';
 //GET Post
 const GO_POST_NEW = '/post/new';
 const GO_POST_GET = '/post/:id/:action';
-const GO_POST_GET_ACTIONS = { get: 'get', edit: 'edit' }
+const GO_POST_GET_ACTIONS = { get: 'get', edit: 'edit', deletePost: 'deletePost' }
 const getUrlPost = pathToRegexp.compile(GO_POST_GET)
 
 class App extends Component {
@@ -59,7 +59,8 @@ class App extends Component {
     const params = pathToRegexp(GO_POST_GET).exec(url)
     const action = params[2]
     return ({
-      isEditPost: action === GO_POST_GET_ACTIONS.edit
+      isEditPost: action === GO_POST_GET_ACTIONS.edit,
+      isShowQuestionDelPost: action === GO_POST_GET_ACTIONS.deletePost
     })
 
   }
@@ -115,6 +116,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       ownProps.history.push(getUrlPost({ id: post.id, action: GO_POST_GET_ACTIONS.get }))
       dispatch(requestPost(post.id))
     },
+    onClickDelPost: (postId) => { ownProps.history.push(getUrlPost({ id: postId, action: GO_POST_GET_ACTIONS.deletePost })) } 
   }
 }
 

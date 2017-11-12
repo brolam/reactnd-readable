@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter, MemoryRouter } from 'react-router-dom'
 import { mount } from 'enzyme'
 import App from '../App';
 import { Provider } from 'react-redux'
@@ -22,9 +22,9 @@ describe("New post", () => {
   beforeEach(() => {
     app = mount(
       <Provider store={store}>
-        <BrowserRouter>
+        <MemoryRouter initialEntries={['/']}>
           <App />
-        </BrowserRouter>
+        </MemoryRouter>
       </Provider>)
   })
 
@@ -67,9 +67,9 @@ describe("Edit post", () => {
   beforeEach(() => {
     app = mount(
       <Provider store={store}>
-        <BrowserRouter>
+        <MemoryRouter initialEntries={['/']}>
           <App />
-        </BrowserRouter>
+        </MemoryRouter>
       </Provider>)
   })
 
@@ -78,6 +78,7 @@ describe("Edit post", () => {
   })
 
   it('back to homepage', () => {
+    selectTheFirstPost(app)
     const backButton = app.find('[className="post-page-header-back"]')
     backButton.simulate('click')
     const homePage = app.find('div [className="main-page-header"]')
@@ -90,11 +91,13 @@ describe("Edit post", () => {
   })
 
   test('close edit post form modal', () => {
+    selectTheFirstPost(app)
     showFormEditPost(app)
     closeFormModalPost(app)
   })
 
   test('edit and save first post', () => {
+    selectTheFirstPost(app)
     showFormEditPost(app)
     const { inputTitle, inputBody, buttonSave } = getPostModalInputs(app)
     inputTitle.instance().value = '1'.repeat(80)
@@ -107,6 +110,26 @@ describe("Edit post", () => {
   })
 
 });
+
+describe("Delete post", () => {
+  let app
+  beforeEach(() => {
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+  })
+
+  test('show post delete question', () => {
+    selectTheFirstPost(app)
+    const deleteButton = app.find('button [className="delete-button"]')
+    deleteButton.simulate('click')
+    expect(app.find('h1').text()).toBe('Are you sure? Do you want delete this post?  Yes?  or No?')
+  })
+
+})
 
 const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]
