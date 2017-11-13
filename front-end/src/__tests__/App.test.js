@@ -159,6 +159,13 @@ describe("Vote Score post", () => {
     rollbackPublicPostsList()
   })
 
+  it('not like in home page', () => {
+    const currentVoteScore = posts[0].voteScore
+    app.find('button [className="not-liked"]').first().simulate('click')
+    expect(posts[0].voteScore).toEqual(currentVoteScore - 1)
+    rollbackPublicPostsList()
+  })
+
   it('like in post page', () => {
     selectTheFirstPost(app)
     const currentVoteScore = posts[0].voteScore

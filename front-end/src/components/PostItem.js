@@ -24,6 +24,10 @@ function PostItem(props) {
             e.stopPropagation()
             props.onVoteScorePost(post.id, 'upVote')
           }}
+          onClickNotLiked={e => {
+            e.stopPropagation()
+            props.onVoteScorePost(post.id, 'downVote')
+          }}
         />
       </div>
     </div>

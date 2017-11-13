@@ -21,7 +21,6 @@ function PostList({
               post={post}
               onSelected={ (e) => onSelectedPost(post)}
               onVoteScorePost={onVoteScorePost}
-              
             />
           )
         })}

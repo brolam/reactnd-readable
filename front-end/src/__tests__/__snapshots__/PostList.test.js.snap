@@ -83,7 +83,7 @@ exports[`last Snapshot 1`] = `
         </button>
         <button
           className="not-liked"
-          onClick={undefined}
+          onClick={[Function]}
         >
           Not like
         </button>
@@ -142,7 +142,7 @@ exports[`last Snapshot 1`] = `
         </button>
         <button
           className="not-liked"
-          onClick={undefined}
+          onClick={[Function]}
         >
           Not like
         </button>
