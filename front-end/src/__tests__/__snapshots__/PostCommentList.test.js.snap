@@ -125,15 +125,5 @@ Array [
         </div>
     </div>
 </div>,
-  <div
-    className="flat-button"
-    onClick={[Function]}
->
-    <a
-        className="add redux"
-    >
-        Add Comment
-    </a>
-</div>,
 ]
 `;

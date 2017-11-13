@@ -183,6 +183,24 @@ describe("Vote Score post", () => {
   })
 })
 
+describe("New comment", () => {
+  let app
+  beforeEach(() => {
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+  })
+
+  it('show form modal new comment', () => {
+    selectTheFirstPost(app)
+    app.find('div [className="flat-button"]').simulate('click')
+    expect(app.find('div [id="commentModal"]').length).toEqual(1);
+  })
+})
+
 const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]
 //Mocked fetch

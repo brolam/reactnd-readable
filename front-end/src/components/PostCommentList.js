@@ -17,9 +17,6 @@ function PostCommentList({ post, comments }) {
           onClickDeleteButton={e => { }}
         />
       ))}
-    </div>,
-    <div key="flat-button" className="flat-button" onClick={e => { }} >
-      <a className={"add " + post.category} >Add Comment</a>
     </div>
   ])
 }

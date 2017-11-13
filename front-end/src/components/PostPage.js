@@ -21,7 +21,8 @@ function PostPage(
     onSaveEditedPost = (fieldsWasValidated, post) => { },
     onClickDelPost = (postId) => { },
     onDeletePost = (postId) => { },
-    onVoteScorePost = (postId, option) => { }
+    onVoteScorePost = (postId, option) => { },
+    goPostNewComment = (postId) => { }
     }) {
   return (
     <div className="app">
@@ -38,10 +39,10 @@ function PostPage(
             onClick={e => goEditPost(post)}>Edit</button>
           <button className="delete-button"
             onClick={e => { onClickDelPost(post.id) }}>Delete</button>
-          <VoteScore 
-          voteScore={post.voteScore} 
-          onClickLiked={e => onVoteScorePost(post.id, 'upVote')}
-          onClickNotLiked={e => onVoteScorePost(post.id, 'downVote')}
+          <VoteScore
+            voteScore={post.voteScore}
+            onClickLiked={e => onVoteScorePost(post.id, 'upVote')}
+            onClickNotLiked={e => onVoteScorePost(post.id, 'downVote')}
           />
         </div>
       </div>
@@ -85,6 +86,12 @@ function PostPage(
             onSavePost={onSaveEditedPost}
           />
         )}
+      <div
+        key="flat-button"
+        className="flat-button"
+        onClick={e => { goPostNewComment(post.id) }} >
+        <a className={"add " + post.category} >Add Comment</a>
+      </div>
     </div>
 
   )

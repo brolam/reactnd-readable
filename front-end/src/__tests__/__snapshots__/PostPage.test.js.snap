@@ -197,16 +197,6 @@ exports[`last Snapshot - Edit Comment 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="flat-button"
-      onClick={[Function]}
-    >
-      <a
-        className="add redux"
-      >
-        Add Comment
-      </a>
-    </div>
   </div>
   <div
     className="modal modal-open"
@@ -229,6 +219,7 @@ exports[`last Snapshot - Edit Comment 1`] = `
         className="modal-content modal-comment"
       >
         <textarea
+          autoFocus={true}
           defaultValue="Hi there! I am a COMMENT."
           placeholder="Body comment"
         />
@@ -245,6 +236,16 @@ exports[`last Snapshot - Edit Comment 1`] = `
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="flat-button"
+    onClick={[Function]}
+  >
+    <a
+      className="add redux"
+    >
+      Add Comment
+    </a>
   </div>
 </div>
 `;
@@ -446,16 +447,6 @@ exports[`last Snapshot - Edit Post 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="flat-button"
-      onClick={[Function]}
-    >
-      <a
-        className="add redux"
-      >
-        Add Comment
-      </a>
-    </div>
   </div>
   <div
     className="modal modal-open"
@@ -502,6 +493,16 @@ exports[`last Snapshot - Edit Post 1`] = `
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="flat-button"
+    onClick={[Function]}
+  >
+    <a
+      className="add redux"
+    >
+      Add Comment
+    </a>
   </div>
 </div>
 `;
@@ -703,16 +704,6 @@ exports[`last Snapshot - New Comment 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="flat-button"
-      onClick={[Function]}
-    >
-      <a
-        className="add redux"
-      >
-        Add Comment
-      </a>
-    </div>
   </div>
   <div
     className="modal modal-open"
@@ -735,6 +726,7 @@ exports[`last Snapshot - New Comment 1`] = `
         className="modal-content modal-comment"
       >
         <textarea
+          autoFocus={true}
           defaultValue={undefined}
           placeholder="Body comment"
         />
@@ -751,6 +743,16 @@ exports[`last Snapshot - New Comment 1`] = `
         </div>
       </div>
     </div>
+  </div>
+  <div
+    className="flat-button"
+    onClick={[Function]}
+  >
+    <a
+      className="add redux"
+    >
+      Add Comment
+    </a>
   </div>
 </div>
 `;
@@ -952,16 +954,6 @@ exports[`last Snapshot - show question delete comment 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="flat-button"
-      onClick={[Function]}
-    >
-      <a
-        className="add redux"
-      >
-        Add Comment
-      </a>
-    </div>
   </div>
   <div
     className="modal-short modal-open"
@@ -987,6 +979,16 @@ exports[`last Snapshot - show question delete comment 1`] = `
         </a>
       </h1>
     </div>
+  </div>
+  <div
+    className="flat-button"
+    onClick={[Function]}
+  >
+    <a
+      className="add redux"
+    >
+      Add Comment
+    </a>
   </div>
 </div>
 `;
@@ -1188,16 +1190,6 @@ exports[`last Snapshot - show question delete post 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="flat-button"
-      onClick={[Function]}
-    >
-      <a
-        className="add redux"
-      >
-        Add Comment
-      </a>
-    </div>
   </div>
   <div
     className="modal-short modal-open"
@@ -1223,6 +1215,16 @@ exports[`last Snapshot - show question delete post 1`] = `
         </a>
       </h1>
     </div>
+  </div>
+  <div
+    className="flat-button"
+    onClick={[Function]}
+  >
+    <a
+      className="add redux"
+    >
+      Add Comment
+    </a>
   </div>
 </div>
 `;
@@ -1424,16 +1426,16 @@ exports[`last Snapshot 1`] = `
         </div>
       </div>
     </div>
-    <div
-      className="flat-button"
-      onClick={[Function]}
+  </div>
+  <div
+    className="flat-button"
+    onClick={[Function]}
+  >
+    <a
+      className="add redux"
     >
-      <a
-        className="add redux"
-      >
-        Add Comment
-      </a>
-    </div>
+      Add Comment
+    </a>
   </div>
 </div>
 `;

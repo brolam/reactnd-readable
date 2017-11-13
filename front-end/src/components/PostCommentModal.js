@@ -35,7 +35,6 @@ function isNewComment(comment) {
 
 PostCommentModal.propTypes = {
   post: PropTypes.shape({
-    id: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
   }),
   comment: PropTypes.shape({}).isRequired,
