@@ -222,6 +222,7 @@ exports[`last Snapshot - Edit Comment 1`] = `
           autoFocus={true}
           defaultValue="Hi there! I am a COMMENT."
           placeholder="Body comment"
+          required={true}
         />
         <div
           className="modal-footer"
@@ -729,6 +730,7 @@ exports[`last Snapshot - New Comment 1`] = `
           autoFocus={true}
           defaultValue={undefined}
           placeholder="Body comment"
+          required={true}
         />
         <div
           className="modal-footer"

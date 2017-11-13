@@ -74,8 +74,27 @@ test('on save event', () => {
       onClickBackButton={e => { }}
       onSave={e => { wasSaveEnvent = true }}
     />);
+  const inputBody = postCommentModal.find('textarea')
+  inputBody.instance().value = 'New comment body'
   postCommentModal.find('button [className="save-button udacity"]').simulate('click')
   expect(wasSaveEnvent).toBe(true);
+})
+
+test('body is required', () => {
+  let isBodyFieldInvalid = true
+  const postCommentModal = mount(
+    <PostCommentModal
+      post={postUdacity}
+      comment={comment}
+      onClickBackButton={e => { }}
+      onSave={fieldsWasValidated => {
+        isBodyFieldInvalid = true
+      }}
+    />);
+  const inputBody = postCommentModal.find('textarea')
+  inputBody.instance().value = ''
+  postCommentModal.find('button [className="save-button udacity"]').simulate('click');
+  expect(isBodyFieldInvalid).toBe(true);
 })
 
 const comment = {

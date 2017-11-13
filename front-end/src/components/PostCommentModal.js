@@ -1,9 +1,19 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Moment from 'moment';
+import { parseReportValidityMethod } from './utils/FormReportValidity'
+
+let inputBody
 
 function PostCommentModal(props) {
-  const { post, comment, onClickBackButton , onSave } = props
+  const { post, comment, onClickBackButton, onSave } = props
+
+  function parseFields(e) {
+    parseReportValidityMethod(inputBody)
+    if (inputBody.reportValidity()) {
+      onSave(true)
+    }
+  }
   return (
     <div id="commentModal" className="modal modal-open">
       <div className="modal-dialog">
@@ -14,14 +24,16 @@ function PostCommentModal(props) {
           </h1>
         </div>
         <div className="modal-content modal-comment">
-          <textarea 
-          placeholder="Body comment"
-          defaultValue={comment.body}
-          autoFocus
-           />
+          <textarea
+            ref={(textarea) => { inputBody = textarea; }}
+            placeholder="Body comment"
+            defaultValue={comment.body}
+            autoFocus
+            required
+          />
           <div className="modal-footer">
             <button className={"save-button " + post.category} href="/"
-              onClick={onSave}>Save</button>
+              onClick={parseFields}>Save</button>
           </div>
         </div>
       </div>
