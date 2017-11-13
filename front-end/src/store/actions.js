@@ -50,10 +50,11 @@ export function requestDeletePost(postId, redirectUrl = null) {
   }
 }
 
-export function requestLikePost(postId, redirectUrl = null) {
+export function requestVoteScorePost(postId, option, redirectUrl = null) {
   return {
-    type: 'REQUEST_LIKE_POST',
+    type: 'REQUEST_VOTE_SCORE_POST',
     postId,
+    option,
     redirectUrl
   }
 }

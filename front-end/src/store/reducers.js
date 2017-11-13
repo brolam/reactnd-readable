@@ -20,7 +20,7 @@ function appProps(state = HOME_INITIAL_STATE, action) {
     case 'REQUEST_DELETE_POST': {
       return { ...state, isShowWaitProcessModal: true }
     }
-    case 'REQUEST_LIKE_POST': {
+    case 'REQUEST_VOTE_SCORE_POST': {
       return { ...state, isShowWaitProcessModal: true }
     }
     case 'RETURN_POSTS': {

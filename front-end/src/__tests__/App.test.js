@@ -159,6 +159,14 @@ describe("Vote Score post", () => {
     expect(posts[0].voteScore).toEqual(currentVoteScore + 1)
     rollbackPublicPostsList()
   })
+
+  it('not like', () => {
+    selectTheFirstPost(app)
+    const currentVoteScore = posts[0].voteScore
+    app.find('button [className="not-liked"]').simulate('click')
+    expect(posts[0].voteScore).toEqual(currentVoteScore - 1)
+    rollbackPublicPostsList()
+  })
 })
 
 const categories = global.dataForTest.categories
@@ -200,11 +208,21 @@ global.fetch = (url, body) => new Promise(function (then) {
     posts[0].voteScore = posts[0].voteScore + 1
     res = { ok: true }
   }
+  //Not Like Post
+  if (
+    url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' &&
+    (body.method === 'POST') &&
+    (body.body === '{"option":"downVote"}')
+  ) {
+    posts[0].voteScore = posts[0].voteScore - 1
+    res = { ok: true }
+  }
+
   if (!res) console.log('Untreated Requisition:', url, body)
   then(res ? res : { json: {}, ok: false });
 });
 
-function rollbackPublicPostsList(){
+function rollbackPublicPostsList() {
   posts = [...global.dataForTest.posts] //Rollback public posts list.
 }
 

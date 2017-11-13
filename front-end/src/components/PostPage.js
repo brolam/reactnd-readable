@@ -21,7 +21,7 @@ function PostPage(
     onSaveEditedPost = (fieldsWasValidated, post) => { },
     onClickDelPost = (postId) => { },
     onDeletePost = (postId) => { },
-    onLikePost = (postId) => { }
+    onVoteScorePost = (postId, option) => { }
     }) {
   return (
     <div className="app">
@@ -40,7 +40,8 @@ function PostPage(
             onClick={e => { onClickDelPost(post.id) }}>Delete</button>
           <VoteScore 
           voteScore={post.voteScore} 
-          onClickLiked={e => onLikePost(post.id)}
+          onClickLiked={e => onVoteScorePost(post.id, 'upVote')}
+          onClickNotLiked={e => onVoteScorePost(post.id, 'downVote')}
           />
         </div>
       </div>

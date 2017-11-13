@@ -54,14 +54,14 @@ ReadableAPI.deletePost = (postId) =>
   fetch(`${api}posts/${postId}`, { method: 'DELETE', headers })
     .then(response => response)
 
-ReadableAPI.likePost = (postId) =>
+ReadableAPI.voteScorePost = (postId, option) =>
   fetch(`${api}posts/${postId}`, { 
     method: 'POST', 
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({option:'upVote'}) })
+    body: JSON.stringify({option}) })
     .then(response => response)
 
 ReadableAPI.getComments = (postId) =>
