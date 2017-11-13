@@ -15,10 +15,12 @@ function appProps(state = HOME_INITIAL_STATE, action) {
       return { ...state, search, isShowWaitProcessModal: true, redirectUrl }
     }
     case 'REQUEST_SAVE_POST': {
-      const { redirectUrl } = action
-      return { ...state, isShowWaitProcessModal: true, redirectUrl }
+      return { ...state, isShowWaitProcessModal: true }
     }
     case 'REQUEST_DELETE_POST': {
+      return { ...state, isShowWaitProcessModal: true }
+    }
+    case 'REQUEST_LIKE_POST': {
       return { ...state, isShowWaitProcessModal: true }
     }
     case 'RETURN_POSTS': {

@@ -10,7 +10,8 @@ import {
   requestSavePost,
   cleanRedirectUrl,
   requestPost,
-  requestDeletePost
+  requestDeletePost,
+  requestLikePost
 } from './store/actions'
 
 const GO_HOME = '/';
@@ -115,6 +116,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       fieldsWasValidated && dispatch(requestSavePost(post, redirectUrl))
     },
     onDeletePost: (postId) => dispatch(requestDeletePost(postId, GO_HOME)),
+    onLikePost:(postId) => dispatch(requestLikePost(postId)),
     //pushs
     onClickNewPost: (e) => ownProps.history.push(GO_POST_NEW),
     goHome: (e) => ownProps.history.push(GO_HOME),

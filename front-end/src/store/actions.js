@@ -50,6 +50,14 @@ export function requestDeletePost(postId, redirectUrl = null) {
   }
 }
 
+export function requestLikePost(postId, redirectUrl = null) {
+  return {
+    type: 'REQUEST_LIKE_POST',
+    postId,
+    redirectUrl
+  }
+}
+
 //app
 export function cleanRedirectUrl() {
   return {

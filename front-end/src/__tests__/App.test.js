@@ -104,7 +104,7 @@ describe("Edit post", () => {
     inputBody.instance().value = '1'.repeat(500)
     buttonSave.simulate('click') //Save edited post  
     const postEdited = posts[0]; //Get the first post updated.
-    posts = [...global.dataForTest.posts] //Rollback public posts list.
+    rollbackPublicPostsList()
     expect(inputTitle.instance().value).toEqual(postEdited.title)
     expect(inputBody.instance().value).toEqual(postEdited.body)
   })
@@ -136,9 +136,29 @@ describe("Delete post", () => {
     showDeleteQuestionForFirstPost(app)
     app.find('a [className="yes"]').simulate('click')
     expect(posts.length).toBe(2); //test number of posts
-    posts = [...global.dataForTest.posts]
+    rollbackPublicPostsList()
   })
 
+})
+
+describe("Vote Score post", () => {
+  let app
+  beforeEach(() => {
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+  })
+
+  it('like', () => {
+    selectTheFirstPost(app)
+    const currentVoteScore = posts[0].voteScore
+    app.find('button [className="liked"]').simulate('click')
+    expect(posts[0].voteScore).toEqual(currentVoteScore + 1)
+    rollbackPublicPostsList()
+  })
 })
 
 const categories = global.dataForTest.categories
@@ -146,12 +166,7 @@ let posts = [...global.dataForTest.posts]
 //Mocked fetch
 global.fetch = (url, body) => new Promise(function (then) {
   //Default return
-  let res = {
-    json: () => {
-      console.log(url, body)
-      return ({ ok: false })
-    }
-  }
+  let res = undefined
   //All posts 
   if (url === 'http://localhost:3001/posts/') res = { json: () => posts }
   //All categories
@@ -176,8 +191,22 @@ global.fetch = (url, body) => new Promise(function (then) {
     posts = posts.splice(1, 2);
     res = { ok: true }
   }
-  then(res);
+  //Like Post
+  if (
+    url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' &&
+    (body.method === 'POST') &&
+    (body.body === '{"option":"upVote"}')
+  ) {
+    posts[0].voteScore = posts[0].voteScore + 1
+    res = { ok: true }
+  }
+  if (!res) console.log('Untreated Requisition:', url, body)
+  then(res ? res : { json: {}, ok: false });
 });
+
+function rollbackPublicPostsList(){
+  posts = [...global.dataForTest.posts] //Rollback public posts list.
+}
 
 function showDeleteQuestionForFirstPost(app) {
   selectTheFirstPost(app)

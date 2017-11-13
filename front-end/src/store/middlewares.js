@@ -44,6 +44,15 @@ export const appMiddleware = store => next => action => {
       })
       return next(action)
     }
+    case 'REQUEST_LIKE_POST': {
+      const { postId } = action
+      ReadableAPI.likePost(postId).then(response => {
+        if (!response.ok) return
+        store.dispatch(requestPosts('')) //Update posts 
+        store.dispatch(requestPost(postId)) // Update selected posts
+      })
+      return next(action)
+    }
     default:
       return next(action)
 
