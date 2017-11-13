@@ -25,6 +25,15 @@ export function requestPost(postId, redirectUrl = null) {
   }
 }
 
+export function returnPost(post, comments, redirectUrl = null) {
+  return {
+    type: 'RETURN_POST',
+    post,
+    comments,
+    redirectUrl
+  }
+}
+
 export function requestSavePost(post, redirectUrl = null) {
   return {
     type: 'REQUEST_SAVE_POST',
@@ -33,11 +42,10 @@ export function requestSavePost(post, redirectUrl = null) {
   }
 }
 
-export function returnPost(post, comments, redirectUrl = null) {
+export function requestDeletePost(postId, redirectUrl = null) {
   return {
-    type: 'RETURN_POST',
-    post,
-    comments,
+    type: 'REQUEST_DELETE_POST',
+    postId,
     redirectUrl
   }
 }

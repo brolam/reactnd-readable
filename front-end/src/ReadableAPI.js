@@ -24,7 +24,7 @@ ReadableAPI.getCategories = () =>
 
 
 ReadableAPI.getPost = (postId) =>
-  fetch(`${api}posts/${postId}`, { headers })
+  fetch(`${api}posts/${postId}`, { method: 'GET', headers })
     .then(res => res.json())
     .then(data => data)
 
@@ -49,6 +49,10 @@ ReadableAPI.editPost = (post) =>
       },
       body: JSON.stringify(post)
     }).then(response => response)
+
+ReadableAPI.deletePost = (postId) =>
+  fetch(`${api}posts/${postId}`, { method: 'DELETE', headers })
+    .then(response => response)
 
 ReadableAPI.getComments = (postId) =>
   fetch(`${api}posts/${postId}/comments`, { headers })

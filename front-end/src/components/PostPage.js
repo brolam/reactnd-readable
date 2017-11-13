@@ -19,7 +19,8 @@ function PostPage(
     goBack = e => { },
     goEditPost = post => { },
     onSaveEditedPost = (fieldsWasValidated, post) => { },
-    onClickDelPost = (postId) => { }
+    onClickDelPost = (postId) => { },
+    onDeletePost = (postId) => { }
     }) {
   return (
     <div className="app">
@@ -35,7 +36,7 @@ function PostPage(
           <button className="edit-button" href="/"
             onClick={e => goEditPost(post)}>Edit</button>
           <button className="delete-button"
-            onClick={e => {  onClickDelPost(post.id) }}>Delete</button>
+            onClick={e => { onClickDelPost(post.id) }}>Delete</button>
           <VoteScore voteScore={post.voteScore} />
         </div>
       </div>
@@ -56,8 +57,8 @@ function PostPage(
         isShowQuestionDelPost && (
           <QuestionModal
             message={"Are you sure? Do you want delete this post? "}
-            timeout={7000}
-            onYesAnswer={e => { }}
+            timeout={4000}
+            onYesAnswer={e => { onDeletePost(post.id) }}
             onNoAnswer={goBack}
           />
         )}
@@ -65,7 +66,7 @@ function PostPage(
         isShowQuestionDelComment && (
           <QuestionModal
             message={"Are you sure? Do you want delete this comment?"}
-            timeout={7000}
+            timeout={4000}
             onYesAnswer={e => { }}
             onNoAnswer={e => { }}
           />

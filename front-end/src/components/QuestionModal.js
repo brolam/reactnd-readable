@@ -6,12 +6,12 @@ let questionModalTimeout
 function QuestionModal(props) {
   let isYesOrNoClicked = false
   const { message, onYesAnswer, onNoAnswer, timeout } = props
-  doNoAnswerEventWhenTimeout(timeout, onNoAnswer)
+  doNoAnswerEventWhenTimeout(timeout, onNoAnswer, this)
   return (
     <div className="modal-short modal-open"
       onClick={e => {
-        if (isYesOrNoClicked) return
-        clearTimeoutAndDoEvent(e, onNoAnswer)
+        if (isYesOrNoClicked === false)
+          clearTimeoutAndDoEvent(e, onNoAnswer)
       }
       }>
       <div className="modal-short-dialog">
@@ -37,12 +37,13 @@ function QuestionModal(props) {
 }
 
 function clearTimeoutAndDoEvent(e, eventTag) {
-  clearTimeout(questionModalTimeout)
+  window.clearTimeout(questionModalTimeout);
   eventTag(e)
 }
 
-function doNoAnswerEventWhenTimeout(timeout, onNoAnswer) {
-  questionModalTimeout = setTimeout(() => {
+const doNoAnswerEventWhenTimeout = (timeout, onNoAnswer) => {
+  window.clearTimeout(questionModalTimeout);
+  questionModalTimeout = window.setTimeout(() => {
     onNoAnswer();
   }, timeout);
 }

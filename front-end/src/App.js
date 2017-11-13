@@ -5,10 +5,15 @@ import pathToRegexp from 'path-to-regexp'
 import './App.css';
 import HomePage from './components/HomePage'
 import PostPage from './components/PostPage'
-import { requestPosts, requestSavePost, cleanRedirectUrl, requestPost } from './store/actions'
+import {
+  requestPosts,
+  requestSavePost,
+  cleanRedirectUrl,
+  requestPost,
+  requestDeletePost
+} from './store/actions'
 
 const GO_HOME = '/';
-
 //GET Post
 const GO_POST_NEW = '/post/new';
 const GO_POST_GET = '/post/:id/:action';
@@ -55,22 +60,27 @@ class App extends Component {
     )
   }
 
+  isPostPageUrl(url) {
+    if (url.endsWith('/new')) return false
+    return (pathToRegexp(GO_POST_GET).test(url))
+  }
+
   getPostPagePropsByUrl(url) {
+    if (!this.isPostPageUrl(url)) return {}
     const params = pathToRegexp(GO_POST_GET).exec(url)
     const action = params[2]
     return ({
       isEditPost: action === GO_POST_GET_ACTIONS.edit,
       isShowQuestionDelPost: action === GO_POST_GET_ACTIONS.deletePost
     })
-
   }
 
   isUserWroteUrlToGePost(currentUrl) {
-    if (currentUrl.endsWith('/new')) return false
-    return pathToRegexp(GO_POST_GET).test(currentUrl)
+    return this.isPostPageUrl(currentUrl)
   }
 
   refreshPostPage(currentUrl) {
+    if (!this.isPostPageUrl(currentUrl)) return
     const params = pathToRegexp(GO_POST_GET).exec(currentUrl)
     this.props.dispatchRequestPost(params[1])
   }
@@ -104,6 +114,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       const redirectUrl = getUrlPost({ id: post.id, action: GO_POST_GET_ACTIONS.get })
       fieldsWasValidated && dispatch(requestSavePost(post, redirectUrl))
     },
+    onDeletePost: (postId) => dispatch(requestDeletePost(postId, GO_HOME)),
     //pushs
     onClickNewPost: (e) => ownProps.history.push(GO_POST_NEW),
     goHome: (e) => ownProps.history.push(GO_HOME),
@@ -116,7 +127,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       ownProps.history.push(getUrlPost({ id: post.id, action: GO_POST_GET_ACTIONS.get }))
       dispatch(requestPost(post.id))
     },
-    onClickDelPost: (postId) => { ownProps.history.push(getUrlPost({ id: postId, action: GO_POST_GET_ACTIONS.deletePost })) } 
+    onClickDelPost: (postId) => { ownProps.history.push(getUrlPost({ id: postId, action: GO_POST_GET_ACTIONS.deletePost })) }
   }
 }
 

@@ -18,6 +18,9 @@ function appProps(state = HOME_INITIAL_STATE, action) {
       const { redirectUrl } = action
       return { ...state, isShowWaitProcessModal: true, redirectUrl }
     }
+    case 'REQUEST_DELETE_POST': {
+      return { ...state, isShowWaitProcessModal: true }
+    }
     case 'RETURN_POSTS': {
       const { posts, categories, redirectUrl } = action
       return { ...state, posts, categories, isShowWaitProcessModal: false, redirectUrl }

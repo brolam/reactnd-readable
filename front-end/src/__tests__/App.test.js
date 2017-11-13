@@ -131,14 +131,27 @@ describe("Delete post", () => {
     app.find('a [className="no"]').simulate('click')
     expect(app.find('div [className="modal-short modal-open"] h1').length).toBe(0)
   })
+
+  it('delete post', () => {
+    showDeleteQuestionForFirstPost(app)
+    app.find('a [className="yes"]').simulate('click')
+    expect(posts.length).toBe(2); //test number of posts
+    posts = [...global.dataForTest.posts]
+  })
+
 })
 
 const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]
 //Mocked fetch
 global.fetch = (url, body) => new Promise(function (then) {
-  //console.log(url, body)
-  let res = { json: () => { } }
+  //Default return
+  let res = {
+    json: () => {
+      console.log(url, body)
+      return ({ ok: false })
+    }
+  }
   //All posts 
   if (url === 'http://localhost:3001/posts/') res = { json: () => posts }
   //All categories
@@ -146,17 +159,25 @@ global.fetch = (url, body) => new Promise(function (then) {
     res = { json: () => { let data = { categories: categories }; return (data) } }
   }
   //New post
-  if ((url === 'http://localhost:3001/posts/') && body.method === 'POST')
+  if ((url === 'http://localhost:3001/posts/') && body.method === 'POST') {
+    res = { ok: true }
     posts = [...posts, JSON.parse(body.body)]
+  }
   //Edit post
-  if ((url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez') && body.method === 'PUT')
+  if ((url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez') && (body.method === 'PUT')) {
+    res = { ok: true }
     posts[0] = { ...posts[0], ...JSON.parse(body.body) }
+  }
   //Get Post 
-  if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez') res = { json: () => posts[0] }
-  if (url === 'http://localhost:3001/posts/comments') res = { json: () => posts[0].comments }
+  if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' && (body.method === 'GET')) res = { json: () => posts[0] }
+  if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez/comments') res = { json: () => { posts[0].comments } }
+  //Delete Post
+  if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' && (body.method === 'DELETE')) {
+    posts = posts.splice(1, 2);
+    res = { ok: true }
+  }
   then(res);
 });
-
 
 function showDeleteQuestionForFirstPost(app) {
   selectTheFirstPost(app)

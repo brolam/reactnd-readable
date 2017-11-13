@@ -37,6 +37,13 @@ export const appMiddleware = store => next => action => {
       })
       return next(action)
     }
+    case 'REQUEST_DELETE_POST': {
+      const { postId, redirectUrl } = action
+      ReadableAPI.deletePost(postId).then(response => {
+        if (response.ok) store.dispatch(requestPosts('', redirectUrl))
+      })
+      return next(action)
+    }
     default:
       return next(action)
 
