@@ -53,6 +53,13 @@ export const appMiddleware = store => next => action => {
       })
       return next(action)
     }
+    case 'REQUEST_SAVE_COMMENT': {
+      const { postId, comment, redirectUrl } = action
+      ReadableAPI.saveComment(comment).then(response => {
+        if (response.ok) store.dispatch(requestPost(postId, redirectUrl)) // Update selected posts
+      })
+      return next(action)
+    }
     default:
       return next(action)
 

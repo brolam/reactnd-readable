@@ -59,6 +59,15 @@ export function requestVoteScorePost(postId, option, redirectUrl = null) {
   }
 }
 
+export function requestSaveComment(postId, comment, redirectUrl = null) {
+  return {
+    type: 'REQUEST_SAVE_COMMENT',
+    postId,
+    comment,
+    redirectUrl
+  }
+}
+
 //app
 export function cleanRedirectUrl() {
   return {

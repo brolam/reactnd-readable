@@ -22,7 +22,9 @@ function PostPage(
     onClickDelPost = (postId) => { },
     onDeletePost = (postId) => { },
     onVoteScorePost = (postId, option) => { },
-    goPostNewComment = (postId) => { }
+    goPostNewComment = (postId) => { },
+    onSaveComment = (postId, comment) => { }
+
     }) {
   return (
     <div className="app">
@@ -56,7 +58,7 @@ function PostPage(
             post={post}
             comment={isNewComment ? {} : selectedComment}
             onClickBackButton={goBack}
-            onSave={e => { }}
+            onSave={ (postId, comment) => { onSaveComment(postId, comment ) }}
           />
         )}
       {

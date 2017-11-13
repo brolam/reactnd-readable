@@ -11,7 +11,8 @@ function PostCommentModal(props) {
   function parseFields(e) {
     parseReportValidityMethod(inputBody)
     if (inputBody.reportValidity()) {
-      onSave(true)
+      const commentNew = buildNewComment(post.id, inputBody.value)
+      onSave(post.id, commentNew)
     }
   }
   return (
@@ -39,6 +40,15 @@ function PostCommentModal(props) {
       </div>
     </div>
   )
+}
+
+function buildNewComment(postId, body){
+  return {
+    timestamp: new Date().getTime(),
+    body,
+    author: 'Breno Marques',
+    parentId: postId
+  }
 }
 
 function isNewComment(comment) {

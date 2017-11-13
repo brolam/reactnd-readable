@@ -207,6 +207,16 @@ describe("New comment", () => {
     expect(app.find('div [id="commentModal"]').length).toEqual(0);
 
   })
+
+  it('save new comment', () => {
+    selectTheFirstPost(app)
+    showFormNewComment(app)
+    const inputBody = app.find('textarea')
+    inputBody.instance().value = 'New Post comment'
+    app.find('button [className="save-button udacity"]').simulate('click');
+    expect(posts[0].comments.length).toEqual(3);
+    rollbackPublicPostsList()
+  })
 })
 
 const categories = global.dataForTest.categories
@@ -258,11 +268,17 @@ global.fetch = (url, body) => new Promise(function (then) {
     res = { ok: true }
   }
 
+  //New Comment
+  if (url === 'http://localhost:3001/comments/' && (body.method === 'POST')) {
+    posts[0].comments = [...posts[0].comments, JSON.parse(body.body) ]
+    res = { ok: true }
+  }
+
   if (!res) console.log('Untreated Requisition:', url, body)
   then(res ? res : { json: {}, ok: false });
 });
 
-function showFormNewComment(app){
+function showFormNewComment(app) {
   app.find('div [className="flat-button"]').simulate('click')
   expect(app.find('div [id="commentModal"]').length).toEqual(1);
 }

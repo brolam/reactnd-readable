@@ -8,22 +8,23 @@ import PostPage from './components/PostPage'
 import {
   requestPosts,
   requestSavePost,
-  cleanRedirectUrl,
   requestPost,
   requestDeletePost,
-  requestVoteScorePost
+  requestVoteScorePost,
+  requestSaveComment,
+  cleanRedirectUrl,
 } from './store/actions'
 
 const GO_HOME = '/';
 //GET Post
 const GO_POST_NEW = '/post/new';
 const GO_POST_GET = '/post/:id/:action';
-const GO_POST_GET_ACTIONS = { 
-  get: 'get', 
-  edit: 'edit', 
+const POST_URL_ACTIONS = {
+  get: 'get',
+  edit: 'edit',
   deletePost: 'delete',
   newComment: 'newComment'
- }
+}
 const getUrlPost = pathToRegexp.compile(GO_POST_GET)
 
 class App extends Component {
@@ -76,9 +77,9 @@ class App extends Component {
     const params = pathToRegexp(GO_POST_GET).exec(url)
     const action = params[2]
     return ({
-      isEditPost: action === GO_POST_GET_ACTIONS.edit,
-      isShowQuestionDelPost: action === GO_POST_GET_ACTIONS.deletePost,
-      isNewComment: action === GO_POST_GET_ACTIONS.newComment
+      isEditPost: action === POST_URL_ACTIONS.edit,
+      isShowQuestionDelPost: action === POST_URL_ACTIONS.deletePost,
+      isNewComment: action === POST_URL_ACTIONS.newComment
     })
   }
 
@@ -118,25 +119,29 @@ function mapDispatchToProps(dispatch, ownProps) {
       fieldsWasValidated && dispatch(requestSavePost(post, GO_HOME))
     },
     onSaveEditedPost: (fieldsWasValidated, post) => {
-      const redirectUrl = getUrlPost({ id: post.id, action: GO_POST_GET_ACTIONS.get })
+      const redirectUrl = getUrlPost({ id: post.id, action: POST_URL_ACTIONS.get })
       fieldsWasValidated && dispatch(requestSavePost(post, redirectUrl))
     },
     onDeletePost: (postId) => dispatch(requestDeletePost(postId, GO_HOME)),
-    onVoteScorePost:(postId, option) => dispatch(requestVoteScorePost(postId, option)),
+    onVoteScorePost: (postId, option) => dispatch(requestVoteScorePost(postId, option)),
+    onSaveComment: (postId, comment) => {
+      const redirectUrl = getUrlPost({ id: postId, action: POST_URL_ACTIONS.get })
+      dispatch(requestSaveComment(postId, comment, redirectUrl))
+    },
     //pushs
     onClickNewPost: (e) => ownProps.history.push(GO_POST_NEW),
     goHome: (e) => ownProps.history.push(GO_HOME),
     goBack: (e) => ownProps.history.goBack(),
     goEditPost: post => {
-      ownProps.history.push(getUrlPost({ id: post.id, action: GO_POST_GET_ACTIONS.edit }))
+      ownProps.history.push(getUrlPost({ id: post.id, action: POST_URL_ACTIONS.edit }))
     },
-    goPostNewComment: (postId) => { ownProps.history.push(getUrlPost({ id: postId, action: GO_POST_GET_ACTIONS.newComment })) },
+    goPostNewComment: (postId) => { ownProps.history.push(getUrlPost({ id: postId, action: POST_URL_ACTIONS.newComment })) },
     //Pushs and dispatchs
     onSelectedPost: (post) => {
-      ownProps.history.push(getUrlPost({ id: post.id, action: GO_POST_GET_ACTIONS.get }))
+      ownProps.history.push(getUrlPost({ id: post.id, action: POST_URL_ACTIONS.get }))
       dispatch(requestPost(post.id))
     },
-    onClickDelPost: (postId) => { ownProps.history.push(getUrlPost({ id: postId, action: GO_POST_GET_ACTIONS.deletePost })) }
+    onClickDelPost: (postId) => { ownProps.history.push(getUrlPost({ id: postId, action: POST_URL_ACTIONS.deletePost })) }
   }
 }
 

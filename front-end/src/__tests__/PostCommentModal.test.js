@@ -59,7 +59,7 @@ test('on click back button', () => {
       post={postUdacity}
       comment={comment}
       onClickBackButton={e => { isClikedBackButton = true }}
-      onSave={e => { }}
+      onSave={() => { }}
     />);
   postCommentModal.find('div [className="modal-heard"] span').simulate('click')
   expect(isClikedBackButton).toBe(true);
@@ -72,7 +72,7 @@ test('on save event', () => {
       post={postUdacity}
       comment={comment}
       onClickBackButton={e => { }}
-      onSave={e => { wasSaveEnvent = true }}
+      onSave={() => { wasSaveEnvent = true }}
     />);
   const inputBody = postCommentModal.find('textarea')
   inputBody.instance().value = 'New comment body'
@@ -87,7 +87,7 @@ test('body is required', () => {
       post={postUdacity}
       comment={comment}
       onClickBackButton={e => { }}
-      onSave={fieldsWasValidated => {
+      onSave={() => {
         isBodyFieldInvalid = true
       }}
     />);

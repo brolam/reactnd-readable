@@ -10,6 +10,10 @@ const headers = {
   'Authorization': token
 }
 
+function newId() {
+  return Math.random().toString(36).substr(-15)
+}
+
 let ReadableAPI = {};
 
 ReadableAPI.getPosts = (search) =>
@@ -36,7 +40,7 @@ ReadableAPI.newPost = (post) =>
         ...headers,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ id: Math.random().toString(36).substr(-15), ...post })
+      body: JSON.stringify({ id: newId(), ...post })
     }).then(response => response)
 
 ReadableAPI.editPost = (post) =>
@@ -55,13 +59,14 @@ ReadableAPI.deletePost = (postId) =>
     .then(response => response)
 
 ReadableAPI.voteScorePost = (postId, option) =>
-  fetch(`${api}posts/${postId}`, { 
-    method: 'POST', 
+  fetch(`${api}posts/${postId}`, {
+    method: 'POST',
     headers: {
       ...headers,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({option}) })
+    body: JSON.stringify({ option })
+  })
     .then(response => response)
 
 ReadableAPI.getComments = (postId) =>
@@ -69,6 +74,15 @@ ReadableAPI.getComments = (postId) =>
     .then(res => res.json())
     .then(data => data)
 
+ReadableAPI.saveComment = (comment) =>
+  fetch(`${api}comments/`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id: newId(), ...comment })
+  }).then(response => response)
 
 export default ReadableAPI;
 

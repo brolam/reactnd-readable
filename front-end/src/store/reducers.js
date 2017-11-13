@@ -10,26 +10,18 @@ const HOME_INITIAL_STATE = {
 
 function appProps(state = HOME_INITIAL_STATE, action) {
   switch (action.type) {
-    case 'REQUEST_POSTS': {
-      const { search, redirectUrl } = action
-      return { ...state, search, isShowWaitProcessModal: true, redirectUrl }
-    }
-    case 'REQUEST_SAVE_POST': {
-      return { ...state, isShowWaitProcessModal: true }
-    }
-    case 'REQUEST_DELETE_POST': {
-      return { ...state, isShowWaitProcessModal: true }
-    }
-    case 'REQUEST_VOTE_SCORE_POST': {
-      return { ...state, isShowWaitProcessModal: true }
+    case 'REQUEST_POSTS':
+    case 'REQUEST_SAVE_POST':
+    case 'REQUEST_DELETE_POST':
+    case 'REQUEST_VOTE_SCORE_POST':
+    case 'REQUEST_POST':
+    case 'REQUEST_SAVE_POST_COMMENT': {
+      const { redirectUrl } = action
+      return { ...state, isShowWaitProcessModal: true, redirectUrl }
     }
     case 'RETURN_POSTS': {
       const { posts, categories, redirectUrl } = action
       return { ...state, posts, categories, isShowWaitProcessModal: false, redirectUrl }
-    }
-    case 'REQUEST_POST': {
-      const { redirectUrl } = action
-      return { ...state, isShowWaitProcessModal: true, redirectUrl }
     }
     case 'RETURN_POST': {
       const { post, comments, redirectUrl } = action
