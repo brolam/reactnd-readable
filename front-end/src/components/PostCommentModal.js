@@ -17,6 +17,7 @@ function PostCommentModal(props) {
           <textarea 
           placeholder="Body comment"
           defaultValue={comment.body}
+          autoFocus
            />
           <div className="modal-footer">
             <button className={"save-button " + post.category} href="/"

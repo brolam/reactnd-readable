@@ -38,6 +38,20 @@ test('last Snapshot to edit comment', () => {
   expect(tree).toMatchSnapshot();
 })
 
+test('input body is focusing', () => {
+  const postCommentModal = mount(
+    <PostCommentModal
+      post={postUdacity}
+      comment={comment}
+      onClickBackButton={e => { }}
+      onSave={e => { }}
+    />);
+  const elementFocusing = document.activeElement
+  const inputBody = postCommentModal.find('textarea')
+  expect(inputBody.instance() === elementFocusing).toBe(true);
+})
+
+
 test('on click back button', () => {
   let isClikedBackButton = false;
   const postCommentModal = mount(

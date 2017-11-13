@@ -22,6 +22,7 @@ exports[`last Snapshot to edit comment 1`] = `
       className="modal-content modal-comment"
     >
       <textarea
+        autoFocus={true}
         defaultValue="Hi there! I am a COMMENT."
         placeholder="Body comment"
       />
@@ -63,6 +64,7 @@ exports[`last Snapshot to new comment 1`] = `
       className="modal-content modal-comment"
     >
       <textarea
+        autoFocus={true}
         defaultValue={undefined}
         placeholder="Body comment"
       />
