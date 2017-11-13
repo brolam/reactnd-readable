@@ -18,7 +18,13 @@ function PostItem(props) {
       <div className="post-header-author">by {post.author}</div>
       <div className="post-body">{post.body}</div>
       <div className="post-footer">
-        <VoteScore voteScore={post.voteScore} />
+        <VoteScore
+          voteScore={post.voteScore}
+          onClickLiked={e => {
+            e.stopPropagation()
+            props.onVoteScorePost(post.id, 'upVote')
+          }}
+        />
       </div>
     </div>
   )

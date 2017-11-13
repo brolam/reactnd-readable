@@ -295,7 +295,7 @@ exports[`last Snapshot - show new post form modal 1`] = `
           >
             <button
               className="liked"
-              onClick={undefined}
+              onClick={[Function]}
             >
               Liked 
               <span>
@@ -354,7 +354,7 @@ exports[`last Snapshot - show new post form modal 1`] = `
           >
             <button
               className="liked"
-              onClick={undefined}
+              onClick={[Function]}
             >
               Liked 
               <span>
@@ -413,7 +413,7 @@ exports[`last Snapshot - show new post form modal 1`] = `
           >
             <button
               className="liked"
-              onClick={undefined}
+              onClick={[Function]}
             >
               Liked 
               <span>
@@ -632,7 +632,7 @@ exports[`last Snapshot 1`] = `
           >
             <button
               className="liked"
-              onClick={undefined}
+              onClick={[Function]}
             >
               Liked 
               <span>
@@ -691,7 +691,7 @@ exports[`last Snapshot 1`] = `
           >
             <button
               className="liked"
-              onClick={undefined}
+              onClick={[Function]}
             >
               Liked 
               <span>
@@ -750,7 +750,7 @@ exports[`last Snapshot 1`] = `
           >
             <button
               className="liked"
-              onClick={undefined}
+              onClick={[Function]}
             >
               Liked 
               <span>

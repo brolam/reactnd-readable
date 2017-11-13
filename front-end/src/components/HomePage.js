@@ -14,7 +14,8 @@ function HomePage({
   onClickNewPost = e => { },
   goHome = e => { },
   onSavePost = fieldsWasValidated => { },
-  onSelectedPost = (post)=>{}} ) {
+  onSelectedPost = (post) => { },
+  onVoteScorePost = (postId, option) => { } }) {
   return (
     <div className="app">
       <div className="main-page-header">
@@ -26,7 +27,10 @@ function HomePage({
       </div>
       <SearchBar placeholder="Search by title post" />
       <div className="main-page-content">
-        <PostList posts={posts} onSelectedPost={onSelectedPost} />
+        <PostList
+          posts={posts}
+          onSelectedPost={onSelectedPost}
+          onVoteScorePost={onVoteScorePost} />
       </div>
       {
         isNewPost && (

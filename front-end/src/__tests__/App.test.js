@@ -152,7 +152,14 @@ describe("Vote Score post", () => {
       </Provider>)
   })
 
-  it('like', () => {
+  it('like in home page', () => {
+    const currentVoteScore = posts[0].voteScore
+    app.find('button [className="liked"]').first().simulate('click')
+    expect(posts[0].voteScore).toEqual(currentVoteScore + 1)
+    rollbackPublicPostsList()
+  })
+
+  it('like in post page', () => {
     selectTheFirstPost(app)
     const currentVoteScore = posts[0].voteScore
     app.find('button [className="liked"]').simulate('click')
@@ -160,7 +167,7 @@ describe("Vote Score post", () => {
     rollbackPublicPostsList()
   })
 
-  it('not like', () => {
+  it('not like in post page', () => {
     selectTheFirstPost(app)
     const currentVoteScore = posts[0].voteScore
     app.find('button [className="not-liked"]').simulate('click')

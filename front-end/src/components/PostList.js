@@ -3,7 +3,10 @@ import PropTypes from 'prop-types'
 import OrderOptions from '../components/OrderOptions'
 import PostItem from '../components/PostItem'
 
-function PostList({ posts, onSelectedPost = (posts) => { } }) {
+function PostList({ 
+  posts, 
+  onSelectedPost = (posts) => { },
+  onVoteScorePost = (postId, option) => { } }) {
   return (
     <div className="posts">
       <div className="posts-title">
@@ -17,6 +20,8 @@ function PostList({ posts, onSelectedPost = (posts) => { } }) {
               key={post.id}
               post={post}
               onSelected={ (e) => onSelectedPost(post)}
+              onVoteScorePost={onVoteScorePost}
+              
             />
           )
         })}
