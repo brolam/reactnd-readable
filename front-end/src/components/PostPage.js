@@ -55,7 +55,7 @@ function PostPage(
           <PostCommentModal
             post={post}
             comment={isNewComment ? {} : selectedComment}
-            onClickBackButton={e => { }}
+            onClickBackButton={goBack}
             onSave={e => { }}
           />
         )}

@@ -196,8 +196,16 @@ describe("New comment", () => {
 
   it('show form modal new comment', () => {
     selectTheFirstPost(app)
-    app.find('div [className="flat-button"]').simulate('click')
-    expect(app.find('div [id="commentModal"]').length).toEqual(1);
+    showFormNewComment(app)
+  })
+
+  it('close form modal new comment', () => {
+    selectTheFirstPost(app)
+    showFormNewComment(app)
+    const backButton = app.find('div [className="modal-heard"] span');
+    backButton.simulate('click');
+    expect(app.find('div [id="commentModal"]').length).toEqual(0);
+
   })
 })
 
@@ -253,6 +261,11 @@ global.fetch = (url, body) => new Promise(function (then) {
   if (!res) console.log('Untreated Requisition:', url, body)
   then(res ? res : { json: {}, ok: false });
 });
+
+function showFormNewComment(app){
+  app.find('div [className="flat-button"]').simulate('click')
+  expect(app.find('div [id="commentModal"]').length).toEqual(1);
+}
 
 function rollbackPublicPostsList() {
   posts = [...global.dataForTest.posts] //Rollback public posts list.
