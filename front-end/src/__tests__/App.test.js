@@ -259,12 +259,14 @@ describe("Delete comment", () => {
     rollbackPublicPostsList()
   })
 
-  it('show question modal delete comment', () => {
-    const selectedFirstComment = app.find('div [className="post-comment"]').first()
-    selectedFirstComment.find('.delete-button').simulate('click')
-    expect(
-      app.find('div [className="modal-short modal-open"] h1').text()
-    ).toBe('Are you sure? Do you want delete this comment?Yes? or No?')
+  it('show question modal delete first comment', () => {
+    showDeleteQuestionForFirstComment(app)
+  })
+
+  it('answer no to delete first comment', () => {
+    showDeleteQuestionForFirstComment(app)
+    app.find('.modal-short-dialog [className="no"]').simulate('click')
+    expect(app.find('.modal-short-dialog').length).toBe(0)
   })
 })
 
@@ -333,6 +335,14 @@ global.fetch = (url, body) => new Promise(function (then) {
   if (!res) console.log('Untreated Requisition:', url, body)
   then(res ? res : { json: {}, ok: false });
 });
+
+function showDeleteQuestionForFirstComment(app){
+  const selectedFirstComment = app.find('div [className="post-comment"]').first()
+  selectedFirstComment.find('.delete-button').simulate('click')
+  expect(
+    app.find('div [className="modal-short modal-open"] h1').text()
+  ).toBe('Are you sure? Do you want delete this comment?Yes? or No?')
+}
 
 function showFormNewComment(app) {
   app.find('div [className="flat-button"]').simulate('click')

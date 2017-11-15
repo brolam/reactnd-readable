@@ -81,7 +81,7 @@ function PostPage(
             message={"Are you sure? Do you want delete this comment?"}
             timeout={4000}
             onYesAnswer={e => { }}
-            onNoAnswer={e => { }}
+            onNoAnswer={ goBack }
           />
         )}
       {
