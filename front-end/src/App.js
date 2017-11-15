@@ -5,6 +5,7 @@ import pathToRegexp from 'path-to-regexp'
 import './App.css';
 import HomePage from './components/HomePage'
 import PostPage from './components/PostPage'
+import { clearQuestionModalTimeout } from './components/QuestionModal'
 import {
   requestPosts,
   requestSavePost,
@@ -52,6 +53,10 @@ class App extends Component {
     if (this.isThereOneRedirectRequest()) {
       this.doRedirectRequest()
     }
+  }
+
+  componentWillUpdate() {
+    clearQuestionModalTimeout()
   }
 
   render() {
