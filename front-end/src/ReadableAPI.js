@@ -74,7 +74,7 @@ ReadableAPI.getComments = (postId) =>
     .then(res => res.json())
     .then(data => data)
 
-ReadableAPI.saveComment = (comment) =>
+ReadableAPI.newComment = (comment) =>
   fetch(`${api}comments/`, {
     method: 'POST',
     headers: {
@@ -82,6 +82,16 @@ ReadableAPI.saveComment = (comment) =>
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({ id: newId(), ...comment })
+  }).then(response => response)
+
+ReadableAPI.editComment = (comment) =>
+  fetch(`${api}comments/${comment.id}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(comment)
   }).then(response => response)
 
 export default ReadableAPI;

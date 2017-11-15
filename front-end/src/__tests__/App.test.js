@@ -205,7 +205,6 @@ describe("New comment", () => {
     const backButton = app.find('div [className="modal-heard"] span');
     backButton.simulate('click');
     expect(app.find('div [id="commentModal"]').length).toEqual(0);
-
   })
 
   it('save new comment', () => {
@@ -214,7 +213,7 @@ describe("New comment", () => {
     const inputBody = app.find('textarea')
     inputBody.instance().value = 'New Post comment'
     app.find('button [className="save-button udacity"]').simulate('click');
-    expect(posts[0].comments.length).toEqual(3);
+    expect(posts[0].comments[2].body).toBe('New Post comment')
     rollbackPublicPostsList()
   })
 })
@@ -233,13 +232,18 @@ describe("Edit comment", () => {
   })
 
   it('show form modal edit comment', () => {
-    const selectedFirstComment = app.find('div [className="post-comment"]').first()
-    selectedFirstComment.find('.edit-button').simulate('click')
-    const selectedComment = posts[0].comments[0]
-    expect(app.find('#commentModal textarea').instance().value
-    ).toEqual(selectedComment.body);
-
+    showFormEditFirstComment(app)
   })
+
+  it('save edited comment', () => {
+    showFormEditFirstComment(app)
+    const commentBody = app.find('#commentModal textarea')
+    commentBody.instance().value = 'Body value was edited'
+    app.find('#commentModal [className="save-button udacity"]').simulate('click');
+    const editedComment = posts[0].comments[0]
+    expect(editedComment.body).toBe('Body value was edited')
+  })
+
 })
 
 const categories = global.dataForTest.categories
@@ -298,6 +302,12 @@ global.fetch = (url, body) => new Promise(function (then) {
     res = { ok: true }
   }
 
+  //Edit Comment
+  if (url === 'http://localhost:3001/comments/894tuq4ut84ut8v4t8wun89g' && (body.method === 'PUT')) {
+    posts[0].comments[0] = JSON.parse(body.body)
+    res = { ok: true }
+  }
+
   if (!res) console.log('Untreated Requisition:', url, body)
   then(res ? res : { json: {}, ok: false });
 });
@@ -309,6 +319,14 @@ function showFormNewComment(app) {
 
 function rollbackPublicPostsList() {
   posts = [...global.dataForTest.posts] //Rollback public posts list.
+}
+
+function showFormEditFirstComment(app) {
+  const selectedFirstComment = app.find('div [className="post-comment"]').first()
+  selectedFirstComment.find('.edit-button').simulate('click')
+  const selectedComment = posts[0].comments[0]
+  expect(app.find('#commentModal textarea').instance().value
+  ).toEqual(selectedComment.body);
 }
 
 function showDeleteQuestionForFirstPost(app) {

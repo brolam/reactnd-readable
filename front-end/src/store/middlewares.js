@@ -1,6 +1,7 @@
 import { requestPosts, returnPosts, returnPost, requestPost } from './actions'
 import ReadableAPI from '../ReadableAPI'
 import { isNewPost } from '../components/PostModal'
+import { isNewComment } from '../components/PostCommentModal'
 
 export const appMiddleware = store => next => action => {
   switch (action.type) {
@@ -29,7 +30,9 @@ export const appMiddleware = store => next => action => {
     case 'REQUEST_SAVE_POST': {
       const { post, redirectUrl } = action
       //Request a POST(new Post) or PUT(edit Post) method
-      const requestMethod = isNewPost(post) ? ReadableAPI.newPost : ReadableAPI.editPost
+      const requestMethod = isNewPost(post) ?
+        ReadableAPI.newPost :
+        ReadableAPI.editPost
       requestMethod(post).then(response => {
         if (!response.ok) return
         store.dispatch(requestPosts('', redirectUrl))
@@ -55,7 +58,11 @@ export const appMiddleware = store => next => action => {
     }
     case 'REQUEST_SAVE_COMMENT': {
       const { postId, comment, redirectUrl } = action
-      ReadableAPI.saveComment(comment).then(response => {
+      //Request a POST(new Comment) or PUT(edit Comment) method
+      const requestMethod = isNewComment(comment) ?
+        ReadableAPI.newComment :
+        ReadableAPI.editComment
+      requestMethod(comment).then(response => {
         if (response.ok) store.dispatch(requestPost(postId, redirectUrl)) // Update selected posts
       })
       return next(action)

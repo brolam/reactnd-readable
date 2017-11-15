@@ -11,8 +11,10 @@ function PostCommentModal(props) {
   function parseFields(e) {
     parseReportValidityMethod(inputBody)
     if (inputBody.reportValidity()) {
-      const commentNew = buildNewComment(post.id, inputBody.value)
-      onSave(post.id, commentNew)
+      const commentParam = isNewComment(comment) ?
+        buildNewComment(post.id, inputBody.value) :
+        { ...comment, body: inputBody.value }
+      onSave(post.id, commentParam)
     }
   }
   return (
@@ -42,7 +44,7 @@ function PostCommentModal(props) {
   )
 }
 
-function buildNewComment(postId, body){
+function buildNewComment(postId, body) {
   return {
     timestamp: new Date().getTime(),
     body,
@@ -52,7 +54,7 @@ function buildNewComment(postId, body){
   }
 }
 
-function isNewComment(comment) {
+export function isNewComment(comment) {
   return comment.id ? false : true
 }
 
