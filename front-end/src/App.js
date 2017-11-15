@@ -30,6 +30,7 @@ const POST_URL_ACTIONS = {
 const COMMENT_URL_ACTIONS = {
   new: 'new',
   edit: 'edit',
+  delete: 'delete',
 }
 
 const getUrlPost = pathToRegexp.compile(GO_POST_GET)
@@ -99,6 +100,10 @@ class App extends Component {
         postAction === POST_URL_ACTIONS.comments &&
         commentAction === COMMENT_URL_ACTIONS.edit
       ),
+      isShowQuestionDelComment: (
+        postAction === POST_URL_ACTIONS.comments &&
+        commentAction === COMMENT_URL_ACTIONS.delete
+      ),
       selectedComment: comments.find(comment => comment.id === commentId)
     })
   }
@@ -122,7 +127,6 @@ class App extends Component {
     this.props.cleanRedirectUrl()
     this.props.history.push(this.props.redirectUrl)
   }
-
 }
 
 function mapStateToProps({ appProps }, ownProps) {
@@ -171,6 +175,15 @@ function mapDispatchToProps(dispatch, ownProps) {
         commentAction: COMMENT_URL_ACTIONS.edit
       })
       ownProps.history.push(urlEditComment)
+    },
+    goPostDeleteComment: (postId, commentId) => {
+      const urlDeleteComment = getUrlPost({
+        id: postId,
+        action: POST_URL_ACTIONS.comments,
+        commentId: commentId,
+        commentAction: COMMENT_URL_ACTIONS.delete
+      })
+      ownProps.history.push(urlDeleteComment)
     },
     //Pushs and dispatchs
     onSelectedPost: (post) => {

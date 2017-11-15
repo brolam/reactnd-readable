@@ -246,6 +246,28 @@ describe("Edit comment", () => {
 
 })
 
+describe("Delete comment", () => {
+  let app
+  beforeEach(() => {
+    store.dispatch({ type: 'CLEAN_REDIRECT_URL', redirectUrl: null })
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/posts/7ni6ok3ym7mf1p33lnez/get']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+    rollbackPublicPostsList()
+  })
+
+  it('show question modal delete comment', () => {
+    const selectedFirstComment = app.find('div [className="post-comment"]').first()
+    selectedFirstComment.find('.delete-button').simulate('click')
+    expect(
+      app.find('div [className="modal-short modal-open"] h1').text()
+    ).toBe('Are you sure? Do you want delete this comment?Yes? or No?')
+  })
+})
+
 const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]
 //Mocked fetch

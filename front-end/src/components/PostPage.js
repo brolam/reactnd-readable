@@ -24,6 +24,7 @@ function PostPage(
     onVoteScorePost = (postId, option) => { },
     goPostNewComment = (postId) => { },
     goPostEditComment = (postId, commentId) => { },
+    goPostDeleteComment = (postId, commentId) => { },
     onSaveComment = (postId, comment) => { },
     }) {
   return (
@@ -53,7 +54,8 @@ function PostPage(
         <PostCommentList
           post={post}
           comments={comments}
-          goPostEditComment={goPostEditComment} />
+          onSelectedEditComment={goPostEditComment}
+          onSelectedDeleteComment={goPostDeleteComment} />
       </div>
       {
         (isNewComment || isEditComment) && (
