@@ -94,5 +94,9 @@ ReadableAPI.editComment = (comment) =>
     body: JSON.stringify(comment)
   }).then(response => response)
 
+ReadableAPI.deleteComment = (commentId) =>
+  fetch(`${api}comments/${commentId}`, { method: 'DELETE', headers })
+    .then(response => response)
+
 export default ReadableAPI;
 

@@ -268,6 +268,13 @@ describe("Delete comment", () => {
     app.find('.modal-short-dialog [className="no"]').simulate('click')
     expect(app.find('.modal-short-dialog').length).toBe(0)
   })
+
+  it('answer yes to delete first comment', () => {
+    showDeleteQuestionForFirstComment(app)
+    const amountBeforDelete = posts[0].comments.length
+    app.find('.modal-short-dialog [className="yes"]').simulate('click')
+    expect(posts[0].comments.length).toBe(amountBeforDelete - 1)
+  })
 })
 
 const categories = global.dataForTest.categories
@@ -332,11 +339,17 @@ global.fetch = (url, body) => new Promise(function (then) {
     res = { ok: true }
   }
 
+  //Delete Comment
+  if (url === 'http://localhost:3001/comments/894tuq4ut84ut8v4t8wun89g' && (body.method === 'DELETE')) {
+    posts[0].comments.splice(0, 1);
+    res = { ok: true }
+  }
+
   if (!res) console.log('Untreated Requisition:', url, body)
   then(res ? res : { json: {}, ok: false });
 });
 
-function showDeleteQuestionForFirstComment(app){
+function showDeleteQuestionForFirstComment(app) {
   const selectedFirstComment = app.find('div [className="post-comment"]').first()
   selectedFirstComment.find('.delete-button').simulate('click')
   expect(

@@ -9,24 +9,24 @@ import QuestionModal from '../components/QuestionModal'
 function PostPage(
   { post = getEmptyPost(),
     comments = [],
+    selectedComment = {},
     isEditPost = false,
     isNewComment = false,
     isEditComment = false,
-    selectedComment = {},
     isShowQuestionDelPost = false,
     isShowQuestionDelComment = false,
     goHome = e => { },
     goBack = e => { },
-    goEditPost = post => { },
-    onSaveEditedPost = (fieldsWasValidated, post) => { },
-    onClickDelPost = (postId) => { },
-    onDeletePost = (postId) => { },
-    onVoteScorePost = (postId, option) => { },
+    goPostEdit = post => { },
     goPostNewComment = (postId) => { },
     goPostEditComment = (postId, commentId) => { },
+    goPostDelete = (postId) => { },
     goPostDeleteComment = (postId, commentId) => { },
-    onSaveComment = (postId, comment) => { },
-    }) {
+    onSavePostEdited = (fieldsWasValidated, post) => { },
+    onSavePostComment = (postId, comment) => { },
+    onDeletePost = (postId) => { },
+    onDeletePostComment = (postId, commentId) => { },
+    onVoteScorePost = (postId, option) => { } }) {
   return (
     <div className="app">
       <div className="post-page-header">
@@ -39,9 +39,9 @@ function PostPage(
         </div>
         <div className="post-page-header-buttons">
           <button className="edit-button" href="/"
-            onClick={e => goEditPost(post)}>Edit</button>
+            onClick={e => goPostEdit(post)}>Edit</button>
           <button className="delete-button"
-            onClick={e => { onClickDelPost(post.id) }}>Delete</button>
+            onClick={e => { goPostDelete(post.id) }}>Delete</button>
           <VoteScore
             voteScore={post.voteScore}
             onClickLiked={e => onVoteScorePost(post.id, 'upVote')}
@@ -63,7 +63,7 @@ function PostPage(
             post={post}
             comment={isNewComment ? {} : selectedComment}
             onClickBackButton={goBack}
-            onSave={(postId, comment) => { onSaveComment(postId, comment) }}
+            onSave={(postId, comment) => { onSavePostComment(postId, comment) }}
           />
         )}
       {
@@ -80,8 +80,8 @@ function PostPage(
           <QuestionModal
             message={"Are you sure? Do you want delete this comment?"}
             timeout={4000}
-            onYesAnswer={e => { }}
-            onNoAnswer={ goBack }
+            onYesAnswer={e => onDeletePostComment(post.id, selectedComment.id)}
+            onNoAnswer={goBack}
           />
         )}
       {
@@ -90,7 +90,7 @@ function PostPage(
             post={post}
             categories={[]}
             onClickBackButton={goBack}
-            onSavePost={onSaveEditedPost}
+            onSavePost={onSavePostEdited}
           />
         )}
       <div

@@ -67,6 +67,13 @@ export const appMiddleware = store => next => action => {
       })
       return next(action)
     }
+    case 'REQUEST_DELETE_POST_COMMENT': {
+      const { postId, commentId, redirectUrl } = action
+      ReadableAPI.deleteComment(commentId).then(response => {
+        if (response.ok) store.dispatch(requestPost(postId, redirectUrl)) // Update selected posts
+      })
+      return next(action)
+    }
     default:
       return next(action)
 

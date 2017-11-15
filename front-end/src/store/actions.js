@@ -68,6 +68,15 @@ export function requestSaveComment(postId, comment, redirectUrl = null) {
   }
 }
 
+export function requestDeletePostComment(postId, commentId, redirectUrl = null){
+  return {
+    type: 'REQUEST_DELETE_POST_COMMENT',
+    postId,
+    commentId,
+    redirectUrl
+  }
+}
+
 //app
 export function cleanRedirectUrl() {
   return {

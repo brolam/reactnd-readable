@@ -11,7 +11,7 @@ function HomePage({
   categories,
   isNewPost = false,
   isShowWaitProcessModal = false,
-  onClickNewPost = e => { },
+  goPostNew = e => { },
   goHome = e => { },
   onSavePost = fieldsWasValidated => { },
   onSelectedPost = (post) => { },
@@ -49,7 +49,7 @@ function HomePage({
           />
         )
       }
-      <div className="flat-button" onClick={onClickNewPost}>
+      <div className="flat-button" onClick={goPostNew}>
         <a className="add">Add Post</a>
       </div>
     </div>
