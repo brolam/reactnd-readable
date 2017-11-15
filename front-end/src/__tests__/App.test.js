@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom'
+import { MemoryRouter } from 'react-router-dom'
 import { mount } from 'enzyme'
 import App from '../App';
 import { Provider } from 'react-redux'
@@ -11,9 +11,9 @@ it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
     <Provider store={store}>
-      <BrowserRouter>
+      <MemoryRouter>
         <App />
-      </BrowserRouter>
+      </MemoryRouter>
     </Provider>, div);
 });
 
@@ -169,7 +169,7 @@ describe("Vote Score post", () => {
   it('like in post page', () => {
     selectTheFirstPost(app)
     const currentVoteScore = posts[0].voteScore
-    app.find('button [className="liked"]').simulate('click')
+    app.find('.post-page-header-buttons button [className="liked"]').simulate('click')
     expect(posts[0].voteScore).toEqual(currentVoteScore + 1)
     rollbackPublicPostsList()
   })
@@ -177,7 +177,7 @@ describe("Vote Score post", () => {
   it('not like in post page', () => {
     selectTheFirstPost(app)
     const currentVoteScore = posts[0].voteScore
-    app.find('button [className="not-liked"]').simulate('click')
+    app.find('.post-page-header-buttons button [className="not-liked"]').simulate('click')
     expect(posts[0].voteScore).toEqual(currentVoteScore - 1)
     rollbackPublicPostsList()
   })
@@ -219,6 +219,29 @@ describe("New comment", () => {
   })
 })
 
+describe("Edit comment", () => {
+  let app
+  beforeEach(() => {
+    store.dispatch({ type: 'CLEAN_REDIRECT_URL', redirectUrl: null })
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/posts/7ni6ok3ym7mf1p33lnez/get']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+    rollbackPublicPostsList()
+  })
+
+  it('show form modal edit comment', () => {
+    const selectedFirstComment = app.find('div [className="post-comment"]').first()
+    selectedFirstComment.find('.edit-button').simulate('click')
+    const selectedComment = posts[0].comments[0]
+    expect(app.find('#commentModal textarea').instance().value
+    ).toEqual(selectedComment.body);
+
+  })
+})
+
 const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]
 //Mocked fetch
@@ -243,7 +266,8 @@ global.fetch = (url, body) => new Promise(function (then) {
   }
   //Get Post 
   if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' && (body.method === 'GET')) res = { json: () => posts[0] }
-  if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez/comments') res = { json: () => { posts[0].comments } }
+  //Get Comments
+  if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez/comments') res = { json: () => posts[0].comments }
   //Delete Post
   if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' && (body.method === 'DELETE')) {
     posts = posts.splice(1, 2);
@@ -270,7 +294,7 @@ global.fetch = (url, body) => new Promise(function (then) {
 
   //New Comment
   if (url === 'http://localhost:3001/comments/' && (body.method === 'POST')) {
-    posts[0].comments = [...posts[0].comments, JSON.parse(body.body) ]
+    posts[0].comments = [...posts[0].comments, JSON.parse(body.body)]
     res = { ok: true }
   }
 
@@ -289,7 +313,7 @@ function rollbackPublicPostsList() {
 
 function showDeleteQuestionForFirstPost(app) {
   selectTheFirstPost(app)
-  const deleteButton = app.find('button [className="delete-button"]')
+  const deleteButton = app.find('.post-page-header-buttons button [className="delete-button"]')
   deleteButton.simulate('click')
   expect(app.find('div [className="modal-short modal-open"] h1').text()).toBe('Are you sure? Do you want delete this post? Yes? or No?')
 }
@@ -308,7 +332,7 @@ function selectTheFirstPost(app) {
 }
 
 function showFormEditPost(app) {
-  const editButton = app.find('button [className="edit-button"]')
+  const editButton = app.find('.post-page-header-buttons button [className="edit-button"]')
   editButton.simulate('click')
   expect(app.find('div [id="postModal"]').length).toEqual(1);
 }

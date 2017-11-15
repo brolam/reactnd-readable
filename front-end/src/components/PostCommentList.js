@@ -2,7 +2,7 @@ import React from 'react'
 import OrderOptions from './OrderOptions'
 import PostCommentItem from './PostCommentItem'
 
-function PostCommentList({ post, comments }) {
+function PostCommentList({ post, comments, goPostEditComment }) {
   return ([
     <div key="title" className="post-comments-title">
       <span>Commentes({comments.length})</span>
@@ -13,7 +13,7 @@ function PostCommentList({ post, comments }) {
         <PostCommentItem
           key={comment.id}
           comment={comment}
-          onClickEditButton={e => { }}
+          onClickEditButton={e => { goPostEditComment(post.id, comment.id) }}
           onClickDeleteButton={e => { }}
         />
       ))}

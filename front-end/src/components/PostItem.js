@@ -39,6 +39,7 @@ PostItem.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     category: PropTypes.string.isRequired,
+    timestamp: PropTypes.number.isRequired,
     author: PropTypes.string.isRequired,
     voteScore: PropTypes.number.isRequired,
   }),

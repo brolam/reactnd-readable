@@ -23,8 +23,8 @@ function PostPage(
     onDeletePost = (postId) => { },
     onVoteScorePost = (postId, option) => { },
     goPostNewComment = (postId) => { },
-    onSaveComment = (postId, comment) => { }
-
+    goPostEditComment = (postId, commentId) => { },
+    onSaveComment = (postId, comment) => { },
     }) {
   return (
     <div className="app">
@@ -50,7 +50,10 @@ function PostPage(
       </div>
       <div className="post-content">
         <PostCommentBody post={post} />
-        <PostCommentList post={post} comments={comments} />
+        <PostCommentList
+          post={post}
+          comments={comments}
+          goPostEditComment={goPostEditComment} />
       </div>
       {
         (isNewComment || isEditComment) && (
@@ -58,7 +61,7 @@ function PostPage(
             post={post}
             comment={isNewComment ? {} : selectedComment}
             onClickBackButton={goBack}
-            onSave={ (postId, comment) => { onSaveComment(postId, comment ) }}
+            onSave={(postId, comment) => { onSaveComment(postId, comment) }}
           />
         )}
       {

@@ -70,7 +70,7 @@ export function buildNewPost(title, body, category) {
     body,
     category,
     author: 'Breno Marques',
-    timestamp: new Date(),
+    timestamp: new Date().getTime(),
     voteScore: 1,
     deleted: false
   }

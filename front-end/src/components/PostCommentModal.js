@@ -47,7 +47,8 @@ function buildNewComment(postId, body){
     timestamp: new Date().getTime(),
     body,
     author: 'Breno Marques',
-    parentId: postId
+    parentId: postId,
+    voteScore: 1,
   }
 }
 

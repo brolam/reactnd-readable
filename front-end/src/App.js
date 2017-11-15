@@ -17,14 +17,20 @@ import {
 
 const GO_HOME = '/';
 //GET Post
-const GO_POST_NEW = '/post/new';
-const GO_POST_GET = '/post/:id/:action';
+const GO_POST_NEW = '/posts/new';
+const GO_POST_GET = '/posts/:id/:action/:commentId?/:commentAction?/';
 const POST_URL_ACTIONS = {
   get: 'get',
   edit: 'edit',
   deletePost: 'delete',
-  newComment: 'newComment'
+  comments: 'comments'
 }
+
+const COMMENT_URL_ACTIONS = {
+  new: 'new',
+  edit: 'edit',
+}
+
 const getUrlPost = pathToRegexp.compile(GO_POST_GET)
 
 class App extends Component {
@@ -75,11 +81,20 @@ class App extends Component {
   getPostPagePropsByUrl(url) {
     if (!this.isPostPageUrl(url)) return {}
     const params = pathToRegexp(GO_POST_GET).exec(url)
-    const action = params[2]
+    const postAction = params[2], commentId = params[3], commentAction = params[4]
+    const comments = commentId ? this.props.selectedPost.comments : []
     return ({
-      isEditPost: action === POST_URL_ACTIONS.edit,
-      isShowQuestionDelPost: action === POST_URL_ACTIONS.deletePost,
-      isNewComment: action === POST_URL_ACTIONS.newComment
+      isEditPost: postAction === POST_URL_ACTIONS.edit,
+      isShowQuestionDelPost: postAction === POST_URL_ACTIONS.deletePost,
+      isNewComment: (
+        postAction === POST_URL_ACTIONS.comments &&
+        commentId === COMMENT_URL_ACTIONS.new
+      ),
+      isEditComment: (
+        postAction === POST_URL_ACTIONS.comments &&
+        commentAction === COMMENT_URL_ACTIONS.edit
+      ),
+      selectedComment: comments.find(comment => comment.id === commentId)
     })
   }
 
@@ -135,7 +150,23 @@ function mapDispatchToProps(dispatch, ownProps) {
     goEditPost: post => {
       ownProps.history.push(getUrlPost({ id: post.id, action: POST_URL_ACTIONS.edit }))
     },
-    goPostNewComment: (postId) => { ownProps.history.push(getUrlPost({ id: postId, action: POST_URL_ACTIONS.newComment })) },
+    goPostNewComment: (postId) => {
+      const urlNewComment = getUrlPost({
+        id: postId,
+        action: POST_URL_ACTIONS.comments,
+        commentId: COMMENT_URL_ACTIONS.new
+      })
+      ownProps.history.push(urlNewComment)
+    },
+    goPostEditComment: (postId, commentId) => {
+      const urlEditComment = getUrlPost({
+        id: postId,
+        action: POST_URL_ACTIONS.comments,
+        commentId: commentId,
+        commentAction: COMMENT_URL_ACTIONS.edit
+      })
+      ownProps.history.push(urlEditComment)
+    },
     //Pushs and dispatchs
     onSelectedPost: (post) => {
       ownProps.history.push(getUrlPost({ id: post.id, action: POST_URL_ACTIONS.get }))
