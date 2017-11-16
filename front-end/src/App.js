@@ -72,14 +72,11 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        {[GO_HOME, GO_HOME_FILTER].map(path => (
-          <Route exact path={path} render={({ history }) => (
-            <HomePage {...this.props} />
+        {[GO_HOME, GO_POST_NEW, GO_HOME_FILTER].map(path => (
+          <Route key={path} exact path={path} render={({ history }) => (
+            <HomePage {...this.props} isNewPost={path === GO_POST_NEW} />
           )} />))
         }
-        <Route exact path={GO_POST_NEW} render={({ history }) => (
-          <HomePage isNewPost={true}  {...this.props} />
-        )} />
         <Route exact path={GO_POST_GET} render={({ history }) => (
           <PostPage
             {...this.getPostPagePropsByUrl(history.location.pathname) }
