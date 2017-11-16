@@ -21,6 +21,11 @@ function PostCommentItem(props) {
             comment.id,
             'upVote'
           )}
+          onClickNotLiked={e => props.onVoteScorePostComment(
+            post.id,
+            comment.id,
+            'downVote'
+          )}
         />
       </div>
     </div>

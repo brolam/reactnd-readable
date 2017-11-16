@@ -295,6 +295,12 @@ describe("Vote Score post comment", () => {
     app.find('.post-comment .liked').first().simulate('click')
     expect(posts[0].comments[0].voteScore).toBe(currentVoteScore + 1)
   })
+
+  it('not like first comment', () => {
+    const currentVoteScore = posts[0].comments[0].voteScore
+    app.find('.post-comment .not-liked').first().simulate('click')
+    expect(posts[0].comments[0].voteScore).toBe(currentVoteScore - 1)
+  })
 })
 
 const categories = global.dataForTest.categories
@@ -368,6 +374,12 @@ global.fetch = (url, body) => new Promise(function (then) {
   //Like Comment
   if (url === 'http://localhost:3001/comments/8tu4bsun805n8un48ve89' && (body.method === 'POST') && (body.body === '{"option":"upVote"}')) {
     posts[0].comments[0].voteScore = posts[0].comments[0].voteScore + 1
+    res = { ok: true }
+  }
+
+  //Not Like Comment
+  if (url === 'http://localhost:3001/comments/8tu4bsun805n8un48ve89' && (body.method === 'POST') && (body.body === '{"option":"downVote"}')) {
+    posts[0].comments[0].voteScore = posts[0].comments[0].voteScore - 1
     res = { ok: true }
   }
 
