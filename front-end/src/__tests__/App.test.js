@@ -71,7 +71,7 @@ describe("Edit post", () => {
           <App />
         </MemoryRouter>
       </Provider>)
-      rollbackPublicPostsList()
+    rollbackPublicPostsList()
   })
 
   it('select first post', () => {
@@ -150,14 +150,14 @@ describe("Vote Score post", () => {
           <App />
         </MemoryRouter>
       </Provider>)
-      rollbackPublicPostsList()
+    rollbackPublicPostsList()
   })
 
   it('like in home page', () => {
     const currentVoteScore = posts[0].voteScore
     app.find('button [className="liked"]').first().simulate('click')
     expect(posts[0].voteScore).toEqual(currentVoteScore + 1)
-    
+
   })
 
   it('not like in home page', () => {
@@ -319,6 +319,13 @@ describe("Post categories filter", () => {
     const event = { target: { value: 'udacity' } };
     postCategoriesFilter.simulate('change', event);
     expect(posts.length).toBe(1)
+  })
+
+  it('get All posts when selected All Categories', () => {
+    const postCategoriesFilter = app.find('.main-page-header-title select')
+    const event = { target: { value: 'none' } };
+    postCategoriesFilter.simulate('change', event);
+    expect(posts.length).toBe(3)
   })
 
 })

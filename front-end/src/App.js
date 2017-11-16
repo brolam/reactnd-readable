@@ -72,7 +72,7 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        {[GO_HOME, GO_POST_NEW, GO_HOME_FILTER].map(path => (
+        {[GO_HOME_FILTER,GO_POST_NEW, GO_HOME].map(path => (
           <Route key={path} exact path={path} render={({ history }) => (
             <HomePage {...this.props} isNewPost={path === GO_POST_NEW} />
           )} />))
@@ -144,9 +144,12 @@ function mapStateToProps({ appProps }, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     goHome: (e) => ownProps.history.push(GO_HOME),
-    goHomeFilterByCategory: (categoryPath) => dispatch(
-      requestPostsByCategory(categoryPath, getHomePathToRegexp({ categoryPath }))
-    ),
+    goHomeFilterByCategory: (categoryPath) => {
+      if (categoryPath === 'none')
+        dispatch(requestPosts('', GO_HOME))
+      else
+        dispatch(requestPostsByCategory(categoryPath, getHomePathToRegexp({ categoryPath })))
+    },
     goBack: (e) => ownProps.history.goBack(),
     goPostNew: (e) => ownProps.history.push(GO_POST_NEW),
     goPostEdit: post => {
