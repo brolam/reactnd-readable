@@ -71,6 +71,7 @@ describe("Edit post", () => {
           <App />
         </MemoryRouter>
       </Provider>)
+      rollbackPublicPostsList()
   })
 
   it('select first post', () => {
@@ -104,7 +105,6 @@ describe("Edit post", () => {
     inputBody.instance().value = '1'.repeat(500)
     buttonSave.simulate('click') //Save edited post  
     const postEdited = posts[0]; //Get the first post updated.
-    rollbackPublicPostsList()
     expect(inputTitle.instance().value).toEqual(postEdited.title)
     expect(inputBody.instance().value).toEqual(postEdited.body)
   })
@@ -150,20 +150,20 @@ describe("Vote Score post", () => {
           <App />
         </MemoryRouter>
       </Provider>)
+      rollbackPublicPostsList()
   })
 
   it('like in home page', () => {
     const currentVoteScore = posts[0].voteScore
     app.find('button [className="liked"]').first().simulate('click')
     expect(posts[0].voteScore).toEqual(currentVoteScore + 1)
-    rollbackPublicPostsList()
+    
   })
 
   it('not like in home page', () => {
     const currentVoteScore = posts[0].voteScore
     app.find('button [className="not-liked"]').first().simulate('click')
     expect(posts[0].voteScore).toEqual(currentVoteScore - 1)
-    rollbackPublicPostsList()
   })
 
   it('like in post page', () => {
@@ -171,7 +171,6 @@ describe("Vote Score post", () => {
     const currentVoteScore = posts[0].voteScore
     app.find('.post-page-header-buttons button [className="liked"]').simulate('click')
     expect(posts[0].voteScore).toEqual(currentVoteScore + 1)
-    rollbackPublicPostsList()
   })
 
   it('not like in post page', () => {
@@ -179,7 +178,6 @@ describe("Vote Score post", () => {
     const currentVoteScore = posts[0].voteScore
     app.find('.post-page-header-buttons button [className="not-liked"]').simulate('click')
     expect(posts[0].voteScore).toEqual(currentVoteScore - 1)
-    rollbackPublicPostsList()
   })
 })
 
@@ -303,6 +301,28 @@ describe("Vote Score post comment", () => {
   })
 })
 
+describe("Post categories filter", () => {
+  let app
+  beforeEach(() => {
+    store.dispatch({ type: 'CLEAN_REDIRECT_URL', redirectUrl: null })
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+    rollbackPublicPostsList()
+  })
+
+  it('filter by category udacity', () => {
+    const postCategoriesFilter = app.find('.main-page-header-title select')
+    const event = { target: { value: 'udacity' } };
+    postCategoriesFilter.simulate('change', event);
+    expect(posts.length).toBe(1)
+  })
+
+})
+
 const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]
 //Mocked fetch
@@ -312,6 +332,12 @@ global.fetch = (url, body) => new Promise(function (then) {
 
   //All posts 
   if (url === 'http://localhost:3001/posts/') res = { json: () => posts }
+
+  //posts by Udacity category 
+  if (url === 'http://localhost:3001/udacity/posts') {
+    posts = [posts[0]]
+    res = { json: () => posts }
+  }
 
   //All categories
   if (url === 'http://localhost:3001/categories/') {

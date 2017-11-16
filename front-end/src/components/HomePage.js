@@ -13,6 +13,7 @@ function HomePage({
   isShowWaitProcessModal = false,
   goPostNew = e => { },
   goHome = e => { },
+  goHomeFilterByCategory = (categoryPath) => { },
   onSavePost = fieldsWasValidated => { },
   onSelectedPost = (post) => { },
   onVoteScorePost = (postId, option) => { } }) {
@@ -22,7 +23,9 @@ function HomePage({
         <div className="main-page-header-title">
           <span />
           <h1>Readable</h1>
-          <PostCategoriesFilter categories={categories} onSelected={e => { }} />
+          <PostCategoriesFilter
+            categories={categories}
+            onSelected={e => { goHomeFilterByCategory(e.target.value) }} />
         </div>
       </div>
       <SearchBar placeholder="Search by title post" />

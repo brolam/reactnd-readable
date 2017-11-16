@@ -7,6 +7,14 @@ export function requestPosts(search, redirectUrl = null) {
   }
 }
 
+export function requestPostsByCategory(category, redirectUrl = null) {
+  return {
+    type: 'REQUEST_POSTS_BY_CATEGORY',
+    category,
+    redirectUrl
+  }
+}
+
 export function returnPosts(posts, categories, redirectUrl = null) {
   return {
     type: 'RETURN_POSTS',

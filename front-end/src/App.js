@@ -8,6 +8,7 @@ import PostPage from './components/PostPage'
 import { clearQuestionModalTimeout } from './components/QuestionModal'
 import {
   requestPosts,
+  requestPostsByCategory,
   requestSavePost,
   requestPost,
   requestDeletePost,
@@ -38,6 +39,11 @@ const COMMENT_URL_ACTIONS = {
 const getUrlPost = pathToRegexp.compile(GO_POST_GET)
 const getPostPageUrl = postId => (getUrlPost({ id: postId, action: POST_URL_ACTIONS.get }))
 
+//GET posts by categoreis 
+const GO_HOME_FILTER = '/:categoryPath/posts';
+const getHomePathToRegexp = pathToRegexp.compile(GO_HOME_FILTER)
+
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -66,9 +72,11 @@ class App extends Component {
   render() {
     return (
       <Switch>
-        <Route exact path={GO_HOME} render={({ history }) => (
-          <HomePage {...this.props} />
-        )} />
+        {[GO_HOME, GO_HOME_FILTER].map(path => (
+          <Route exact path={path} render={({ history }) => (
+            <HomePage {...this.props} />
+          )} />))
+        }
         <Route exact path={GO_POST_NEW} render={({ history }) => (
           <HomePage isNewPost={true}  {...this.props} />
         )} />
@@ -139,6 +147,9 @@ function mapStateToProps({ appProps }, ownProps) {
 function mapDispatchToProps(dispatch, ownProps) {
   return {
     goHome: (e) => ownProps.history.push(GO_HOME),
+    goHomeFilterByCategory: (categoryPath) => dispatch(
+      requestPostsByCategory(categoryPath, getHomePathToRegexp({ categoryPath }))
+    ),
     goBack: (e) => ownProps.history.goBack(),
     goPostNew: (e) => ownProps.history.push(GO_POST_NEW),
     goPostEdit: post => {

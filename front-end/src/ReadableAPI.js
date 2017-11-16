@@ -21,6 +21,11 @@ ReadableAPI.getPosts = (search) =>
     .then(res => res.json())
     .then(data => data)
 
+ReadableAPI.getPostsByCategory = (category) =>
+  fetch(`${api}${category}/posts`, { headers })
+    .then(res => res.json())
+    .then(data => data)
+
 ReadableAPI.getCategories = () =>
   fetch(`${api}categories/`, { headers })
     .then(res => res.json())

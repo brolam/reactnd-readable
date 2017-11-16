@@ -16,6 +16,17 @@ export const appMiddleware = store => next => action => {
       })
       return next(action)
     }
+    case 'REQUEST_POSTS_BY_CATEGORY': {
+      const { category, redirectUrl } = action
+      //Get Posts
+      ReadableAPI.getPostsByCategory(category).then((posts) => {
+        //Get Categories 
+        ReadableAPI.getCategories().then((data) => {
+          store.dispatch(returnPosts(posts, data.categories, redirectUrl))
+        })
+      })
+      return next(action)
+    }
     case 'REQUEST_POST': {
       const { postId, redirectUrl } = action
       //Get post

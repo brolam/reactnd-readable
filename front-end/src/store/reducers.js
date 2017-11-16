@@ -11,6 +11,7 @@ const HOME_INITIAL_STATE = {
 function appProps(state = HOME_INITIAL_STATE, action) {
   switch (action.type) {
     case 'REQUEST_POSTS':
+    case 'REQUEST_POSTS_BY_CATEGORY':
     case 'REQUEST_SAVE_POST':
     case 'REQUEST_DELETE_POST':
     case 'REQUEST_VOTE_SCORE_POST':
