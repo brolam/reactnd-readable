@@ -98,5 +98,16 @@ ReadableAPI.deleteComment = (commentId) =>
   fetch(`${api}comments/${commentId}`, { method: 'DELETE', headers })
     .then(response => response)
 
+ReadableAPI.voteScoreComment = (commentId, option) =>
+  fetch(`${api}comments/${commentId}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option })
+  })
+    .then(response => response)
+
 export default ReadableAPI;
 

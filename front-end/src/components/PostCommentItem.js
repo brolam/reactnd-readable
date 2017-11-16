@@ -4,7 +4,7 @@ import Moment from 'moment';
 import VoteScore from './VoteScore'
 
 function PostCommentItem(props) {
-  const { comment } = props
+  const { post, comment } = props
   return (
     <div className="post-comment" >
       <div className="post-comment-author">
@@ -14,7 +14,13 @@ function PostCommentItem(props) {
       <div className="post-comment-footer">
         <button className="edit-button" href="/" onClick={props.onClickEditButton}>Edit</button>
         <button className="delete-button" onClick={props.onClickDeleteButton} >Delete</button>
-        <VoteScore voteScore={comment.voteScore}
+        <VoteScore
+          voteScore={comment.voteScore}
+          onClickLiked={e => props.onVoteScorePostComment(
+            post.id,
+            comment.id,
+            'upVote'
+          )}
         />
       </div>
     </div>
@@ -22,6 +28,9 @@ function PostCommentItem(props) {
 }
 
 PostCommentItem.propTypes = {
+  post: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+  }),
   comment: PropTypes.shape({
     id: PropTypes.string.isRequired,
     timestamp: PropTypes.number.isRequired,

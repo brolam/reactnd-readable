@@ -62,7 +62,7 @@ Array [
             </button>
             <button
                 className="liked"
-                onClick={undefined}
+                onClick={[Function]}
             >
                 Liked 
                 <span>
@@ -109,7 +109,7 @@ Array [
             </button>
             <button
                 className="liked"
-                onClick={undefined}
+                onClick={[Function]}
             >
                 Liked 
                 <span>

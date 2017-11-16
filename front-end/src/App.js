@@ -14,6 +14,7 @@ import {
   requestVoteScorePost,
   requestSaveComment,
   requestDeletePostComment,
+  requestVoteScorePostComment,
   cleanRedirectUrl,
 } from './store/actions'
 
@@ -174,11 +175,14 @@ function mapDispatchToProps(dispatch, ownProps) {
         {
           id: postId,
           action: POST_URL_ACTIONS.deletePost
-        })
-      )
+        }))
     },
     dispatchRequestPosts: (search) => dispatch(requestPosts(search)),
     dispatchRequestPost: (postId) => dispatch(requestPost(postId)),
+    onSelectedPost: (post) => {
+      ownProps.history.push(getPostPageUrl(post.id))
+      dispatch(requestPost(post.id))
+    },
     onSavePost: (fieldsWasValidated, post) => {
       fieldsWasValidated && dispatch(requestSavePost(post, GO_HOME))
     },
@@ -196,10 +200,9 @@ function mapDispatchToProps(dispatch, ownProps) {
       dispatch(requestDeletePostComment(postId, commentId, redirectUrl))
     },
     onVoteScorePost: (postId, option) => dispatch(requestVoteScorePost(postId, option)),
-    onSelectedPost: (post) => {
-      ownProps.history.push(getPostPageUrl(post.id))
-      dispatch(requestPost(post.id))
-    },
+    onVoteScorePostComment: (postId, commentId, option) => dispatch(
+      requestVoteScorePostComment(postId, commentId, option)
+    ),
     cleanRedirectUrl: () => dispatch(cleanRedirectUrl()),
   }
 }

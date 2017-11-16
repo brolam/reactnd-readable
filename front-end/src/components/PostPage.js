@@ -26,7 +26,8 @@ function PostPage(
     onSavePostComment = (postId, comment) => { },
     onDeletePost = (postId) => { },
     onDeletePostComment = (postId, commentId) => { },
-    onVoteScorePost = (postId, option) => { } }) {
+    onVoteScorePost = (postId, option) => { },
+    onVoteScorePostComment = (postId, commentId, option) => { } }) {
   return (
     <div className="app">
       <div className="post-page-header">
@@ -55,7 +56,8 @@ function PostPage(
           post={post}
           comments={comments}
           onSelectedEditComment={goPostEditComment}
-          onSelectedDeleteComment={goPostDeleteComment} />
+          onSelectedDeleteComment={goPostDeleteComment}
+          onVoteScorePostComment={onVoteScorePostComment} />
       </div>
       {
         (isNewComment || isEditComment) && (

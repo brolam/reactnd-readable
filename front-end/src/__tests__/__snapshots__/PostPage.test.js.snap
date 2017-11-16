@@ -134,7 +134,7 @@ exports[`last Snapshot - Edit Comment 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -181,7 +181,7 @@ exports[`last Snapshot - Edit Comment 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -385,7 +385,7 @@ exports[`last Snapshot - Edit Post 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -432,7 +432,7 @@ exports[`last Snapshot - Edit Post 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -642,7 +642,7 @@ exports[`last Snapshot - New Comment 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -689,7 +689,7 @@ exports[`last Snapshot - New Comment 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -893,7 +893,7 @@ exports[`last Snapshot - show question delete comment 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -940,7 +940,7 @@ exports[`last Snapshot - show question delete comment 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -1129,7 +1129,7 @@ exports[`last Snapshot - show question delete post 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -1176,7 +1176,7 @@ exports[`last Snapshot - show question delete post 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -1365,7 +1365,7 @@ exports[`last Snapshot 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>
@@ -1412,7 +1412,7 @@ exports[`last Snapshot 1`] = `
           </button>
           <button
             className="liked"
-            onClick={undefined}
+            onClick={[Function]}
           >
             Liked 
             <span>

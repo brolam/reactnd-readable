@@ -68,7 +68,17 @@ export function requestSaveComment(postId, comment, redirectUrl = null) {
   }
 }
 
-export function requestDeletePostComment(postId, commentId, redirectUrl = null){
+export function requestVoteScorePostComment(postId, commentId, option, redirectUrl = null) {
+  return {
+    type: 'REQUEST_VOTE_SCORE_POST_COMMENT',
+    postId,
+    commentId,
+    option,
+    redirectUrl
+  }
+}
+
+export function requestDeletePostComment(postId, commentId, redirectUrl = null) {
   return {
     type: 'REQUEST_DELETE_POST_COMMENT',
     postId,

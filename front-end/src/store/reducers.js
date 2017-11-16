@@ -16,7 +16,8 @@ function appProps(state = HOME_INITIAL_STATE, action) {
     case 'REQUEST_VOTE_SCORE_POST':
     case 'REQUEST_POST':
     case 'REQUEST_SAVE_POST_COMMENT':
-    case 'REQUEST_DELETE_POST_COMMENT': {
+    case 'REQUEST_DELETE_POST_COMMENT':
+    case 'REQUEST_VOTE_SCORE_POST_COMMENT': {
       const { redirectUrl } = action
       return { ...state, isShowWaitProcessModal: true, redirectUrl }
     }

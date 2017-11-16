@@ -277,52 +277,72 @@ describe("Delete comment", () => {
   })
 })
 
+describe("Vote Score post comment", () => {
+  let app
+  beforeEach(() => {
+    store.dispatch({ type: 'CLEAN_REDIRECT_URL', redirectUrl: null })
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/posts/7ni6ok3ym7mf1p33lnez/get']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+    rollbackPublicPostsList()
+  })
+
+  it('like first comment', () => {
+    const currentVoteScore = posts[0].comments[0].voteScore
+    app.find('.post-comment .liked').first().simulate('click')
+    expect(posts[0].comments[0].voteScore).toBe(currentVoteScore + 1)
+  })
+})
+
 const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]
 //Mocked fetch
 global.fetch = (url, body) => new Promise(function (then) {
   //Default return
   let res = undefined
+
   //All posts 
   if (url === 'http://localhost:3001/posts/') res = { json: () => posts }
+
   //All categories
   if (url === 'http://localhost:3001/categories/') {
     res = { json: () => { let data = { categories: categories }; return (data) } }
   }
+
   //New post
   if ((url === 'http://localhost:3001/posts/') && body.method === 'POST') {
     res = { ok: true }
     posts = [...posts, JSON.parse(body.body)]
   }
+
   //Edit post
   if ((url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez') && (body.method === 'PUT')) {
     res = { ok: true }
     posts[0] = { ...posts[0], ...JSON.parse(body.body) }
   }
+
   //Get Post 
   if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' && (body.method === 'GET')) res = { json: () => posts[0] }
+
   //Get Comments
   if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez/comments') res = { json: () => posts[0].comments }
+
   //Delete Post
   if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' && (body.method === 'DELETE')) {
     posts = posts.splice(1, 2);
     res = { ok: true }
   }
   //Like Post
-  if (
-    url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' &&
-    (body.method === 'POST') &&
-    (body.body === '{"option":"upVote"}')
-  ) {
+  if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' && (body.method === 'POST') && (body.body === '{"option":"upVote"}')) {
     posts[0].voteScore = posts[0].voteScore + 1
     res = { ok: true }
   }
+
   //Not Like Post
-  if (
-    url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' &&
-    (body.method === 'POST') &&
-    (body.body === '{"option":"downVote"}')
-  ) {
+  if (url === 'http://localhost:3001/posts/7ni6ok3ym7mf1p33lnez' && (body.method === 'POST') && (body.body === '{"option":"downVote"}')) {
     posts[0].voteScore = posts[0].voteScore - 1
     res = { ok: true }
   }
@@ -342,6 +362,12 @@ global.fetch = (url, body) => new Promise(function (then) {
   //Delete Comment
   if (url === 'http://localhost:3001/comments/894tuq4ut84ut8v4t8wun89g' && (body.method === 'DELETE')) {
     posts[0].comments.splice(0, 1);
+    res = { ok: true }
+  }
+
+  //Like Comment
+  if (url === 'http://localhost:3001/comments/8tu4bsun805n8un48ve89' && (body.method === 'POST') && (body.body === '{"option":"upVote"}')) {
+    posts[0].comments[0].voteScore = posts[0].comments[0].voteScore + 1
     res = { ok: true }
   }
 

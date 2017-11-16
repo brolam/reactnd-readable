@@ -74,6 +74,14 @@ export const appMiddleware = store => next => action => {
       })
       return next(action)
     }
+    case 'REQUEST_VOTE_SCORE_POST_COMMENT': {
+      const { postId, commentId, option, redirectUrl } = action
+      ReadableAPI.voteScoreComment(commentId, option).then(response => {
+        if (!response.ok) return
+        store.dispatch(requestPost(postId, redirectUrl) ) // Update selected posts
+      })
+      return next(action)
+    }
     default:
       return next(action)
 
