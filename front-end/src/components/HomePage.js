@@ -8,6 +8,7 @@ import WaitProcessModal from '../components/WaitProcessModal'
 
 function HomePage({
   posts,
+  postsOrder,
   categories,
   isNewPost = false,
   isShowWaitProcessModal = false,
@@ -35,7 +36,8 @@ function HomePage({
           posts={posts}
           onSelectedPost={onSelectedPost}
           onVoteScorePost={onVoteScorePost}
-          onChangeOrderPostsList={onChangeOrderPostsList} />
+          onChangeOrderPostsList={onChangeOrderPostsList}
+          selectedPostsOrder={postsOrder} />
       </div>
       {
         isNewPost && (

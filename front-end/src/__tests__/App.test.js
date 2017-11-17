@@ -355,6 +355,11 @@ describe("Posts order list", () => {
     selectOrder.simulate('change', event);
   })
 
+  it('show "Published date" title on select element', () => {
+    const selectOrder = app.find('.order-options select')
+    expect(selectOrder.instance().selectedIndex).toBe(1)
+  })
+
   it('order by published date', () => {
     expect(app.find('.post-header-title').first().text())
     .toBe('Redux Udacity is the best place to learn Redux')

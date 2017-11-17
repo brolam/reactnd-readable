@@ -49,6 +49,7 @@ exports[`last Snapshot - show error message modal 1`] = `
           className="order-options"
         >
           <select
+            defaultValue="voteScore"
             onChange={[Function]}
           >
             <option
@@ -131,6 +132,7 @@ exports[`last Snapshot - show message wait process modal 1`] = `
           className="order-options"
         >
           <select
+            defaultValue="voteScore"
             onChange={[Function]}
           >
             <option
@@ -239,6 +241,7 @@ exports[`last Snapshot - show new post form modal 1`] = `
           className="order-options"
         >
           <select
+            defaultValue="voteScore"
             onChange={[Function]}
           >
             <option
@@ -578,6 +581,7 @@ exports[`last Snapshot 1`] = `
           className="order-options"
         >
           <select
+            defaultValue="voteScore"
             onChange={[Function]}
           >
             <option

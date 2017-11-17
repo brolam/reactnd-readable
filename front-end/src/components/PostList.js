@@ -7,12 +7,15 @@ function PostList({
   posts,
   onSelectedPost = (posts) => { },
   onVoteScorePost = (postId, option) => { },
-  onChangeOrderPostsList = (order) => { } }) {
+  onChangeOrderPostsList = (order) => { },
+  selectedPostsOrder }) {
   return (
     <div className="posts">
       <div className="posts-title">
         <span>Posts</span>
-        <OrderOptions onChageOrder={onChangeOrderPostsList} />
+        <OrderOptions 
+        onChageOrder={onChangeOrderPostsList}
+        selectedValue={selectedPostsOrder} />
       </div>
       <div className="posts-list">
         {posts.map(post => {
