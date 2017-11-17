@@ -1,10 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function PostCategoriesFilter(props) {
-  const { categories } = props
+function PostCategoriesFilter(
+  { categories,
+    onSelected = e => { },
+    selectedCategoryPath = 'none' }) {
   return (
-    <select onChange={props.onSelected} >
+    <select
+      onChange={onSelected}
+      defaultValue={selectedCategoryPath} >
       <option value="none">All Categories</option>
       {categories.map(category => (
         <option key={category.name} value={category.path} >{category.name[0].toUpperCase() + category.name.slice(1)}</option>

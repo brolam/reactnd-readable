@@ -10,6 +10,7 @@ function HomePage({
   posts,
   postsOrder,
   categories,
+  selectedCategoryPathFilter = 'none',
   isNewPost = false,
   isShowWaitProcessModal = false,
   goPostNew = e => { },
@@ -27,7 +28,8 @@ function HomePage({
           <h1>Readable</h1>
           <PostCategoriesFilter
             categories={categories}
-            onSelected={e => { goHomeFilterByCategory(e.target.value) }} />
+            onSelected={e => { goHomeFilterByCategory(e.target.value) }}
+            selectedCategoryPath={selectedCategoryPathFilter} />
         </div>
       </div>
       <SearchBar placeholder="Search by title post" />

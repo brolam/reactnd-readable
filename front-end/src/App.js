@@ -71,7 +71,7 @@ class App extends Component {
       <Switch>
         {[GO_HOME_FILTER, GO_POST_NEW, GO_HOME].map(path => (
           <Route key={path} exact path={path} render={({ history }) => (
-            <HomePage {...this.props} isNewPost={path === GO_POST_NEW} />
+            <HomePage {...this.props} {...this.getHomePropsByUrl(history.location.pathname) } />
           )} />))
         }
         <Route exact path={GO_POST_GET} render={({ history }) => (
@@ -90,6 +90,18 @@ class App extends Component {
 
   isHomeFilterByCategoryUrl(url) {
     return (pathToRegexp(GO_HOME_FILTER).test(url))
+  }
+
+  getHomePropsByUrl(url) {
+    let selectedCategoryPathFilter = 'none'
+    if (this.isHomeFilterByCategoryUrl(url)) {
+      const params = pathToRegexp(GO_HOME_FILTER).exec(url)
+      selectedCategoryPathFilter = params[1]
+    }
+    return ({
+      isNewPost: pathToRegexp(GO_POST_NEW).test(url) === true,
+      selectedCategoryPathFilter,
+    })
   }
 
   isPostPageUrl(url) {

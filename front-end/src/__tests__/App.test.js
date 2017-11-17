@@ -305,7 +305,6 @@ describe("Vote Score post comment", () => {
 describe("Post categories filter", () => {
   let app
   beforeEach(() => {
-    store.dispatch({ type: 'CLEAN_REDIRECT_URL', redirectUrl: null })
     app = mount(
       <Provider store={store}>
         <MemoryRouter initialEntries={['/']}>
@@ -317,6 +316,11 @@ describe("Post categories filter", () => {
   it('filter by category udacity', () => {
     homePagefilterPostsByCategory(app, 'udacity')
     rollbackPublicPostsList()
+  })
+
+  it('show "Udacity" title on select element', () => {
+    const postCategoriesFilter = app.find('.main-page-header-title select')
+    expect(postCategoriesFilter.instance().selectedIndex).toBe(0)
   })
 
   it('get All posts when selected All Categories', () => {
@@ -362,16 +366,16 @@ describe("Posts order list", () => {
 
   it('order by published date', () => {
     expect(app.find('.post-header-title').first().text())
-    .toBe('Redux Udacity is the best place to learn Redux')
+      .toBe('Redux Udacity is the best place to learn Redux')
   })
 
   it('order by published date select category filter', () => {
     homePagefilterPostsByCategory(app, 'udacity')
   })
-  
+
   it('order by published date when category filter', () => {
     expect(app.find('.post-header-title').first().text())
-    .toBe('Redux Udacity is the best place to learn Redux')
+      .toBe('Redux Udacity is the best place to learn Redux')
     rollbackPublicPostsList()
   })
 
