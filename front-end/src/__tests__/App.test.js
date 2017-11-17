@@ -130,7 +130,7 @@ describe("Delete post", () => {
   it('click No in post delete question', () => {
     showDeleteQuestionForFirstPost(app)
     app.find('a [className="no"]').simulate('click')
-    expect(app.find('div [className="modal-short modal-open"] h1').length).toBe(0)
+    expect(app.find('div [className="modal-short modal-open"] h1').length).toBe(1)
   })
 
   it('delete post', () => {
@@ -507,7 +507,7 @@ function showDeleteQuestionForFirstPost(app) {
   selectTheFirstPost(app)
   const deleteButton = app.find('.post-page-header-buttons button [className="delete-button"]')
   deleteButton.simulate('click')
-  expect(app.find('div [className="modal-short modal-open"] h1').text()).toBe('Are you sure? Do you want delete this post? Yes? or No?')
+  expect(app.find('div [className="modal-short modal-open"] h1').first().text()).toBe('Are you sure? Do you want delete this post? Yes? or No?')
 }
 
 function closeFormModalPost(app) {

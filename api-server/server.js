@@ -129,7 +129,10 @@ app.use((req, res, next) => {
 app.get('/categories', (req, res) => {
     categories.getAll(req.token)
       .then(
-          (data) => res.send(data),
+          (data) => { 
+              setTimeout(function() {
+                res.send(data)
+            }, 1000); },
           (error) => {
               console.error(error)
               res.status(500).send({
@@ -178,10 +181,14 @@ app.post('/posts', bodyParser.json(), (req, res) => {
       )
 })
 
+
 app.get('/posts/:id', (req, res) => {
     posts.get(req.token, req.params.id)
       .then(
-          (data) => res.send(data),
+          (data) =>  { 
+            setTimeout(function() {
+              res.send(data)
+          }, 1000); },
           (error) => {
               console.error(error)
               res.status(500).send({

@@ -5,6 +5,7 @@ import PostCommentList from '../components/PostCommentList'
 import PostModal from '../components/PostModal'
 import PostCommentModal from '../components/PostCommentModal'
 import QuestionModal from '../components/QuestionModal'
+import WaitProcessModal from '../components/WaitProcessModal'
 
 function PostPage(
   { post = getEmptyPost(),
@@ -15,6 +16,7 @@ function PostPage(
     isEditComment = false,
     isShowQuestionDelPost = false,
     isShowQuestionDelComment = false,
+    isShowWaitProcessModal = false,
     goHome = e => { },
     goBack = e => { },
     goPostEdit = post => { },
@@ -101,6 +103,13 @@ function PostPage(
         onClick={e => { goPostNewComment(post.id) }} >
         <a className={"add " + post.category} >Add Comment</a>
       </div>
+      {
+        isShowWaitProcessModal && (
+          <WaitProcessModal
+            message="Please wait while the information is updated."
+          />
+        )
+      }
     </div>
 
   )
