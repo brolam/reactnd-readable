@@ -35,6 +35,10 @@ function appProps(state = HOME_INITIAL_STATE, action) {
         redirectUrl
       }
     }
+    case 'REQUEST_REDIRECT': {
+      const { redirectUrl } = action
+      return { ...state, redirectUrl: redirectUrl, isShowWaitProcessModal: false }
+    }
     case 'CLEAN_REDIRECT_URL': {
       return { ...state, redirectUrl: null, isShowWaitProcessModal: false }
     }

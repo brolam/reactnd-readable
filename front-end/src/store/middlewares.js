@@ -1,9 +1,12 @@
-import { requestPosts, returnPosts, returnPost, requestPost } from './actions'
+import { returnPosts, returnPost, requestRedirect } from './actions'
 import ReadableAPI from '../ReadableAPI'
 import { isNewPost } from '../components/PostModal'
 import { isNewComment } from '../components/PostCommentModal'
 
 export const appMiddleware = store => next => action => {
+  const isSuccessWhenRquestScreenRefrech = (success, url) => {
+    if (success) store.dispatch(requestRedirect(url))
+  }
   switch (action.type) {
     case 'REQUEST_POSTS': {
       const { search, redirectUrl } = action
@@ -41,55 +44,46 @@ export const appMiddleware = store => next => action => {
     case 'REQUEST_SAVE_POST': {
       const { post, redirectUrl } = action
       //Request a POST(new Post) or PUT(edit Post) method
-      const requestMethod = isNewPost(post) ?
-        ReadableAPI.newPost :
-        ReadableAPI.editPost
+      const requestMethod = isNewPost(post) ? ReadableAPI.newPost : ReadableAPI.editPost
       requestMethod(post).then(response => {
-        if (!response.ok) return
-        store.dispatch(requestPosts('', redirectUrl))
-        if (!isNewPost(post)) store.dispatch(requestPost(post.id)) //Update selected posts.
+        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }
     case 'REQUEST_DELETE_POST': {
       const { postId, redirectUrl } = action
       ReadableAPI.deletePost(postId).then(response => {
-        if (response.ok) store.dispatch(requestPosts('', redirectUrl))
+        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }
     case 'REQUEST_VOTE_SCORE_POST': {
-      const { postId, option } = action
+      const { postId, option, redirectUrl } = action
       ReadableAPI.voteScorePost(postId, option).then(response => {
-        if (!response.ok) return
-        store.dispatch(requestPosts('')) //Update posts 
-        store.dispatch(requestPost(postId)) // Update selected posts
+        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }
     case 'REQUEST_SAVE_COMMENT': {
-      const { postId, comment, redirectUrl } = action
+      const { comment, redirectUrl } = action
       //Request a POST(new Comment) or PUT(edit Comment) method
-      const requestMethod = isNewComment(comment) ?
-        ReadableAPI.newComment :
-        ReadableAPI.editComment
+      const requestMethod = isNewComment(comment) ? ReadableAPI.newComment : ReadableAPI.editComment
       requestMethod(comment).then(response => {
-        if (response.ok) store.dispatch(requestPost(postId, redirectUrl)) // Update selected posts
+        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }
     case 'REQUEST_DELETE_POST_COMMENT': {
-      const { postId, commentId, redirectUrl } = action
+      const { commentId, redirectUrl } = action
       ReadableAPI.deleteComment(commentId).then(response => {
-        if (response.ok) store.dispatch(requestPost(postId, redirectUrl)) // Update selected posts
+        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }
     case 'REQUEST_VOTE_SCORE_POST_COMMENT': {
-      const { postId, commentId, option, redirectUrl } = action
+      const { commentId, option, redirectUrl } = action
       ReadableAPI.voteScoreComment(commentId, option).then(response => {
-        if (!response.ok) return
-        store.dispatch(requestPost(postId, redirectUrl) ) // Update selected posts
+        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }

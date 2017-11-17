@@ -315,10 +315,7 @@ describe("Post categories filter", () => {
   })
 
   it('filter by category udacity', () => {
-    const postCategoriesFilter = app.find('.main-page-header-title select')
-    const event = { target: { value: 'udacity' } };
-    postCategoriesFilter.simulate('change', event);
-    expect(posts.length).toBe(1)
+    homePagefilterPostsByCategory(app,'udacity')
   })
 
   it('get All posts when selected All Categories', () => {
@@ -326,6 +323,14 @@ describe("Post categories filter", () => {
     const event = { target: { value: 'none' } };
     postCategoriesFilter.simulate('change', event);
     expect(posts.length).toBe(3)
+  })
+
+  it('keep filter when like and not like ', () => {
+    homePagefilterPostsByCategory(app,'udacity')
+    const currentVoteScore = posts[0].voteScore
+    app.find('button [className="liked"]').first().simulate('click')
+    expect(posts[0].voteScore).toEqual(currentVoteScore + 1)
+    expect(posts.length).toBe(1)
   })
 
 })
@@ -419,6 +424,13 @@ global.fetch = (url, body) => new Promise(function (then) {
   if (!res) console.log('Untreated Requisition:', url, body)
   then(res ? res : { json: {}, ok: false });
 });
+
+function homePagefilterPostsByCategory(app, category) {
+  const postCategoriesFilter = app.find('.main-page-header-title select')
+  const event = { target: { value: category } };
+  postCategoriesFilter.simulate('change', event);
+  expect(posts.length).toBe(1)
+}
 
 function showDeleteQuestionForFirstComment(app) {
   const selectedFirstComment = app.find('div [className="post-comment"]').first()

@@ -96,6 +96,13 @@ export function requestDeletePostComment(postId, commentId, redirectUrl = null) 
 }
 
 //app
+export function requestRedirect(url) {
+  return {
+    type: 'REQUEST_REDIRECT',
+    redirectUrl: url
+  }
+}
+
 export function cleanRedirectUrl() {
   return {
     type: 'CLEAN_REDIRECT_URL',

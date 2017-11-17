@@ -16,33 +16,33 @@ import {
   requestSaveComment,
   requestDeletePostComment,
   requestVoteScorePostComment,
+  requestRedirect,
   cleanRedirectUrl,
 } from './store/actions'
 
+//Home Url
 const GO_HOME = '/';
+
 //GET Post
 const GO_POST_NEW = '/posts/new';
 const GO_POST_GET = '/posts/:id/:action/:commentId?/:commentAction?/';
 const POST_URL_ACTIONS = {
   get: 'get',
   edit: 'edit',
-  deletePost: 'delete',
+  delete: 'delete',
   comments: 'comments'
 }
-
 const COMMENT_URL_ACTIONS = {
   new: 'new',
   edit: 'edit',
   delete: 'delete',
 }
-
-const getUrlPost = pathToRegexp.compile(GO_POST_GET)
-const getPostPageUrl = postId => (getUrlPost({ id: postId, action: POST_URL_ACTIONS.get }))
+const getPostPathToRegexp = pathToRegexp.compile(GO_POST_GET)
+const getPostPageUrl = postId => (getPostPathToRegexp({ id: postId, action: POST_URL_ACTIONS.get }))
 
 //GET posts by categoreis 
 const GO_HOME_FILTER = '/:categoryPath/posts';
-const getHomePathToRegexp = pathToRegexp.compile(GO_HOME_FILTER)
-
+const getHomeFilterPathToRegexp = pathToRegexp.compile(GO_HOME_FILTER)
 
 class App extends Component {
   constructor(props) {
@@ -52,27 +52,23 @@ class App extends Component {
 
   componentDidMount() {
     const currentUrl = this.props.location.pathname
-    //to list all posts at the first render
-    this.props.dispatchRequestPosts(this.props.search)
-    //Refresh the post page if the user entered the url manually
-    if (this.isUserWroteUrlToGePost(currentUrl)) this.refreshPostPage(this.props.location.pathname)
-
-  }
-
-  componentWillReceiveProps() {
-    if (this.isThereOneRedirectRequest()) {
-      this.doRedirectRequest()
-    }
+    this.doDispatchByUrl(currentUrl)
   }
 
   componentWillUpdate() {
     clearQuestionModalTimeout()
   }
 
+  componentDidUpdate() {
+    if (this.isThereOneRedirectRequest()) {
+      this.doRedirectRequest()
+    }
+  }
+
   render() {
     return (
       <Switch>
-        {[GO_HOME_FILTER,GO_POST_NEW, GO_HOME].map(path => (
+        {[GO_HOME_FILTER, GO_POST_NEW, GO_HOME].map(path => (
           <Route key={path} exact path={path} render={({ history }) => (
             <HomePage {...this.props} isNewPost={path === GO_POST_NEW} />
           )} />))
@@ -87,11 +83,23 @@ class App extends Component {
     )
   }
 
+  isHomeUrl(url) {
+    return (pathToRegexp(GO_HOME).test(url) || pathToRegexp(GO_POST_NEW).test(url))
+  }
+
+  isHomeFilterByCategoryUrl(url) {
+    return (pathToRegexp(GO_HOME_FILTER).test(url))
+  }
+
   isPostPageUrl(url) {
     if (url.endsWith('/new')) return false
     return (pathToRegexp(GO_POST_GET).test(url))
   }
-
+  
+  /**
+   * Returns with the PostPage Component props entered in the URL
+   * @param {*} url 
+   */
   getPostPagePropsByUrl(url) {
     if (!this.isPostPageUrl(url)) return {}
     const params = pathToRegexp(GO_POST_GET).exec(url)
@@ -99,7 +107,7 @@ class App extends Component {
     const comments = commentId ? this.props.selectedPost.comments : []
     return ({
       isEditPost: postAction === POST_URL_ACTIONS.edit,
-      isShowQuestionDelPost: postAction === POST_URL_ACTIONS.deletePost,
+      isShowQuestionDelPost: postAction === POST_URL_ACTIONS.delete,
       isNewComment: (
         postAction === POST_URL_ACTIONS.comments &&
         commentId === COMMENT_URL_ACTIONS.new
@@ -116,25 +124,40 @@ class App extends Component {
     })
   }
 
-  isUserWroteUrlToGePost(currentUrl) {
-    return this.isPostPageUrl(currentUrl)
-  }
-
-  refreshPostPage(currentUrl) {
-    if (!this.isPostPageUrl(currentUrl)) return
-    const params = pathToRegexp(GO_POST_GET).exec(currentUrl)
-    this.props.dispatchRequestPost(params[1])
-  }
-
   isThereOneRedirectRequest() {
-    if (!this.props.redirectUrl) return false
-    return (this.props.redirectUrl !== this.props.location.pathname)
+    return (this.props.redirectUrl) ? true : false
   }
 
   doRedirectRequest() {
+    const url = this.props.redirectUrl
     this.props.cleanRedirectUrl()
-    this.props.history.push(this.props.redirectUrl)
+    this.props.history.push(url)
+    //after changend the URL a dispatch will trigger 
+    //to refresh the screen
+    this.doDispatchByUrl(url) 
   }
+
+  /**
+   * Dispatch a data request by URL to refresh the screen 
+   * @param {*} url 
+   */
+  doDispatchByUrl(url) {
+    if (this.isHomeFilterByCategoryUrl(url)) {
+      const params = pathToRegexp(GO_HOME_FILTER).exec(url)
+      this.props.dispatchRequestPostsByCategory(params[1])
+      return
+    }
+    if (this.isHomeUrl(url)) {
+      this.props.dispatchRequestPosts()
+      return
+    }
+    if (this.isPostPageUrl(url)) {
+      const params = pathToRegexp(GO_POST_GET).exec(url)
+      this.props.dispatchRequestPost(params[1])
+      return
+    }
+  }
+
 }
 
 function mapStateToProps({ appProps }, ownProps) {
@@ -143,20 +166,21 @@ function mapStateToProps({ appProps }, ownProps) {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    goHome: (e) => ownProps.history.push(GO_HOME),
+    goHome: (e) => {
+      ownProps.history.push(GO_HOME)
+      dispatch(requestRedirect(GO_HOME))
+    },
     goHomeFilterByCategory: (categoryPath) => {
-      if (categoryPath === 'none')
-        dispatch(requestPosts('', GO_HOME))
-      else
-        dispatch(requestPostsByCategory(categoryPath, getHomePathToRegexp({ categoryPath })))
+      const url = (categoryPath === 'none') ? GO_HOME : getHomeFilterPathToRegexp({ categoryPath })
+      dispatch(requestRedirect(url))
     },
     goBack: (e) => ownProps.history.goBack(),
     goPostNew: (e) => ownProps.history.push(GO_POST_NEW),
     goPostEdit: post => {
-      ownProps.history.push(getUrlPost({ id: post.id, action: POST_URL_ACTIONS.edit }))
+      ownProps.history.push(getPostPathToRegexp({ id: post.id, action: POST_URL_ACTIONS.edit }))
     },
     goPostNewComment: (postId) => {
-      const urlNewComment = getUrlPost({
+      const urlNewComment = getPostPathToRegexp({
         id: postId,
         action: POST_URL_ACTIONS.comments,
         commentId: COMMENT_URL_ACTIONS.new
@@ -164,7 +188,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       ownProps.history.push(urlNewComment)
     },
     goPostEditComment: (postId, commentId) => {
-      const urlEditComment = getUrlPost({
+      const urlEditComment = getPostPathToRegexp({
         id: postId,
         action: POST_URL_ACTIONS.comments,
         commentId: commentId,
@@ -173,7 +197,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       ownProps.history.push(urlEditComment)
     },
     goPostDeleteComment: (postId, commentId) => {
-      const urlDeleteComment = getUrlPost({
+      const urlDeleteComment = getPostPathToRegexp({
         id: postId,
         action: POST_URL_ACTIONS.comments,
         commentId: commentId,
@@ -182,14 +206,15 @@ function mapDispatchToProps(dispatch, ownProps) {
       ownProps.history.push(urlDeleteComment)
     },
     goPostDelete: (postId) => {
-      ownProps.history.push(getUrlPost(
+      ownProps.history.push(getPostPathToRegexp(
         {
           id: postId,
-          action: POST_URL_ACTIONS.deletePost
+          action: POST_URL_ACTIONS.delete
         }))
     },
     dispatchRequestPosts: (search) => dispatch(requestPosts(search)),
     dispatchRequestPost: (postId) => dispatch(requestPost(postId)),
+    dispatchRequestPostsByCategory: (categoryPath) => dispatch(requestPostsByCategory(categoryPath)),
     onSelectedPost: (post) => {
       ownProps.history.push(getPostPageUrl(post.id))
       dispatch(requestPost(post.id))
@@ -210,10 +235,14 @@ function mapDispatchToProps(dispatch, ownProps) {
       const redirectUrl = getPostPageUrl(postId)
       dispatch(requestDeletePostComment(postId, commentId, redirectUrl))
     },
-    onVoteScorePost: (postId, option) => dispatch(requestVoteScorePost(postId, option)),
-    onVoteScorePostComment: (postId, commentId, option) => dispatch(
-      requestVoteScorePostComment(postId, commentId, option)
-    ),
+    onVoteScorePost: (postId, option) => {
+      const redirectUrl = ownProps.location.pathname
+      dispatch(requestVoteScorePost(postId, option, redirectUrl))
+    },
+    onVoteScorePostComment: (postId, commentId, option) => {
+      const redirectUrl = ownProps.location.pathname
+      dispatch(requestVoteScorePostComment(postId, commentId, option, redirectUrl))
+    },
     cleanRedirectUrl: () => dispatch(cleanRedirectUrl()),
   }
 }
