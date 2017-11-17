@@ -6,6 +6,7 @@ import App from '../App';
 import { Provider } from 'react-redux'
 import store from '../store'
 import { buildNewPost } from '../components/PostModal'
+import { requestPosts } from '../store/actions'
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
@@ -311,11 +312,11 @@ describe("Post categories filter", () => {
           <App />
         </MemoryRouter>
       </Provider>)
-    rollbackPublicPostsList()
   })
 
   it('filter by category udacity', () => {
-    homePagefilterPostsByCategory(app,'udacity')
+    homePagefilterPostsByCategory(app, 'udacity')
+    rollbackPublicPostsList()
   })
 
   it('get All posts when selected All Categories', () => {
@@ -323,16 +324,41 @@ describe("Post categories filter", () => {
     const event = { target: { value: 'none' } };
     postCategoriesFilter.simulate('change', event);
     expect(posts.length).toBe(3)
+    rollbackPublicPostsList()
   })
 
   it('keep filter when like and not like ', () => {
-    homePagefilterPostsByCategory(app,'udacity')
+    homePagefilterPostsByCategory(app, 'udacity')
     const currentVoteScore = posts[0].voteScore
     app.find('button [className="liked"]').first().simulate('click')
     expect(posts[0].voteScore).toEqual(currentVoteScore + 1)
     expect(posts.length).toBe(1)
+    rollbackPublicPostsList()
   })
 
+})
+
+describe("Posts order list", () => {
+  let app
+  beforeEach(() => {
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+  })
+
+  it('select order by published date', () => {
+    const selectOrder = app.find('.order-options select')
+    const event = { target: { value: 'publishedDate' } };
+    selectOrder.simulate('change', event);
+  })
+
+  it('order by published date', () => {
+    expect(app.find('.post-header-title').first().text())
+    .toBe('Redux Udacity is the best place to learn Redux')
+  })
 })
 
 const categories = global.dataForTest.categories

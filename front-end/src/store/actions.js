@@ -95,6 +95,14 @@ export function requestDeletePostComment(postId, commentId, redirectUrl = null) 
   }
 }
 
+export function requestChagenOrderPosts(order,  redirectUrl = null) {
+  return {
+    type: 'REQUEST_CHANGE_ORDER_POSTS',
+    postsOrder: order,
+    redirectUrl
+  }
+}
+
 //app
 export function requestRedirect(url) {
   return {

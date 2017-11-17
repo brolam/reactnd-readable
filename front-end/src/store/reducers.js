@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 const HOME_INITIAL_STATE = {
   posts: [],
+  postsOrder: 'voteScore',
   categories: [],
   isShowWaitProcessModal: false,
   redirectUrl: null,
@@ -32,6 +33,13 @@ function appProps(state = HOME_INITIAL_STATE, action) {
         ...state,
         selectedPost: { post, comments },
         isShowWaitProcessModal: false,
+        redirectUrl
+      }
+    } case 'REQUEST_CHANGE_ORDER_POSTS': {
+      const { postsOrder, redirectUrl } = action
+      return {
+        ...state,
+        postsOrder,
         redirectUrl
       }
     }

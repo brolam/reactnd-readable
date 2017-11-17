@@ -13,7 +13,9 @@ exports[`last Snapshot 1`] = `
     <div
       className="order-options"
     >
-      <select>
+      <select
+        onChange={[Function]}
+      >
         <option
           value="voteScore"
         >

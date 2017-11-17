@@ -85,7 +85,9 @@ exports[`last Snapshot - Edit Comment 1`] = `
       <div
         className="order-options"
       >
-        <select>
+        <select
+          onChange={[Function]}
+        >
           <option
             value="voteScore"
           >
@@ -336,7 +338,9 @@ exports[`last Snapshot - Edit Post 1`] = `
       <div
         className="order-options"
       >
-        <select>
+        <select
+          onChange={[Function]}
+        >
           <option
             value="voteScore"
           >
@@ -593,7 +597,9 @@ exports[`last Snapshot - New Comment 1`] = `
       <div
         className="order-options"
       >
-        <select>
+        <select
+          onChange={[Function]}
+        >
           <option
             value="voteScore"
           >
@@ -844,7 +850,9 @@ exports[`last Snapshot - show question delete comment 1`] = `
       <div
         className="order-options"
       >
-        <select>
+        <select
+          onChange={[Function]}
+        >
           <option
             value="voteScore"
           >
@@ -1080,7 +1088,9 @@ exports[`last Snapshot - show question delete post 1`] = `
       <div
         className="order-options"
       >
-        <select>
+        <select
+          onChange={[Function]}
+        >
           <option
             value="voteScore"
           >
@@ -1316,7 +1326,9 @@ exports[`last Snapshot 1`] = `
       <div
         className="order-options"
       >
-        <select>
+        <select
+          onChange={[Function]}
+        >
           <option
             value="voteScore"
           >

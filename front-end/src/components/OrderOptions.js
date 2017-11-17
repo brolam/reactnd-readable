@@ -1,9 +1,9 @@
 import React from 'react'
 
-function OrderOptions(props) {
+function OrderOptions({ onChageOrder = order => { } }) {
   return (
     <div className="order-options">
-      <select>
+      <select onChange={e => onChageOrder(e.target.value)} >
         <option value="voteScore" >Vote Score</option>
         <option value="publishedDate" >Published date</option>
       </select>

@@ -16,7 +16,8 @@ function HomePage({
   goHomeFilterByCategory = (categoryPath) => { },
   onSavePost = fieldsWasValidated => { },
   onSelectedPost = (post) => { },
-  onVoteScorePost = (postId, option) => { } }) {
+  onVoteScorePost = (postId, option) => { },
+  onChangeOrderPostsList = (order) => { } }) {
   return (
     <div className="app">
       <div className="main-page-header">
@@ -33,7 +34,8 @@ function HomePage({
         <PostList
           posts={posts}
           onSelectedPost={onSelectedPost}
-          onVoteScorePost={onVoteScorePost} />
+          onVoteScorePost={onVoteScorePost}
+          onChangeOrderPostsList={onChangeOrderPostsList} />
       </div>
       {
         isNewPost && (

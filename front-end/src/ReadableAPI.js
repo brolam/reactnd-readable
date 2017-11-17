@@ -16,10 +16,19 @@ function newId() {
 
 let ReadableAPI = {};
 
-ReadableAPI.getPosts = (search) =>
+const comparePostsOrderBy = function (post, nextPost, postsOrder) {
+  if (postsOrder === 'publishedDate') {
+    return nextPost.timestamp - post.timestamp
+  }
+  return nextPost.voteScore - post.voteScore
+}
+
+ReadableAPI.getPosts = (search, postsOrder) =>
   fetch(`${api}posts/`, { headers })
     .then(res => res.json())
-    .then(data => data)
+    .then(posts => posts.sort(
+      (post, nextPost) => comparePostsOrderBy(post, nextPost, postsOrder)
+    ))
 
 ReadableAPI.getPostsByCategory = (category) =>
   fetch(`${api}${category}/posts`, { headers })

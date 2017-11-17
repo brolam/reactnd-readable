@@ -3,15 +3,16 @@ import PropTypes from 'prop-types'
 import OrderOptions from '../components/OrderOptions'
 import PostItem from '../components/PostItem'
 
-function PostList({ 
-  posts, 
+function PostList({
+  posts,
   onSelectedPost = (posts) => { },
-  onVoteScorePost = (postId, option) => { } }) {
+  onVoteScorePost = (postId, option) => { },
+  onChangeOrderPostsList = (order) => { } }) {
   return (
     <div className="posts">
       <div className="posts-title">
         <span>Posts</span>
-        <OrderOptions />
+        <OrderOptions onChageOrder={onChangeOrderPostsList} />
       </div>
       <div className="posts-list">
         {posts.map(post => {
@@ -19,7 +20,7 @@ function PostList({
             <PostItem
               key={post.id}
               post={post}
-              onSelected={ (e) => onSelectedPost(post)}
+              onSelected={(e) => onSelectedPost(post)}
               onVoteScorePost={onVoteScorePost}
             />
           )

@@ -3,6 +3,7 @@ import store from '../store'
 
 const HOME_INITIAL_STATE = {
   posts: [],
+  postsOrder: 'voteScore',
   categories: [],
   isShowWaitProcessModal: false,
   redirectUrl: null,

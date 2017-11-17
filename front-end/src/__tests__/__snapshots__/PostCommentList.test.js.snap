@@ -13,7 +13,9 @@ Array [
     <div
         className="order-options"
     >
-        <select>
+        <select
+            onChange={[Function]}
+        >
             <option
                 value="voteScore"
             >

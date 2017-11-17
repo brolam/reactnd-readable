@@ -4,14 +4,15 @@ import { isNewPost } from '../components/PostModal'
 import { isNewComment } from '../components/PostCommentModal'
 
 export const appMiddleware = store => next => action => {
-  const isSuccessWhenRquestScreenRefrech = (success, url) => {
+  const isOkRequestScreenRefrech = (success, url) => {
     if (success) store.dispatch(requestRedirect(url))
   }
   switch (action.type) {
     case 'REQUEST_POSTS': {
       const { search, redirectUrl } = action
+      const { postsOrder } = store.getState().appProps
       //Get Posts
-      ReadableAPI.getPosts(search).then((posts) => {
+      ReadableAPI.getPosts(search, postsOrder).then((posts) => {
         //Get Categories 
         ReadableAPI.getCategories().then((data) => {
           store.dispatch(returnPosts(posts, data.categories, redirectUrl))
@@ -46,21 +47,21 @@ export const appMiddleware = store => next => action => {
       //Request a POST(new Post) or PUT(edit Post) method
       const requestMethod = isNewPost(post) ? ReadableAPI.newPost : ReadableAPI.editPost
       requestMethod(post).then(response => {
-        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
+        isOkRequestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }
     case 'REQUEST_DELETE_POST': {
       const { postId, redirectUrl } = action
       ReadableAPI.deletePost(postId).then(response => {
-        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
+        isOkRequestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }
     case 'REQUEST_VOTE_SCORE_POST': {
       const { postId, option, redirectUrl } = action
       ReadableAPI.voteScorePost(postId, option).then(response => {
-        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
+        isOkRequestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }
@@ -69,21 +70,26 @@ export const appMiddleware = store => next => action => {
       //Request a POST(new Comment) or PUT(edit Comment) method
       const requestMethod = isNewComment(comment) ? ReadableAPI.newComment : ReadableAPI.editComment
       requestMethod(comment).then(response => {
-        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
+        isOkRequestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }
     case 'REQUEST_DELETE_POST_COMMENT': {
       const { commentId, redirectUrl } = action
       ReadableAPI.deleteComment(commentId).then(response => {
-        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
+        isOkRequestScreenRefrech(response.ok, redirectUrl)
       })
+      return next(action)
+    }
+    case 'REQUEST_CHANGE_ORDER_POSTS': {
+      const { redirectUrl } = action
+      store.dispatch(requestRedirect(redirectUrl))
       return next(action)
     }
     case 'REQUEST_VOTE_SCORE_POST_COMMENT': {
       const { commentId, option, redirectUrl } = action
       ReadableAPI.voteScoreComment(commentId, option).then(response => {
-        isSuccessWhenRquestScreenRefrech(response.ok, redirectUrl)
+        isOkRequestScreenRefrech(response.ok, redirectUrl)
       })
       return next(action)
     }

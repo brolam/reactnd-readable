@@ -17,6 +17,7 @@ import {
   requestDeletePostComment,
   requestVoteScorePostComment,
   requestRedirect,
+  requestChagenOrderPosts,
   cleanRedirectUrl,
 } from './store/actions'
 
@@ -95,7 +96,7 @@ class App extends Component {
     if (url.endsWith('/new')) return false
     return (pathToRegexp(GO_POST_GET).test(url))
   }
-  
+
   /**
    * Returns with the PostPage Component props entered in the URL
    * @param {*} url 
@@ -134,7 +135,7 @@ class App extends Component {
     this.props.history.push(url)
     //after changend the URL a dispatch will trigger 
     //to refresh the screen
-    this.doDispatchByUrl(url) 
+    this.doDispatchByUrl(url)
   }
 
   /**
@@ -165,6 +166,7 @@ function mapStateToProps({ appProps }, ownProps) {
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
+  const getCurrentUrl = () => ownProps.location.pathname
   return {
     goHome: (e) => {
       ownProps.history.push(GO_HOME)
@@ -236,12 +238,16 @@ function mapDispatchToProps(dispatch, ownProps) {
       dispatch(requestDeletePostComment(postId, commentId, redirectUrl))
     },
     onVoteScorePost: (postId, option) => {
-      const redirectUrl = ownProps.location.pathname
+      const redirectUrl = getCurrentUrl()
       dispatch(requestVoteScorePost(postId, option, redirectUrl))
     },
     onVoteScorePostComment: (postId, commentId, option) => {
-      const redirectUrl = ownProps.location.pathname
+      const redirectUrl = getCurrentUrl()
       dispatch(requestVoteScorePostComment(postId, commentId, option, redirectUrl))
+    },
+    onChangeOrderPostsList: (order) => {
+      const redirectUrl = getCurrentUrl()
+      dispatch(requestChagenOrderPosts(order, redirectUrl))
     },
     cleanRedirectUrl: () => dispatch(cleanRedirectUrl()),
   }
