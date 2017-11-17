@@ -359,6 +359,17 @@ describe("Posts order list", () => {
     expect(app.find('.post-header-title').first().text())
     .toBe('Redux Udacity is the best place to learn Redux')
   })
+
+  it('order by published date select category filter', () => {
+    homePagefilterPostsByCategory(app, 'udacity')
+  })
+  
+  it('order by published date when category filter', () => {
+    expect(app.find('.post-header-title').first().text())
+    .toBe('Redux Udacity is the best place to learn Redux')
+    rollbackPublicPostsList()
+  })
+
 })
 
 const categories = global.dataForTest.categories
