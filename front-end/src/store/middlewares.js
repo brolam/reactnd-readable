@@ -22,9 +22,9 @@ export const appMiddleware = store => next => action => {
     }
     case 'REQUEST_POSTS_BY_CATEGORY': {
       const { category, redirectUrl } = action
-      const { postsOrder } = store.getState().appProps
+      const { searchPosts, postsOrder } = store.getState().appProps
       //Get Posts
-      ReadableAPI.getPostsByCategory(category, postsOrder).then((posts) => {
+      ReadableAPI.getPostsByCategory(category, searchPosts, postsOrder).then((posts) => {
         //Get Categories 
         ReadableAPI.getCategories().then((data) => {
           store.dispatch(returnPosts(posts, data.categories, redirectUrl))

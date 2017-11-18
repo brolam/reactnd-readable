@@ -37,12 +37,14 @@ ReadableAPI.getPosts = (search, postsOrder) =>
       )
     )
 
-ReadableAPI.getPostsByCategory = (category, postsOrder) =>
+ReadableAPI.getPostsByCategory = (category, search, postsOrder) =>
   fetch(`${api}${category}/posts`, { headers })
     .then(res => res.json())
-    .then(posts => posts.sort(
-      (post, nextPost) => orderBy(post, nextPost, postsOrder)
-    ))
+    .then(posts => posts
+      .filter(post => searchPosts(post, search))
+      .sort((post, nextPost) => orderBy(post, nextPost, postsOrder)
+      )
+    )
 
 ReadableAPI.getCategories = () =>
   fetch(`${api}categories/`, { headers })

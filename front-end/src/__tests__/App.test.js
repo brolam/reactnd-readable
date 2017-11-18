@@ -439,6 +439,14 @@ describe("Search posts", () => {
     expect(app.find('.search-bar input').instance().value).toBe('Redux')
   })
 
+  it('filter by category udacity', () => {
+    homePagefilterPostsByCategory(app, 'udacity')
+  })
+
+  it('search Redux when category Udacity filter', () => {
+    expect(app.find('div [className="post"]').length).toBe(0)
+  })
+
 })
 
 const categories = global.dataForTest.categories
