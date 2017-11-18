@@ -19,7 +19,8 @@ function HomePage({
   onSavePost = fieldsWasValidated => { },
   onSelectedPost = (post) => { },
   onVoteScorePost = (postId, option) => { },
-  onChangeOrderPostsList = (order) => { } }) {
+  onChangeOrderPostsList = (order) => { },
+  onSearch = value => { } }) {
   return (
     <div className="app">
       <div className="main-page-header">
@@ -32,7 +33,7 @@ function HomePage({
             selectedCategoryPath={selectedCategoryPathFilter} />
         </div>
       </div>
-      <SearchBar placeholder="Search by title post" />
+      <SearchBar placeholder="Search by title post" onSearch={onSearch} />
       <div className="main-page-content">
         <PostList
           posts={posts}

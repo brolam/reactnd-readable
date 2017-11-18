@@ -9,10 +9,10 @@ export const appMiddleware = store => next => action => {
   }
   switch (action.type) {
     case 'REQUEST_POSTS': {
-      const { search, redirectUrl } = action
-      const { postsOrder } = store.getState().appProps
+      const { redirectUrl } = action
+      const { searchPosts, postsOrder } = store.getState().appProps
       //Get Posts
-      ReadableAPI.getPosts(search, postsOrder).then((posts) => {
+      ReadableAPI.getPosts(searchPosts, postsOrder).then((posts) => {
         //Get Categories 
         ReadableAPI.getCategories().then((data) => {
           store.dispatch(returnPosts(posts, data.categories, redirectUrl))
@@ -38,7 +38,7 @@ export const appMiddleware = store => next => action => {
       //Get post
       ReadableAPI.getPost(postId).then((post) => {
         //Get comments
-        ReadableAPI.getComments(postId, commentsOrder ).then((comments) => {
+        ReadableAPI.getComments(postId, commentsOrder).then((comments) => {
           store.dispatch(returnPost(post, comments, redirectUrl))
         })
       })

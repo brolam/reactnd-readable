@@ -3,7 +3,7 @@ import { DebounceInput } from 'react-debounce-input';
 
 function SearchBar({
   placeholder,
-  onSearch = value => { console.log(value) } }) {
+  onSearch = value => { } }) {
   return (
     <div className="search-bar">
       <DebounceInput

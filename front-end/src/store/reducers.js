@@ -1,6 +1,7 @@
 import { combineReducers } from 'redux'
 
 const HOME_INITIAL_STATE = {
+  searchPosts : undefined,
   posts: [],
   postsOrder: 'voteScore',
   categories: [],
@@ -23,6 +24,10 @@ function appProps(state = HOME_INITIAL_STATE, action) {
     case 'REQUEST_VOTE_SCORE_POST_COMMENT': {
       const { redirectUrl } = action
       return { ...state, isShowWaitProcessModal: true, redirectUrl }
+    }
+    case 'REQUEST_SEARCH_POSTS': {
+      const { searchPosts, redirectUrl } = action
+      return { ...state, searchPosts, redirectUrl }
     }
     case 'RETURN_POSTS': {
       const { posts, categories, redirectUrl } = action

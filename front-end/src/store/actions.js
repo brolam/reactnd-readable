@@ -1,8 +1,7 @@
 //Posts
-export function requestPosts(search, redirectUrl = null) {
+export function requestPosts(redirectUrl = null) {
   return {
     type: 'REQUEST_POSTS',
-    search,
     redirectUrl
   }
 }
@@ -11,6 +10,14 @@ export function requestPostsByCategory(category, redirectUrl = null) {
   return {
     type: 'REQUEST_POSTS_BY_CATEGORY',
     category,
+    redirectUrl
+  }
+}
+
+export function requestSearchPosts(value,  redirectUrl = null) {
+  return {
+    type: 'REQUEST_SEARCH_POSTS',
+    searchPosts: value,
     redirectUrl
   }
 }

@@ -369,11 +369,8 @@ describe("Posts order list", () => {
       .toBe('Redux Udacity is the best place to learn Redux')
   })
 
-  it('order by published date select category filter', () => {
-    homePagefilterPostsByCategory(app, 'udacity')
-  })
-
   it('order by published date when category filter', () => {
+    homePagefilterPostsByCategory(app, 'udacity')
     expect(app.find('.post-header-title').first().text())
       .toBe('Redux Udacity is the best place to learn Redux')
     rollbackPublicPostsList()
@@ -410,6 +407,35 @@ describe("PostPage comments order list", () => {
     expect(selectOrder.instance().selectedIndex).toBe(1)
   })
 })
+
+describe("Search posts", () => {
+  let app
+  beforeEach(() => {
+    rollbackPublicPostsList()
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+  })
+
+  it('search Redux', () => {
+    jest.useFakeTimers();
+    const searchBarInput = app.find('.search-bar input')
+    const event = { target: { value: 'Redux' } };
+    searchBarInput.simulate('change', event);
+    setTimeout(() => {
+      expect(store.getState().appProps.searchPosts).toBe('Redux')
+    }, 3000);
+    jest.runAllTimers();
+  })
+
+  it('searched Redux', () => {
+    expect(app.find('div [className="post"]').length).toBe(1)
+  })
+})
+
 
 const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]

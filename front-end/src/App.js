@@ -19,6 +19,7 @@ import {
   requestRedirect,
   requestChangeOrderPosts,
   requestChangeOrderComments,
+  requestSearchPosts,
   cleanRedirectUrl,
 } from './store/actions'
 
@@ -227,7 +228,7 @@ function mapDispatchToProps(dispatch, ownProps) {
           action: POST_URL_ACTIONS.delete
         }))
     },
-    dispatchRequestPosts: (search) => dispatch(requestPosts(search)),
+    dispatchRequestPosts: (search) => dispatch(requestPosts()),
     dispatchRequestPost: (postId) => dispatch(requestPost(postId)),
     dispatchRequestPostsByCategory: (categoryPath) => dispatch(requestPostsByCategory(categoryPath)),
     onSelectedPost: (post) => {
@@ -265,6 +266,10 @@ function mapDispatchToProps(dispatch, ownProps) {
     onChangeOrderCommentsList: (order) => {
       const redirectUrl = getCurrentUrl()
       dispatch(requestChangeOrderComments(order, redirectUrl))
+    },
+    onSearch: (value) => {
+      const redirectUrl = getCurrentUrl()
+      dispatch(requestSearchPosts(value, redirectUrl))
     },
     cleanRedirectUrl: () => dispatch(cleanRedirectUrl()),
   }

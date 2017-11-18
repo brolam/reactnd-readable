@@ -23,12 +23,20 @@ const orderBy = function (model, nextModel, order) {
   return nextModel.voteScore - model.voteScore
 }
 
+const searchPosts = function (post, searchValue) {
+  if (!searchValue) return true
+  return post.title.toLowerCase().includes(searchValue.toLowerCase())
+}
+
+
 ReadableAPI.getPosts = (search, postsOrder) =>
   fetch(`${api}posts/`, { headers })
     .then(res => res.json())
-    .then(posts => posts.sort(
-      (post, nextPost) => orderBy(post, nextPost, postsOrder)
-    ))
+    .then(posts => posts
+      .filter(post => searchPosts(post, search))
+      .sort((post, nextPost) => orderBy(post, nextPost, postsOrder)
+      )
+    )
 
 ReadableAPI.getPostsByCategory = (category, postsOrder) =>
   fetch(`${api}${category}/posts`, { headers })

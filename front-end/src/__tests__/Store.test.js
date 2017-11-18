@@ -2,6 +2,7 @@ import { requestPostLike } from '../store/actions'
 import store from '../store'
 
 const HOME_INITIAL_STATE = {
+  searchPosts : undefined,  
   posts: [],
   postsOrder: 'voteScore',
   categories: [],
