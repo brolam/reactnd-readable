@@ -30,8 +30,12 @@ exports[`last Snapshot - show error message modal 1`] = `
     className="search-bar"
   >
     <input
+      onBlur={[Function]}
+      onChange={[Function]}
+      onKeyDown={[Function]}
       placeholder="Search by title post"
       type="text"
+      value=""
     />
   </div>
   <div
@@ -114,8 +118,12 @@ exports[`last Snapshot - show message wait process modal 1`] = `
     className="search-bar"
   >
     <input
+      onBlur={[Function]}
+      onChange={[Function]}
+      onKeyDown={[Function]}
       placeholder="Search by title post"
       type="text"
+      value=""
     />
   </div>
   <div
@@ -224,8 +232,12 @@ exports[`last Snapshot - show new post form modal 1`] = `
     className="search-bar"
   >
     <input
+      onBlur={[Function]}
+      onChange={[Function]}
+      onKeyDown={[Function]}
       placeholder="Search by title post"
       type="text"
+      value=""
     />
   </div>
   <div
@@ -565,8 +577,12 @@ exports[`last Snapshot 1`] = `
     className="search-bar"
   >
     <input
+      onBlur={[Function]}
+      onChange={[Function]}
+      onKeyDown={[Function]}
       placeholder="Search by title post"
       type="text"
+      value=""
     />
   </div>
   <div

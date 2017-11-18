@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`last Snapshot 1`] = `
+<div
+  className="search-bar"
+>
+  <input
+    onBlur={[Function]}
+    onChange={[Function]}
+    onKeyDown={[Function]}
+    placeholder="Search by title post"
+    type="text"
+    value=""
+  />
+</div>
+`;
