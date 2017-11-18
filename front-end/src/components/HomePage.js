@@ -10,6 +10,7 @@ function HomePage({
   posts,
   postsOrder,
   categories,
+  searchPosts,
   selectedCategoryPathFilter = 'none',
   isNewPost = false,
   isShowWaitProcessModal = false,
@@ -33,7 +34,11 @@ function HomePage({
             selectedCategoryPath={selectedCategoryPathFilter} />
         </div>
       </div>
-      <SearchBar placeholder="Search by title post" onSearch={onSearch} />
+      <SearchBar
+        placeholder="Search by title post"
+        searchValue={searchPosts}
+        onSearch={onSearch}
+      />
       <div className="main-page-content">
         <PostList
           posts={posts}

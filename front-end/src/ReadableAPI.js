@@ -28,7 +28,6 @@ const searchPosts = function (post, searchValue) {
   return post.title.toLowerCase().includes(searchValue.toLowerCase())
 }
 
-
 ReadableAPI.getPosts = (search, postsOrder) =>
   fetch(`${api}posts/`, { headers })
     .then(res => res.json())

@@ -29,10 +29,12 @@ function appProps(state = HOME_INITIAL_STATE, action) {
       const { searchPosts, redirectUrl } = action
       return { ...state, searchPosts, redirectUrl }
     }
+    //All posts 
     case 'RETURN_POSTS': {
       const { posts, categories, redirectUrl } = action
       return { ...state, posts, categories, isShowWaitProcessModal: false, redirectUrl }
     }
+    //One post
     case 'RETURN_POST': {
       const { post, comments, redirectUrl } = action
       return {

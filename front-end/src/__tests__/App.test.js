@@ -434,8 +434,12 @@ describe("Search posts", () => {
   it('searched Redux', () => {
     expect(app.find('div [className="post"]').length).toBe(1)
   })
-})
 
+  it('show last search value on shearchBar', () => {
+    expect(app.find('.search-bar input').instance().value).toBe('Redux')
+  })
+
+})
 
 const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]
