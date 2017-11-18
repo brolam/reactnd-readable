@@ -404,6 +404,11 @@ describe("PostPage comments order list", () => {
     selectOrder.simulate('change', event);
     expect(store.getState().appProps.commentsOrder).toBe('publishedDate')
   })
+
+  it('show "Published date" title on select element', () => {
+    const selectOrder = app.find('.order-options select')
+    expect(selectOrder.instance().selectedIndex).toBe(1)
+  })
 })
 
 const categories = global.dataForTest.categories

@@ -5,6 +5,7 @@ import PostCommentItem from './PostCommentItem'
 function PostCommentList({
   post,
   comments,
+  selectedCommentsOrder,
   onSelectedEditComment = (postId, commentId) => { },
   onSelectedDeleteComment = (postId, commentId) => { },
   onVoteScorePostComment = (postId, commentId, option) => { },
@@ -14,6 +15,7 @@ function PostCommentList({
       <span>Commentes({comments.length})</span>
       <OrderOptions
         onChangeOrder={onChangeOrderCommentsList}
+        selectedValue={selectedCommentsOrder}
       />
     </div>,
     <div key="comments" className={"post-page-comments"}>

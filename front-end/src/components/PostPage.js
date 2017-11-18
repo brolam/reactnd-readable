@@ -10,6 +10,7 @@ import WaitProcessModal from '../components/WaitProcessModal'
 function PostPage(
   { post = getEmptyPost(),
     comments = [],
+    commentsOrder,
     selectedComment = {},
     isEditPost = false,
     isNewComment = false,
@@ -61,7 +62,8 @@ function PostPage(
           onSelectedEditComment={goPostEditComment}
           onSelectedDeleteComment={goPostDeleteComment}
           onVoteScorePostComment={onVoteScorePostComment}
-          onChangeOrderCommentsList={onChangeOrderCommentsList} />
+          onChangeOrderCommentsList={onChangeOrderCommentsList}
+          selectedCommentsOrder={commentsOrder} />
       </div>
       {
         (isNewComment || isEditComment) && (
