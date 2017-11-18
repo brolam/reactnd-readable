@@ -44,7 +44,7 @@ global.dataForTest = {
         timestamp: 1468166872634,
         body: 'Hi there! I am a COMMENT.',
         author: 'thingtwo',
-        voteScore: 6,
+        voteScore: 10,
         deleted: false,
         parentDeleted: false
       },
@@ -54,7 +54,7 @@ global.dataForTest = {
         timestamp: 1469479767190,
         body: 'Comments. Are. Cool.',
         author: 'thingone',
-        voteScore: -5,
+        voteScore: 5,
         deleted: false,
         parentDeleted: false
       }]

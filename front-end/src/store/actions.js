@@ -95,10 +95,18 @@ export function requestDeletePostComment(postId, commentId, redirectUrl = null) 
   }
 }
 
-export function requestChagenOrderPosts(order,  redirectUrl = null) {
+export function requestChangeOrderPosts(order,  redirectUrl = null) {
   return {
     type: 'REQUEST_CHANGE_ORDER_POSTS',
     postsOrder: order,
+    redirectUrl
+  }
+}
+
+export function requestChangeOrderComments(order,  redirectUrl = null) {
+  return {
+    type: 'REQUEST_CHANGE_ORDER_COMMENTS',
+    commentsOrder: order,
     redirectUrl
   }
 }

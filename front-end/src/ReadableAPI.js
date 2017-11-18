@@ -16,25 +16,25 @@ function newId() {
 
 let ReadableAPI = {};
 
-const comparePostsOrderBy = function (post, nextPost, postsOrder) {
-  if (postsOrder === 'publishedDate') {
-    return nextPost.timestamp - post.timestamp
+const orderBy = function (model, nextModel, order) {
+  if (order === 'publishedDate') {
+    return nextModel.timestamp - model.timestamp
   }
-  return nextPost.voteScore - post.voteScore
+  return nextModel.voteScore - model.voteScore
 }
 
 ReadableAPI.getPosts = (search, postsOrder) =>
   fetch(`${api}posts/`, { headers })
     .then(res => res.json())
     .then(posts => posts.sort(
-      (post, nextPost) => comparePostsOrderBy(post, nextPost, postsOrder)
+      (post, nextPost) => orderBy(post, nextPost, postsOrder)
     ))
 
 ReadableAPI.getPostsByCategory = (category, postsOrder) =>
   fetch(`${api}${category}/posts`, { headers })
     .then(res => res.json())
     .then(posts => posts.sort(
-      (post, nextPost) => comparePostsOrderBy(post, nextPost, postsOrder)
+      (post, nextPost) => orderBy(post, nextPost, postsOrder)
     ))
 
 ReadableAPI.getCategories = () =>
@@ -85,10 +85,12 @@ ReadableAPI.voteScorePost = (postId, option) =>
   })
     .then(response => response)
 
-ReadableAPI.getComments = (postId) =>
+ReadableAPI.getComments = (postId, order) =>
   fetch(`${api}posts/${postId}/comments`, { headers })
     .then(res => res.json())
-    .then(data => data)
+    .then(comments => comments.sort(
+      (comment, nextComment) => orderBy(comment, nextComment, order)
+    ))
 
 ReadableAPI.newComment = (comment) =>
   fetch(`${api}comments/`, {

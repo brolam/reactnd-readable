@@ -17,7 +17,8 @@ import {
   requestDeletePostComment,
   requestVoteScorePostComment,
   requestRedirect,
-  requestChagenOrderPosts,
+  requestChangeOrderPosts,
+  requestChangeOrderComments,
   cleanRedirectUrl,
 } from './store/actions'
 
@@ -259,7 +260,11 @@ function mapDispatchToProps(dispatch, ownProps) {
     },
     onChangeOrderPostsList: (order) => {
       const redirectUrl = getCurrentUrl()
-      dispatch(requestChagenOrderPosts(order, redirectUrl))
+      dispatch(requestChangeOrderPosts(order, redirectUrl))
+    },
+    onChangeOrderCommentsList: (order) => {
+      const redirectUrl = getCurrentUrl()
+      dispatch(requestChangeOrderComments(order, redirectUrl))
     },
     cleanRedirectUrl: () => dispatch(cleanRedirectUrl()),
   }

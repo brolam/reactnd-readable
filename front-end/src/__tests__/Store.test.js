@@ -5,6 +5,7 @@ const HOME_INITIAL_STATE = {
   posts: [],
   postsOrder: 'voteScore',
   categories: [],
+  commentsOrder: 'voteScore',
   isShowWaitProcessModal: false,
   redirectUrl: null,
   selectedPost: { post: undefined, comments: undefined }

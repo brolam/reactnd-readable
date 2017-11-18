@@ -4,6 +4,7 @@ const HOME_INITIAL_STATE = {
   posts: [],
   postsOrder: 'voteScore',
   categories: [],
+  commentsOrder: 'voteScore',
   isShowWaitProcessModal: false,
   redirectUrl: null,
   selectedPost: { post: undefined, comments: undefined }
@@ -42,8 +43,14 @@ function appProps(state = HOME_INITIAL_STATE, action) {
         postsOrder,
         redirectUrl
       }
-    }
-    case 'REQUEST_REDIRECT': {
+    } case 'REQUEST_CHANGE_ORDER_COMMENTS': {
+      const { commentsOrder, redirectUrl } = action
+      return {
+        ...state,
+        commentsOrder,
+        redirectUrl
+      }
+    } case 'REQUEST_REDIRECT': {
       const { redirectUrl } = action
       return { ...state, redirectUrl: redirectUrl, isShowWaitProcessModal: false }
     }

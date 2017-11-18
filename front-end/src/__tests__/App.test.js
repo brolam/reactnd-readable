@@ -378,7 +378,32 @@ describe("Posts order list", () => {
       .toBe('Redux Udacity is the best place to learn Redux')
     rollbackPublicPostsList()
   })
+})
 
+describe("PostPage comments order list", () => {
+  let app
+  beforeEach(() => {
+    rollbackPublicPostsList()
+    store.dispatch({ type: 'CLEAN_REDIRECT_URL', redirectUrl: null })
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/posts/7ni6ok3ym7mf1p33lnez/get']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+  })
+
+  it('voteScore is the default comments order ', () => {
+    expect(store.getState().appProps.commentsOrder).toBe('voteScore')
+  })
+
+  it('select order by published date', () => {
+    expect(store.getState().appProps.commentsOrder).toBe('voteScore')
+    const selectOrder = app.find('.order-options select')
+    const event = { target: { value: 'publishedDate' } };
+    selectOrder.simulate('change', event);
+    expect(store.getState().appProps.commentsOrder).toBe('publishedDate')
+  })
 })
 
 const categories = global.dataForTest.categories

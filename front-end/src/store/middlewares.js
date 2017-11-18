@@ -34,10 +34,11 @@ export const appMiddleware = store => next => action => {
     }
     case 'REQUEST_POST': {
       const { postId, redirectUrl } = action
+      const { commentsOrder } = store.getState().appProps
       //Get post
       ReadableAPI.getPost(postId).then((post) => {
         //Get comments
-        ReadableAPI.getComments(postId).then((comments) => {
+        ReadableAPI.getComments(postId, commentsOrder ).then((comments) => {
           store.dispatch(returnPost(post, comments, redirectUrl))
         })
       })

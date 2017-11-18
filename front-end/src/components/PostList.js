@@ -14,7 +14,7 @@ function PostList({
       <div className="posts-title">
         <span>Posts</span>
         <OrderOptions 
-        onChageOrder={onChangeOrderPostsList}
+        onChangeOrder={onChangeOrderPostsList}
         selectedValue={selectedPostsOrder} />
       </div>
       <div className="posts-list">

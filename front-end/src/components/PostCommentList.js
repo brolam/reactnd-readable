@@ -7,11 +7,14 @@ function PostCommentList({
   comments,
   onSelectedEditComment = (postId, commentId) => { },
   onSelectedDeleteComment = (postId, commentId) => { },
-  onVoteScorePostComment = (postId, commentId, option) => { } }) {
+  onVoteScorePostComment = (postId, commentId, option) => { },
+  onChangeOrderCommentsList = (order) => { } }) {
   return ([
     <div key="title" className="post-comments-title">
       <span>Commentes({comments.length})</span>
-      <OrderOptions />
+      <OrderOptions
+        onChangeOrder={onChangeOrderCommentsList}
+      />
     </div>,
     <div key="comments" className={"post-page-comments"}>
       {comments.map(comment => (
