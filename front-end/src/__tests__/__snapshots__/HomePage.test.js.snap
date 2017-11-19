@@ -15,8 +15,8 @@ exports[`last Snapshot - show error message modal 1`] = `
         Readable
       </h1>
       <select
-        defaultValue="none"
         onChange={[Function]}
+        value="none"
       >
         <option
           value="none"
@@ -103,8 +103,8 @@ exports[`last Snapshot - show message wait process modal 1`] = `
         Readable
       </h1>
       <select
-        defaultValue="none"
         onChange={[Function]}
+        value="none"
       >
         <option
           value="none"
@@ -202,8 +202,8 @@ exports[`last Snapshot - show new post form modal 1`] = `
         Readable
       </h1>
       <select
-        defaultValue="none"
         onChange={[Function]}
+        value="none"
       >
         <option
           value="none"
@@ -547,8 +547,8 @@ exports[`last Snapshot 1`] = `
         Readable
       </h1>
       <select
-        defaultValue="none"
         onChange={[Function]}
+        value="none"
       >
         <option
           value="none"

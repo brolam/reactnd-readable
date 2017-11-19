@@ -34,19 +34,27 @@ class App extends Component {
     const currentUrl = this.props.location.pathname
     //Do a dispatch to update the screen
     this.doDispatchByUrl(currentUrl)
-  }
-
-  componentWillUpdate() {
-    clearQuestionModalTimeout()
+    //Do a dispatch to update the screen 
+    //when the user clicks back or forward in the browser
+    this.props.history.listen((location, action) => {
+      if (action === 'POP') {
+        const currentUrl = location.pathname
+        this.doDispatchByUrl(currentUrl)
+      }
+    })
   }
 
   componentDidUpdate() {
     //Do an URL redirect when it's necessary
-    //for example: When saved a post, reditect to homepage. 
+    //for example: When saved a post and he is redirect to homepage. 
     //See the requestRedirect and cleanRedirectUrl in Redux actions. 
     if (this.isThereOneRedirectRequest()) {
       this.doRequestRedirect()
     }
+  }
+
+  componentWillUpdate() {
+    clearQuestionModalTimeout()
   }
 
   render() {
@@ -100,6 +108,7 @@ class App extends Component {
       return
     }
   }
+
 }
 
 function mapStateToProps({ appProps }, ownProps) {
@@ -114,9 +123,7 @@ function mapDispatchToProps(dispatch, ownProps) {
       dispatch(requestRedirect(routes.GO_HOME))
     },
     goHomeFilterByCategory: (categoryPath) => {
-      const url = (categoryPath === 'none') ?
-        routes.GO_HOME :
-        routes.getHomeFilterPathToRegexp({ categoryPath })
+      const url = (categoryPath === 'none') ? routes.GO_HOME : routes.getHomeFilterPathToRegexp({ categoryPath })
       dispatch(requestRedirect(url))
     },
     goBack: (e) => ownProps.history.goBack(),

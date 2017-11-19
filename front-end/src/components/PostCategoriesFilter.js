@@ -7,11 +7,13 @@ function PostCategoriesFilter(
     selectedCategoryPath = 'none' }) {
   return (
     <select
-      onChange={onSelected}
-      defaultValue={selectedCategoryPath} >
+      value={selectedCategoryPath}
+      onChange={onSelected} >
       <option value="none">All Categories</option>
       {categories.map(category => (
-        <option key={category.name} value={category.path} >{category.name[0].toUpperCase() + category.name.slice(1)}</option>
+        <option
+          key={category.name}
+          value={category.path} >{category.name[0].toUpperCase() + category.name.slice(1)}</option>
       ))}
     </select>
   )

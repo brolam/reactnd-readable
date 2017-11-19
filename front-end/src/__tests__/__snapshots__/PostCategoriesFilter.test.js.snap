@@ -2,8 +2,8 @@
 
 exports[`last Snapshot 1`] = `
 <select
-  defaultValue="none"
   onChange={[Function]}
+  value="none"
 >
   <option
     value="none"
