@@ -132,7 +132,7 @@ app.get('/categories', (req, res) => {
           (data) => { 
               setTimeout(function() {
                 res.send(data)
-            }, 1000); },
+            }, 800); },
           (error) => {
               console.error(error)
               res.status(500).send({
@@ -188,7 +188,7 @@ app.get('/posts/:id', (req, res) => {
           (data) =>  { 
             setTimeout(function() {
               res.send(data)
-          }, 1000); },
+          }, 800); },
           (error) => {
               console.error(error)
               res.status(500).send({

@@ -6,6 +6,7 @@ import './App.css';
 import HomePage from './components/HomePage'
 import PostPage from './components/PostPage'
 import { clearQuestionModalTimeout } from './components/QuestionModal'
+import * as routes from './routes'
 import {
   requestPosts,
   requestPostsByCategory,
@@ -23,30 +24,6 @@ import {
   cleanRedirectUrl,
 } from './store/actions'
 
-//Home Url
-const GO_HOME = '/';
-
-//GET Post
-const GO_POST_NEW = '/posts/new';
-const GO_POST_GET = '/posts/:id/:action/:commentId?/:commentAction?/';
-const POST_URL_ACTIONS = {
-  get: 'get',
-  edit: 'edit',
-  delete: 'delete',
-  comments: 'comments'
-}
-const COMMENT_URL_ACTIONS = {
-  new: 'new',
-  edit: 'edit',
-  delete: 'delete',
-}
-const getPostPathToRegexp = pathToRegexp.compile(GO_POST_GET)
-const getPostPageUrl = postId => (getPostPathToRegexp({ id: postId, action: POST_URL_ACTIONS.get }))
-
-//GET posts by categoreis 
-const GO_HOME_FILTER = '/:categoryPath/posts';
-const getHomeFilterPathToRegexp = pathToRegexp.compile(GO_HOME_FILTER)
-
 class App extends Component {
   constructor(props) {
     super(props);
@@ -55,6 +32,7 @@ class App extends Component {
 
   componentDidMount() {
     const currentUrl = this.props.location.pathname
+    //Do a dispatch to update the screen
     this.doDispatchByUrl(currentUrl)
   }
 
@@ -63,22 +41,25 @@ class App extends Component {
   }
 
   componentDidUpdate() {
+    //Do an URL redirect when it's necessary
+    //for example: When saved a post, reditect to homepage. 
+    //See the requestRedirect and cleanRedirectUrl in Redux actions. 
     if (this.isThereOneRedirectRequest()) {
-      this.doRedirectRequest()
+      this.doRequestRedirect()
     }
   }
 
   render() {
     return (
       <Switch>
-        {[GO_HOME_FILTER, GO_POST_NEW, GO_HOME].map(path => (
+        {[routes.GO_HOME_FILTER, routes.GO_POST_NEW, routes.GO_HOME].map(path => (
           <Route key={path} exact path={path} render={({ history }) => (
-            <HomePage {...this.props} {...this.getHomePropsByUrl(history.location.pathname) } />
+            <HomePage {...this.props} {...routes.getHomePropsByUrl(history.location.pathname) } />
           )} />))
         }
-        <Route exact path={GO_POST_GET} render={({ history }) => (
+        <Route exact path={routes.GO_POST_GET} render={({ history }) => (
           <PostPage
-            {...this.getPostPagePropsByUrl(history.location.pathname) }
+            {...routes.getPostPagePropsByUrl(history.location.pathname, this.props.selectedPost.comments ) }
             {...this.props.selectedPost}
             {...this.props} />
         )} />
@@ -86,64 +67,11 @@ class App extends Component {
     )
   }
 
-  isHomeUrl(url) {
-    return (pathToRegexp(GO_HOME).test(url) || pathToRegexp(GO_POST_NEW).test(url))
-  }
-
-  isHomeFilterByCategoryUrl(url) {
-    return (pathToRegexp(GO_HOME_FILTER).test(url))
-  }
-
-  getHomePropsByUrl(url) {
-    let selectedCategoryPathFilter = 'none'
-    if (this.isHomeFilterByCategoryUrl(url)) {
-      const params = pathToRegexp(GO_HOME_FILTER).exec(url)
-      selectedCategoryPathFilter = params[1]
-    }
-    return ({
-      isNewPost: pathToRegexp(GO_POST_NEW).test(url) === true,
-      selectedCategoryPathFilter,
-    })
-  }
-
-  isPostPageUrl(url) {
-    if (url.endsWith('/new')) return false
-    return (pathToRegexp(GO_POST_GET).test(url))
-  }
-
-  /**
-   * Returns with the PostPage Component props entered in the URL
-   * @param {*} url 
-   */
-  getPostPagePropsByUrl(url) {
-    if (!this.isPostPageUrl(url)) return {}
-    const params = pathToRegexp(GO_POST_GET).exec(url)
-    const postAction = params[2], commentId = params[3], commentAction = params[4]
-    const comments = commentId ? this.props.selectedPost.comments : []
-    return ({
-      isEditPost: postAction === POST_URL_ACTIONS.edit,
-      isShowQuestionDelPost: postAction === POST_URL_ACTIONS.delete,
-      isNewComment: (
-        postAction === POST_URL_ACTIONS.comments &&
-        commentId === COMMENT_URL_ACTIONS.new
-      ),
-      isEditComment: (
-        postAction === POST_URL_ACTIONS.comments &&
-        commentAction === COMMENT_URL_ACTIONS.edit
-      ),
-      isShowQuestionDelComment: (
-        postAction === POST_URL_ACTIONS.comments &&
-        commentAction === COMMENT_URL_ACTIONS.delete
-      ),
-      selectedComment: comments.find(comment => comment.id === commentId)
-    })
-  }
-
   isThereOneRedirectRequest() {
     return (this.props.redirectUrl) ? true : false
   }
 
-  doRedirectRequest() {
+  doRequestRedirect() {
     const url = this.props.redirectUrl
     this.props.cleanRedirectUrl()
     this.props.history.push(url)
@@ -157,17 +85,17 @@ class App extends Component {
    * @param {*} url 
    */
   doDispatchByUrl(url) {
-    if (this.isHomeFilterByCategoryUrl(url)) {
-      const params = pathToRegexp(GO_HOME_FILTER).exec(url)
+    if (routes.isHomeFilterByCategoryUrl(url)) {
+      const params = pathToRegexp(routes.GO_HOME_FILTER).exec(url)
       this.props.dispatchRequestPostsByCategory(params[1])
       return
     }
-    if (this.isHomeUrl(url)) {
+    if (routes.isHomeUrl(url)) {
       this.props.dispatchRequestPosts()
       return
     }
-    if (this.isPostPageUrl(url)) {
-      const params = pathToRegexp(GO_POST_GET).exec(url)
+    if (routes.isPostPageUrl(url)) {
+      const params = pathToRegexp(routes.GO_POST_GET).exec(url)
       this.props.dispatchRequestPost(params[1])
       return
     }
@@ -183,72 +111,72 @@ function mapDispatchToProps(dispatch, ownProps) {
   const getCurrentUrl = () => ownProps.location.pathname
   return {
     goHome: (e) => {
-      ownProps.history.push(GO_HOME)
-      dispatch(requestRedirect(GO_HOME))
+      ownProps.history.push(routes.GO_HOME)
+      dispatch(requestRedirect(routes.GO_HOME))
     },
     goHomeFilterByCategory: (categoryPath) => {
-      const url = (categoryPath === 'none') ? GO_HOME : getHomeFilterPathToRegexp({ categoryPath })
+      const url = (categoryPath === 'none') ? routes.GO_HOME : routes.getHomeFilterPathToRegexp({ categoryPath })
       dispatch(requestRedirect(url))
     },
     goBack: (e) => ownProps.history.goBack(),
-    goPostNew: (e) => ownProps.history.push(GO_POST_NEW),
+    goPostNew: (e) => ownProps.history.push(routes.GO_POST_NEW),
     goPostEdit: post => {
-      ownProps.history.push(getPostPathToRegexp({ id: post.id, action: POST_URL_ACTIONS.edit }))
+      ownProps.history.push(routes.getPostPathToRegexp({ id: post.id, action: routes.POST_URL_ACTIONS.edit }))
     },
     goPostNewComment: (postId) => {
-      const urlNewComment = getPostPathToRegexp({
+      const urlNewComment = routes.getPostPathToRegexp({
         id: postId,
-        action: POST_URL_ACTIONS.comments,
-        commentId: COMMENT_URL_ACTIONS.new
+        action: routes.POST_URL_ACTIONS.comments,
+        commentId: routes.COMMENT_URL_ACTIONS.new
       })
       ownProps.history.push(urlNewComment)
     },
     goPostEditComment: (postId, commentId) => {
-      const urlEditComment = getPostPathToRegexp({
+      const urlEditComment = routes.getPostPathToRegexp({
         id: postId,
-        action: POST_URL_ACTIONS.comments,
+        action: routes.POST_URL_ACTIONS.comments,
         commentId: commentId,
-        commentAction: COMMENT_URL_ACTIONS.edit
+        commentAction: routes.COMMENT_URL_ACTIONS.edit
       })
       ownProps.history.push(urlEditComment)
     },
     goPostDeleteComment: (postId, commentId) => {
-      const urlDeleteComment = getPostPathToRegexp({
+      const urlDeleteComment = routes.getPostPathToRegexp({
         id: postId,
-        action: POST_URL_ACTIONS.comments,
+        action: routes.POST_URL_ACTIONS.comments,
         commentId: commentId,
-        commentAction: COMMENT_URL_ACTIONS.delete
+        commentAction: routes.COMMENT_URL_ACTIONS.delete
       })
       ownProps.history.push(urlDeleteComment)
     },
     goPostDelete: (postId) => {
-      ownProps.history.push(getPostPathToRegexp(
+      ownProps.history.push(routes.getPostPathToRegexp(
         {
           id: postId,
-          action: POST_URL_ACTIONS.delete
+          action: routes.POST_URL_ACTIONS.delete
         }))
     },
     dispatchRequestPosts: (search) => dispatch(requestPosts()),
     dispatchRequestPost: (postId) => dispatch(requestPost(postId)),
     dispatchRequestPostsByCategory: (categoryPath) => dispatch(requestPostsByCategory(categoryPath)),
     onSelectedPost: (post) => {
-      ownProps.history.push(getPostPageUrl(post.id))
+      ownProps.history.push(routes.getPostPageUrl(post.id))
       dispatch(requestPost(post.id))
     },
     onSavePost: (fieldsWasValidated, post) => {
-      fieldsWasValidated && dispatch(requestSavePost(post, GO_HOME))
+      fieldsWasValidated && dispatch(requestSavePost(post, routes.GO_HOME))
     },
     onSavePostComment: (postId, comment) => {
-      const redirectUrl = getPostPageUrl(postId)
+      const redirectUrl = routes.getPostPageUrl(postId)
       dispatch(requestSaveComment(postId, comment, redirectUrl))
     },
     onSavePostEdited: (fieldsWasValidated, post) => {
-      const redirectUrl = getPostPageUrl(post.id)
+      const redirectUrl = routes.getPostPageUrl(post.id)
       dispatch(requestSavePost(post, redirectUrl))
     },
-    onDeletePost: (postId) => dispatch(requestDeletePost(postId, GO_HOME)),
+    onDeletePost: (postId) => dispatch(requestDeletePost(postId, routes.GO_HOME)),
     onDeletePostComment: (postId, commentId) => {
-      const redirectUrl = getPostPageUrl(postId)
+      const redirectUrl = routes.getPostPageUrl(postId)
       dispatch(requestDeletePostComment(postId, commentId, redirectUrl))
     },
     onVoteScorePost: (postId, option) => {
