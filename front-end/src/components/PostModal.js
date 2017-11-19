@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { parseReportValidityMethod } from './utils/FormReportValidity'
+import { capitalize } from '../components/utils/Helpers'
 
 let inputTitle
 let inputBody
@@ -85,7 +86,7 @@ function getFooterToNewPost(categories, parseFields) {
     <select ref={(select) => { selecCategory = select; }} onChange={parseFields} >
       <option value="none">Save as?</option>
       {categories.map(category => (
-        <option key={category.path} value={category.path} >{category.name[0].toUpperCase() + category.name.slice(1)}</option>
+        <option key={category.path} value={category.path} >{capitalize(category.name)}</option>
       ))}
     </select>
   )
