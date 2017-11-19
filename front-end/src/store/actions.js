@@ -14,7 +14,7 @@ export function requestPostsByCategory(category, redirectUrl = null) {
   }
 }
 
-export function requestSearchPosts(value,  redirectUrl = null) {
+export function requestSearchPosts(value, redirectUrl = null) {
   return {
     type: 'REQUEST_SEARCH_POSTS',
     searchPosts: value,
@@ -102,7 +102,7 @@ export function requestDeletePostComment(postId, commentId, redirectUrl = null) 
   }
 }
 
-export function requestChangeOrderPosts(order,  redirectUrl = null) {
+export function requestChangeOrderPosts(order, redirectUrl = null) {
   return {
     type: 'REQUEST_CHANGE_ORDER_POSTS',
     postsOrder: order,
@@ -110,7 +110,7 @@ export function requestChangeOrderPosts(order,  redirectUrl = null) {
   }
 }
 
-export function requestChangeOrderComments(order,  redirectUrl = null) {
+export function requestChangeOrderComments(order, redirectUrl = null) {
   return {
     type: 'REQUEST_CHANGE_ORDER_COMMENTS',
     commentsOrder: order,

@@ -19,7 +19,7 @@ function PostModal(props) {
         buildEditPost(props.post, inputTitle.value, inputBody.value)
       props.onSavePost(true, postParam)
     } else {
-      if (selecCategory) selecCategory.value = 'none'
+      if (isNewPost(props.post)) selecCategory.value = 'none'
     }
   }
   return (

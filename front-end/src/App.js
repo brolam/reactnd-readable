@@ -59,7 +59,7 @@ class App extends Component {
         }
         <Route exact path={routes.GO_POST_GET} render={({ history }) => (
           <PostPage
-            {...routes.getPostPagePropsByUrl(history.location.pathname, this.props.selectedPost.comments ) }
+            {...routes.getPostPagePropsByUrl(history.location.pathname, this.props.selectedPost.comments) }
             {...this.props.selectedPost}
             {...this.props} />
         )} />
@@ -100,7 +100,6 @@ class App extends Component {
       return
     }
   }
-
 }
 
 function mapStateToProps({ appProps }, ownProps) {
@@ -115,13 +114,17 @@ function mapDispatchToProps(dispatch, ownProps) {
       dispatch(requestRedirect(routes.GO_HOME))
     },
     goHomeFilterByCategory: (categoryPath) => {
-      const url = (categoryPath === 'none') ? routes.GO_HOME : routes.getHomeFilterPathToRegexp({ categoryPath })
+      const url = (categoryPath === 'none') ?
+        routes.GO_HOME :
+        routes.getHomeFilterPathToRegexp({ categoryPath })
       dispatch(requestRedirect(url))
     },
     goBack: (e) => ownProps.history.goBack(),
     goPostNew: (e) => ownProps.history.push(routes.GO_POST_NEW),
     goPostEdit: post => {
-      ownProps.history.push(routes.getPostPathToRegexp({ id: post.id, action: routes.POST_URL_ACTIONS.edit }))
+      ownProps.history.push(
+        routes.getPostPathToRegexp({ id: post.id, action: routes.POST_URL_ACTIONS.edit })
+      )
     },
     goPostNewComment: (postId) => {
       const urlNewComment = routes.getPostPathToRegexp({
@@ -158,7 +161,9 @@ function mapDispatchToProps(dispatch, ownProps) {
     },
     dispatchRequestPosts: (search) => dispatch(requestPosts()),
     dispatchRequestPost: (postId) => dispatch(requestPost(postId)),
-    dispatchRequestPostsByCategory: (categoryPath) => dispatch(requestPostsByCategory(categoryPath)),
+    dispatchRequestPostsByCategory: (categoryPath) => (
+      dispatch(requestPostsByCategory(categoryPath))
+    ),
     onSelectedPost: (post) => {
       ownProps.history.push(routes.getPostPageUrl(post.id))
       dispatch(requestPost(post.id))

@@ -5,7 +5,7 @@ import { isNewComment } from '../components/PostCommentModal'
 
 export const appMiddleware = store => next => action => {
   const isOkRequestScreenRefrech = (success, url) => {
-    if (success) store.dispatch(requestRedirect(url))
+    store.dispatch(requestRedirect(url))
   }
   switch (action.type) {
     case 'REQUEST_POSTS': {

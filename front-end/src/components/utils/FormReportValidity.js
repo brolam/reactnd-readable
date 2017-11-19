@@ -1,13 +1,19 @@
+
+/**
+ * simulates the reportValidity method when the web browser is not compatible.
+ */
+export function reportValidity() {
+  const value = getValueOrDefaulValue(this)
+  if (isInputRequiredAndNotValid(this, value)) return false
+  if (isInputHasMinLengthAndNotValid(this, value)) return false
+  if (isInputHasMaxLengthAndNotValid(this, value)) return false
+  return true;
+}
+
 export function parseReportValidityMethod(input) {
   if (isNotNeedToSetNewReportValidityMethod(input)) return
   //Set a new reportValidity method: 
-  input.reportValidity = function () {
-    const value = getValueOrDefaulValue(input)
-    if (isInputRequiredAndNotValid(input, value)) return false
-    if (isInputHasMinLengthAndNotValid(input, value)) return false
-    if (isInputHasMaxLengthAndNotValid(input, value)) return false
-    return true;
-  }
+  input.reportValidity = reportValidity
 }
 
 function isInputHasMinLengthAndNotValid(input, value) {

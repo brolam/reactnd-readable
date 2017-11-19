@@ -88,11 +88,11 @@ test('body is required', () => {
       comment={comment}
       onClickBackButton={e => { }}
       onSave={() => {
-        isBodyFieldInvalid = true
+        isBodyFieldInvalid = false 
       }}
     />);
   const inputBody = postCommentModal.find('textarea')
-  inputBody.instance().value = ''
+  inputBody.instance().value = ' '
   postCommentModal.find('button [className="save-button udacity"]').simulate('click');
   expect(isBodyFieldInvalid).toBe(true);
 })

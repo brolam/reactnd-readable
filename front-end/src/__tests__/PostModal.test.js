@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import PostModal from '../components/PostModal'
 import renderer from 'react-test-renderer'
 import { mount } from 'enzyme'
+import {reportValidity} from '../components/utils/FormReportValidity'
 
 const categories = global.dataForTest.categories
 const postUdacity = global.dataForTest.posts[0]
@@ -88,18 +89,27 @@ describe("New Post to valid and to save", () => {
     expect(areTheFieldsValidated).toEqual(false);
   })
 
-  test('title must be valid', () => {
-    inputTitle.instance().value = '1'.repeat(80)
-    inputBody.instance().value = '1'.repeat(500)
-    postModal.find('select').simulate('change');
-    expect(areTheFieldsValidated).toEqual(true);
-  })
-
   test('body is required', () => {
     inputTitle.instance().value = '1'.repeat(80)
     inputBody.instance().value = ' '
     postModal.find('select').simulate('change');
     expect(areTheFieldsValidated).toBe(false);
+  })
+
+  test('do not save when category is none', () => {
+    inputTitle.instance().value = '1'.repeat(80)
+    inputBody.instance().value = '1'.repeat(500)
+    buttonSavePost.instance().value = 'none'
+    postModal.find('select').simulate('change');
+    expect(areTheFieldsValidated).toBe(false);
+    buttonSavePost.instance().value = 'udacity'
+  })
+
+  test('title must be valid', () => {
+    inputTitle.instance().value = '1'.repeat(80)
+    inputBody.instance().value = '1'.repeat(500)
+    postModal.find('select').simulate('change');
+    expect(areTheFieldsValidated).toEqual(true);
   })
 
   test('body must be longer than 2 characters', () => {
@@ -137,17 +147,36 @@ describe("New Post to valid and to save", () => {
   })
 })
 
-test('on save event to Edit Post', () => {
-  let didTheSaveEvent = false;
-  const postModal = mount(
-    <PostModal
-      post={postUdacity}
-      categories={categories}
-      onClickBackButton={e => { }}
-      onSavePost={e => { didTheSaveEvent = true }}
-    />);
-  postModal.find('button [className="save-button udacity"]').simulate('click');
-  expect(didTheSaveEvent).toBe(true);
+describe("Edit post", () => {
+  test('on save event to Edit Post', () => {
+    let didTheSaveEvent = false;
+    const postModal = mount(
+      <PostModal
+        post={postUdacity}
+        categories={categories}
+        onClickBackButton={e => { }}
+        onSavePost={e => { didTheSaveEvent = true }}
+      />);
+    postModal.find('button [className="save-button udacity"]').simulate('click');
+    expect(didTheSaveEvent).toBe(true);
+  })
+
+  test('invalid edit Post', () => {
+    let didTheSaveEvent = false;
+    const postModal = mount(
+      <PostModal
+        post={postUdacity}
+        categories={categories}
+        onClickBackButton={e => { }}
+        onSavePost={e => { didTheSaveEvent = true }}
+      />);
+    const inputBody = postModal.find('textarea')
+    inputBody.instance().reportValidity = reportValidity
+    inputBody.instance().value = ' '
+    postModal.find('button [className="save-button udacity"]').simulate('click');
+    expect(didTheSaveEvent).toBe(false);
+  })
+
 })
 
 describe("save button", () => {
