@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Moment from 'moment';
 import VoteScore from './VoteScore'
+import { capitalize } from '../components/utils/Helpers'
 
 function PostItem(props) {
   const { post } = props
@@ -9,7 +10,7 @@ function PostItem(props) {
     <div className="post" onClick={props.onSelected}>
       <div className="post-header">
         <div className="post-header-title">
-          <span className={"category " + post.category} >{post.category[0].toUpperCase() + post.category.slice(1)}</span> {post.title}
+          <span className={"category " + post.category} >{capitalize(post.category)}</span> {post.title}
         </div>
         <div className="post-header-published">
           <span className="published">{Moment(post.timestamp).from(new Date())}</span>
