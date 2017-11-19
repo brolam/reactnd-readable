@@ -61,6 +61,7 @@ body, .app {
   top: 10px;
   width: 293px;
   height: 48px;
+  margin-right: 15px;
 }
 
 .search-bar input {
@@ -73,7 +74,19 @@ body, .app {
   border: #050505
 }
 
-/* search component */
+@media (max-width: 600px) {
+  .search-bar {
+    position: static;
+    width: 100%;
+    right: unset;
+  }
+  .search-bar input {
+    width: 100%;
+  }
+}
+
+
+/* post component */
 .posts {
   padding: 0 10px 20px;
 }
