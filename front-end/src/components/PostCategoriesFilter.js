@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { capitalize } from '../components/utils/Helpers'
 
 function PostCategoriesFilter(
   { categories,
@@ -13,7 +14,7 @@ function PostCategoriesFilter(
       {categories.map(category => (
         <option
           key={category.name}
-          value={category.path} >{category.name[0].toUpperCase() + category.name.slice(1)}</option>
+          value={category.path} >{capitalize(category.name)}</option>
       ))}
     </select>
   )
