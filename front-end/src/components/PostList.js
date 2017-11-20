@@ -6,6 +6,7 @@ import PostItem from '../components/PostItem'
 function PostList({
   posts,
   onSelectedPost = (posts) => { },
+  goPostEdit = post => { },
   onVoteScorePost = (postId, option) => { },
   onChangeOrderPostsList = (order) => { },
   selectedPostsOrder }) {
@@ -24,6 +25,7 @@ function PostList({
               key={post.id}
               post={post}
               onSelected={(e) => onSelectedPost(post)}
+              goPostEdit={goPostEdit}
               onVoteScorePost={onVoteScorePost}
             />
           )

@@ -63,7 +63,26 @@ describe("New post", () => {
   })
 });
 
-describe("Edit post", () => {
+describe("Homepage Edit post", () => {
+  let app
+  beforeEach(() => {
+    rollbackPublicPostsList()
+    app = mount(
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <App />
+        </MemoryRouter>
+      </Provider>)
+
+  })
+
+  it('Show form modal Edit Post', () => {
+    app.find('button [className="edit-button"]').first().simulate('click')
+    expect(app.find('div [id="postModal"]').length).toEqual(1);
+  })
+})
+
+describe("Post Page Edit post", () => {
   let app
   beforeEach(() => {
     app = mount(

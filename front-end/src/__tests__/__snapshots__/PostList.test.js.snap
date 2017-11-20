@@ -76,6 +76,13 @@ exports[`last Snapshot 1`] = `
         className="post-footer"
       >
         <button
+          className="edit-button"
+          href="/"
+          onClick={[Function]}
+        >
+          Edit
+        </button>
+        <button
           className="liked"
           onClick={[Function]}
         >
@@ -134,6 +141,13 @@ exports[`last Snapshot 1`] = `
       <div
         className="post-footer"
       >
+        <button
+          className="edit-button"
+          href="/"
+          onClick={[Function]}
+        >
+          Edit
+        </button>
         <button
           className="liked"
           onClick={[Function]}

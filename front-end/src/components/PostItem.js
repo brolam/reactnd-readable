@@ -19,6 +19,11 @@ function PostItem(props) {
       <div className="post-header-author">by {post.author}</div>
       <div className="post-body">{post.body}</div>
       <div className="post-footer">
+        <button className="edit-button" href="/"
+          onClick={e => {
+            e.stopPropagation()
+            props.goPostEdit(post)
+          }}>Edit</button>
         <VoteScore
           voteScore={post.voteScore}
           onClickLiked={e => {

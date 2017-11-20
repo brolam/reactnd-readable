@@ -23,6 +23,9 @@ function PostModal(props) {
       if (isNewPost(props.post)) selecCategory.value = 'none'
     }
   }
+  //Fixed out of date title and body setting on defaultValue props.
+  if (inputTitle && post.title) inputTitle.value = post.title
+  if (inputBody && post.body) inputBody.value = post.body
   return (
     <div id="postModal" className="modal modal-open" >
       <div className="modal-dialog">

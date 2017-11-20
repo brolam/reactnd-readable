@@ -129,6 +129,7 @@ function mapDispatchToProps(dispatch, ownProps) {
     goBack: (e) => ownProps.history.goBack(),
     goPostNew: (e) => ownProps.history.push(routes.GO_POST_NEW),
     goPostEdit: post => {
+      dispatch(requestPost(post.id))
       ownProps.history.push(
         routes.getPostPathToRegexp({ id: post.id, action: routes.POST_URL_ACTIONS.edit })
       )
