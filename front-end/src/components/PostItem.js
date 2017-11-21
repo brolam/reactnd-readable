@@ -24,6 +24,12 @@ function PostItem(props) {
             e.stopPropagation()
             props.goPostEdit(post)
           }}>Edit</button>
+        <button className="delete-button"
+          onClick={e => {
+            e.stopPropagation()
+            props.goPostDelete(post.id)
+          }
+          }>Delete</button>
         <VoteScore
           voteScore={post.voteScore}
           onClickLiked={e => {

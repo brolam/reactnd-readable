@@ -161,11 +161,13 @@ function mapDispatchToProps(dispatch, ownProps) {
       ownProps.history.push(urlDeleteComment)
     },
     goPostDelete: (postId) => {
-      ownProps.history.push(routes.getPostPathToRegexp(
+      dispatch(requestPost(postId))
+      const postDeleteUrl = routes.getPostPathToRegexp(
         {
           id: postId,
           action: routes.POST_URL_ACTIONS.delete
-        }))
+        })
+      ownProps.history.push(postDeleteUrl)
     },
     dispatchRequestPosts: (search) => dispatch(requestPosts()),
     dispatchRequestPost: (postId) => dispatch(requestPost(postId)),

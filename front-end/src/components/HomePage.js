@@ -18,6 +18,7 @@ function HomePage({
   goHome = e => { },
   goHomeFilterByCategory = (categoryPath) => { },
   goPostEdit = post => { },
+  goPostDelete = (postId) => { },
   onSavePost = fieldsWasValidated => { },
   onSelectedPost = (post) => { },
   onVoteScorePost = (postId, option) => { },
@@ -45,6 +46,7 @@ function HomePage({
           posts={posts}
           onSelectedPost={onSelectedPost}
           goPostEdit={goPostEdit}
+          goPostDelete={goPostDelete}
           onVoteScorePost={onVoteScorePost}
           onChangeOrderPostsList={onChangeOrderPostsList}
           selectedPostsOrder={postsOrder} />

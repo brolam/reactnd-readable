@@ -325,6 +325,12 @@ exports[`last Snapshot - show new post form modal 1`] = `
               Edit
             </button>
             <button
+              className="delete-button"
+              onClick={[Function]}
+            >
+              Delete
+            </button>
+            <button
               className="liked"
               onClick={[Function]}
             >
@@ -391,6 +397,12 @@ exports[`last Snapshot - show new post form modal 1`] = `
               Edit
             </button>
             <button
+              className="delete-button"
+              onClick={[Function]}
+            >
+              Delete
+            </button>
+            <button
               className="liked"
               onClick={[Function]}
             >
@@ -455,6 +467,12 @@ exports[`last Snapshot - show new post form modal 1`] = `
               onClick={[Function]}
             >
               Edit
+            </button>
+            <button
+              className="delete-button"
+              onClick={[Function]}
+            >
+              Delete
             </button>
             <button
               className="liked"
@@ -691,6 +709,12 @@ exports[`last Snapshot 1`] = `
               Edit
             </button>
             <button
+              className="delete-button"
+              onClick={[Function]}
+            >
+              Delete
+            </button>
+            <button
               className="liked"
               onClick={[Function]}
             >
@@ -757,6 +781,12 @@ exports[`last Snapshot 1`] = `
               Edit
             </button>
             <button
+              className="delete-button"
+              onClick={[Function]}
+            >
+              Delete
+            </button>
+            <button
               className="liked"
               onClick={[Function]}
             >
@@ -821,6 +851,12 @@ exports[`last Snapshot 1`] = `
               onClick={[Function]}
             >
               Edit
+            </button>
+            <button
+              className="delete-button"
+              onClick={[Function]}
+            >
+              Delete
             </button>
             <button
               className="liked"

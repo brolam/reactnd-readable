@@ -63,7 +63,7 @@ describe("New post", () => {
   })
 });
 
-describe("Homepage Edit post", () => {
+describe("Homepage Edit and Delete post", () => {
   let app
   beforeEach(() => {
     rollbackPublicPostsList()
@@ -76,10 +76,16 @@ describe("Homepage Edit post", () => {
 
   })
 
-  it('Show form modal Edit Post', () => {
+  it('show form modal Edit Post', () => {
     app.find('button [className="edit-button"]').first().simulate('click')
     expect(app.find('div [id="postModal"]').length).toEqual(1);
   })
+
+  it('show question modal delete Post', () => {
+    app.find('button [className="delete-button"]').first().simulate('click')
+    expect(app.find('div [className="modal-short modal-open"]').length).toEqual(2);
+  })
+
 })
 
 describe("Post Page Edit post", () => {

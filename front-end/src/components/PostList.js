@@ -7,6 +7,7 @@ function PostList({
   posts,
   onSelectedPost = (posts) => { },
   goPostEdit = post => { },
+  goPostDelete = (postId) => { },
   onVoteScorePost = (postId, option) => { },
   onChangeOrderPostsList = (order) => { },
   selectedPostsOrder }) {
@@ -26,6 +27,7 @@ function PostList({
               post={post}
               onSelected={(e) => onSelectedPost(post)}
               goPostEdit={goPostEdit}
+              goPostDelete ={goPostDelete}
               onVoteScorePost={onVoteScorePost}
             />
           )
