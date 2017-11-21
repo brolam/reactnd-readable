@@ -43,6 +43,9 @@ exports[`last Snapshot 1`] = `
   <div
     className="post-footer"
   >
+    <h3>
+      Comments(2)
+    </h3>
     <button
       className="edit-button"
       href="/"

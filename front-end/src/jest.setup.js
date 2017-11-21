@@ -37,6 +37,7 @@ global.dataForTest = {
     body: "Everyone says so after all.",
     deleted: false,
     voteScore: 5,
+    countComments: 2,
     comments: [
       {
         id: '894tuq4ut84ut8v4t8wun89g',
@@ -68,6 +69,7 @@ global.dataForTest = {
     body: "Everyone says so after all.",
     deleted: false,
     voteScore: 4,
+    countComments: 0,
     comments: []
   },
   {
@@ -79,6 +81,7 @@ global.dataForTest = {
     body: "Everyone says so after all.",
     deleted: false,
     voteScore: 3,
+    countComments: 0,
     comments: []
   }]
 

@@ -24,7 +24,8 @@ const posts = [{
   author: "thingtwo",
   body: "Everyone says so after all.",
   deleted: false,
-  voteScore: 5
+  voteScore: 5,
+  countComments: 2,
 },
 {
   category: "react",
@@ -34,5 +35,6 @@ const posts = [{
   author: "thingtwo",
   body: "Everyone says so after all.",
   deleted: false,
-  voteScore: 5
+  voteScore: 5,
+  countComments: 0,
 }]

@@ -17,8 +17,13 @@ function PostItem(props) {
         </div>
       </div>
       <div className="post-header-author">by {post.author}</div>
-      <div className="post-body">{post.body}</div>
+      <div className="post-body">
+        {post.body}
+      </div>
       <div className="post-footer">
+        <button className="count-comments">
+          Comments <span>{post.countComments}</span>
+        </button>
         <button className="edit-button" href="/"
           onClick={e => {
             e.stopPropagation()
@@ -54,6 +59,7 @@ PostItem.propTypes = {
     timestamp: PropTypes.number.isRequired,
     author: PropTypes.string.isRequired,
     voteScore: PropTypes.number.isRequired,
+    countComments: PropTypes.number.isRequired
   }),
   onSelected: PropTypes.func.isRequired
 }

@@ -223,7 +223,14 @@ body, .app {
   text-align: right;
 }
 
-.liked, .not-liked, .edit-button, .delete-button, .save-button {
+.post-footer .count-comments {
+  display: initial;
+  align-items: left;
+  background-color: #155724;
+  border-color: #155724;
+}
+
+.liked, .not-liked, .edit-button, .delete-button, .save-button, .count-comments {
   padding: 0.35em 0.5em;
   margin: 0px 3px;
   color: #fff;
@@ -240,7 +247,7 @@ body, .app {
   border-color: #dc3545;
 }
 
-.liked span {
+.liked span, .count-comments span {
   padding: 0.25em 0.25em;
   font-size: 90%;
   font-weight: bold;

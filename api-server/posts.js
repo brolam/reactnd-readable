@@ -22,7 +22,17 @@ const defaultData = {
     category: 'redux',
     voteScore: -5,
     deleted: false
-  }
+  },
+  "8xf0y6ziyjabvozdd253bf": {
+    id: '8xf0y6ziyjabvozdd253bf',
+    timestamp: Date.now(),
+    title: 'Learn Web Development anywhere and anytime.',
+    body: 'Join Udacity to learn Web Developement anywhere and anytime',
+    author: 'Breno Marques',
+    category: 'udacity',
+    voteScore: 6,
+    deleted: false
+  },
 }
 
 function getData (token) {

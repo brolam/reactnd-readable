@@ -317,6 +317,9 @@ exports[`last Snapshot - show new post form modal 1`] = `
           <div
             className="post-footer"
           >
+            <h3>
+              Comments(2)
+            </h3>
             <button
               className="edit-button"
               href="/"
@@ -389,6 +392,9 @@ exports[`last Snapshot - show new post form modal 1`] = `
           <div
             className="post-footer"
           >
+            <h3>
+              Comments(0)
+            </h3>
             <button
               className="edit-button"
               href="/"
@@ -461,6 +467,9 @@ exports[`last Snapshot - show new post form modal 1`] = `
           <div
             className="post-footer"
           >
+            <h3>
+              Comments(0)
+            </h3>
             <button
               className="edit-button"
               href="/"
@@ -701,6 +710,9 @@ exports[`last Snapshot 1`] = `
           <div
             className="post-footer"
           >
+            <h3>
+              Comments(2)
+            </h3>
             <button
               className="edit-button"
               href="/"
@@ -773,6 +785,9 @@ exports[`last Snapshot 1`] = `
           <div
             className="post-footer"
           >
+            <h3>
+              Comments(0)
+            </h3>
             <button
               className="edit-button"
               href="/"
@@ -845,6 +860,9 @@ exports[`last Snapshot 1`] = `
           <div
             className="post-footer"
           >
+            <h3>
+              Comments(0)
+            </h3>
             <button
               className="edit-button"
               href="/"

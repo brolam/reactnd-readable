@@ -42,6 +42,13 @@ function getByParent (token, parentId) {
   })
 }
 
+function countByParent (token, parentId) {
+    let comments = getData(token)
+    let keys = Object.keys(comments)
+    filtered_keys = keys.filter(key => comments[key].parentId === parentId && !comments[key].deleted)
+    return filtered_keys.length
+}
+
 function get (token, id) {
   return new Promise((res) => {
     const comments = getData(token)
@@ -125,5 +132,6 @@ module.exports = {
   vote,
   disableByParent,
   disable,
-  edit
+  edit,
+  countByParent
 }
