@@ -1,4 +1,4 @@
-import reducer from './reducers.js'
+import reducer from './reducers'
 import { createStore, applyMiddleware } from 'redux'
 import {appMiddleware} from './middlewares'
 
