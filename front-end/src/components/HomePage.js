@@ -18,7 +18,7 @@ function HomePage({
   goHome = e => { },
   goHomeFilterByCategory = (categoryPath) => { },
   goPostEdit = post => { },
-  goPostDelete = (postId) => { },
+  goPostDelete = post => { },
   onSavePost = fieldsWasValidated => { },
   onSelectedPost = (post) => { },
   onVoteScorePost = (postId, option) => { },

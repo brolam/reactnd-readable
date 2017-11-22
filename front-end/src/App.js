@@ -104,7 +104,7 @@ class App extends Component {
     }
     if (routes.isPostPageUrl(url)) {
       const params = pathToRegexp(routes.GO_POST_GET).exec(url)
-      this.props.dispatchRequestPost(params[1])
+      this.props.dispatchRequestPost(params[2])
       return
     }
   }
@@ -131,40 +131,48 @@ function mapDispatchToProps(dispatch, ownProps) {
     goPostEdit: post => {
       dispatch(requestPost(post.id))
       ownProps.history.push(
-        routes.getPostPathToRegexp({ id: post.id, action: routes.POST_URL_ACTIONS.edit })
+        routes.getPostPathToRegexp({
+          categoryPath: post.category,
+          id: post.id,
+          action: routes.POST_URL_ACTIONS.edit
+        })
       )
     },
-    goPostNewComment: (postId) => {
-      const urlNewComment = routes.getPostPathToRegexp({
-        id: postId,
+    goPostNewComment: (post) => {
+      const newCommentUrl = routes.getPostPathToRegexp({
+        categoryPath: post.category,
+        id: post.id,
         action: routes.POST_URL_ACTIONS.comments,
         commentId: routes.COMMENT_URL_ACTIONS.new
       })
-      ownProps.history.push(urlNewComment)
+      ownProps.history.push(newCommentUrl)
     },
-    goPostEditComment: (postId, commentId) => {
-      const urlEditComment = routes.getPostPathToRegexp({
-        id: postId,
+    goPostEditComment: (post, commentId) => {
+      const editCommentUrl = routes.getPostPathToRegexp({
+        categoryPath: post.category,
+        id: post.id,
         action: routes.POST_URL_ACTIONS.comments,
         commentId: commentId,
         commentAction: routes.COMMENT_URL_ACTIONS.edit
       })
-      ownProps.history.push(urlEditComment)
+      ownProps.history.push(editCommentUrl)
     },
-    goPostDeleteComment: (postId, commentId) => {
+    goPostDeleteComment: (post, commentId) => {
       const urlDeleteComment = routes.getPostPathToRegexp({
-        id: postId,
+        categoryPath: post.category,
+        id: post.id,
         action: routes.POST_URL_ACTIONS.comments,
         commentId: commentId,
         commentAction: routes.COMMENT_URL_ACTIONS.delete
       })
       ownProps.history.push(urlDeleteComment)
     },
-    goPostDelete: (postId) => {
-      dispatch(requestPost(postId))
+    goPostDelete: (post) => {
+      dispatch(requestPost(post.id))
       const postDeleteUrl = routes.getPostPathToRegexp(
         {
-          id: postId,
+          categoryPath: post.category,
+          id: post.id,
           action: routes.POST_URL_ACTIONS.delete
         })
       ownProps.history.push(postDeleteUrl)
@@ -175,24 +183,26 @@ function mapDispatchToProps(dispatch, ownProps) {
       dispatch(requestPostsByCategory(categoryPath))
     ),
     onSelectedPost: (post) => {
-      ownProps.history.push(routes.getPostPageUrl(post.id))
+      ownProps.history.push(routes.getPostPageUrl(post))
       dispatch(requestPost(post.id))
     },
     onSavePost: (fieldsWasValidated, post) => {
       fieldsWasValidated && dispatch(requestSavePost(post, routes.GO_HOME))
     },
-    onSavePostComment: (postId, comment) => {
-      const redirectUrl = routes.getPostPageUrl(postId)
-      dispatch(requestSaveComment(postId, comment, redirectUrl))
+    onSavePostComment: (post, comment) => {
+      const redirectUrl = routes.getPostPageUrl(post)
+      dispatch(requestSaveComment(post.id, comment, redirectUrl))
     },
     onSavePostEdited: (fieldsWasValidated, post) => {
-      const redirectUrl = routes.getPostPageUrl(post.id)
+      const redirectUrl = routes.getPostPageUrl(post)
       dispatch(requestSavePost(post, redirectUrl))
     },
-    onDeletePost: (postId) => dispatch(requestDeletePost(postId, routes.GO_HOME)),
-    onDeletePostComment: (postId, commentId) => {
-      const redirectUrl = routes.getPostPageUrl(postId)
-      dispatch(requestDeletePostComment(postId, commentId, redirectUrl))
+    onDeletePost: (postId) => {
+      dispatch(requestDeletePost(postId, routes.GO_HOME))
+    },
+    onDeletePostComment: (post, commentId) => {
+      const redirectUrl = routes.getPostPageUrl(post)
+      dispatch(requestDeletePostComment(post.id, commentId, redirectUrl))
     },
     onVoteScorePost: (postId, option) => {
       const redirectUrl = getCurrentUrl()

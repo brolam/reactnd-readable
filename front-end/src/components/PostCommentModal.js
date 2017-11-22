@@ -14,7 +14,7 @@ function PostCommentModal(props) {
       const commentParam = isNewComment(comment) ?
         buildNewComment(post.id, inputBody.value) :
         { ...comment, body: inputBody.value }
-      onSave(post.id, commentParam)
+      onSave(post, commentParam)
     }
   }
   return (

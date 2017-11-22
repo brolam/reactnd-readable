@@ -21,14 +21,14 @@ function PostPage(
     goHome = e => { },
     goBack = e => { },
     goPostEdit = post => { },
-    goPostNewComment = (postId) => { },
-    goPostEditComment = (postId, commentId) => { },
-    goPostDelete = (postId) => { },
-    goPostDeleteComment = (postId, commentId) => { },
+    goPostNewComment = (post) => { },
+    goPostEditComment = (post, commentId) => { },
+    goPostDelete = (post) => { },
+    goPostDeleteComment = (post, commentId) => { },
     onSavePostEdited = (fieldsWasValidated, post) => { },
-    onSavePostComment = (postId, comment) => { },
+    onSavePostComment = (post, comment) => { },
     onDeletePost = (postId) => { },
-    onDeletePostComment = (postId, commentId) => { },
+    onDeletePostComment = (post, commentId) => { },
     onVoteScorePost = (postId, option) => { },
     onVoteScorePostComment = (postId, commentId, option) => { },
     onChangeOrderCommentsList = (order) => { } }) {
@@ -46,7 +46,7 @@ function PostPage(
           <button className="edit-button" href="/"
             onClick={e => goPostEdit(post)}>Edit</button>
           <button className="delete-button"
-            onClick={e => { goPostDelete(post.id) }}>Delete</button>
+            onClick={e => { goPostDelete(post) }}>Delete</button>
           <VoteScore
             voteScore={post.voteScore}
             onClickLiked={e => onVoteScorePost(post.id, 'upVote')}
@@ -71,7 +71,7 @@ function PostPage(
             post={post}
             comment={isNewComment ? {} : selectedComment}
             onClickBackButton={goBack}
-            onSave={(postId, comment) => { onSavePostComment(postId, comment) }}
+            onSave={(post, comment) => { onSavePostComment(post, comment) }}
           />
         )}
       {
@@ -88,7 +88,7 @@ function PostPage(
           <QuestionModal
             message={"Are you sure? Do you want delete this comment?"}
             timeout={4000}
-            onYesAnswer={e => onDeletePostComment(post.id, selectedComment.id)}
+            onYesAnswer={e => onDeletePostComment(post, selectedComment.id)}
             onNoAnswer={goBack}
           />
         )}
@@ -104,7 +104,7 @@ function PostPage(
       <div
         key="flat-button"
         className="flat-button"
-        onClick={e => { goPostNewComment(post.id) }} >
+        onClick={e => { goPostNewComment(post) }} >
         <a className={"add " + post.category} >Add Comment</a>
       </div>
       {

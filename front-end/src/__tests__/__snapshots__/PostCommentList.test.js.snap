@@ -4,129 +4,129 @@ exports[`last Snapshot 1`] = `
 Array [
   <div
     className="post-comments-title"
-  >
+>
     <span>
-      Commentes(
-      2
-      )
+        Commentes(
+        2
+        )
     </span>
     <div
-      className="order-options"
+        className="order-options"
     >
-      <select
-        defaultValue="voteScore"
-        onChange={[Function]}
-      >
-        <option
-          value="voteScore"
+        <select
+            defaultValue="voteScore"
+            onChange={[Function]}
         >
-          Vote Score
-        </option>
-        <option
-          value="publishedDate"
-        >
-          Published date
-        </option>
-      </select>
+            <option
+                value="voteScore"
+            >
+                Vote Score
+            </option>
+            <option
+                value="publishedDate"
+            >
+                Published date
+            </option>
+        </select>
     </div>
-  </div>,
+</div>,
   <div
     className="post-page-comments"
-  >
+>
     <div
-      className="post-comment"
+        className="post-comment"
     >
-      <div
-        className="post-comment-author"
-      >
-        by 
-        thingtwo
-         
-        a year ago
-      </div>
-      <div>
-        Hi there! I am a COMMENT.
-      </div>
-      <div
-        className="post-comment-footer"
-      >
-        <button
-          className="edit-button"
-          href="/"
-          onClick={[Function]}
+        <div
+            className="post-comment-author"
         >
-          Edit
-        </button>
-        <button
-          className="delete-button"
-          onClick={[Function]}
+            by 
+            thingtwo
+             
+            a year ago
+        </div>
+        <div>
+            Hi there! I am a COMMENT.
+        </div>
+        <div
+            className="post-comment-footer"
         >
-          Delete
-        </button>
-        <button
-          className="liked"
-          onClick={[Function]}
-        >
-          Liked 
-          <span>
-            6
-          </span>
-        </button>
-        <button
-          className="not-liked"
-          onClick={[Function]}
-        >
-          Not like
-        </button>
-      </div>
+            <button
+                className="edit-button"
+                href="/"
+                onClick={[Function]}
+            >
+                Edit
+            </button>
+            <button
+                className="delete-button"
+                onClick={[Function]}
+            >
+                Delete
+            </button>
+            <button
+                className="liked"
+                onClick={[Function]}
+            >
+                Liked 
+                <span>
+                    6
+                </span>
+            </button>
+            <button
+                className="not-liked"
+                onClick={[Function]}
+            >
+                Not like
+            </button>
+        </div>
     </div>
     <div
-      className="post-comment"
+        className="post-comment"
     >
-      <div
-        className="post-comment-author"
-      >
-        by 
-        thingone
-         
-        a year ago
-      </div>
-      <div>
-        Comments. Are. Cool.
-      </div>
-      <div
-        className="post-comment-footer"
-      >
-        <button
-          className="edit-button"
-          href="/"
-          onClick={[Function]}
+        <div
+            className="post-comment-author"
         >
-          Edit
-        </button>
-        <button
-          className="delete-button"
-          onClick={[Function]}
+            by 
+            thingone
+             
+            a year ago
+        </div>
+        <div>
+            Comments. Are. Cool.
+        </div>
+        <div
+            className="post-comment-footer"
         >
-          Delete
-        </button>
-        <button
-          className="liked"
-          onClick={[Function]}
-        >
-          Liked 
-          <span>
-            -5
-          </span>
-        </button>
-        <button
-          className="not-liked"
-          onClick={[Function]}
-        >
-          Not like
-        </button>
-      </div>
+            <button
+                className="edit-button"
+                href="/"
+                onClick={[Function]}
+            >
+                Edit
+            </button>
+            <button
+                className="delete-button"
+                onClick={[Function]}
+            >
+                Delete
+            </button>
+            <button
+                className="liked"
+                onClick={[Function]}
+            >
+                Liked 
+                <span>
+                    -5
+                </span>
+            </button>
+            <button
+                className="not-liked"
+                onClick={[Function]}
+            >
+                Not like
+            </button>
+        </div>
     </div>
-  </div>,
+</div>,
 ]
 `;

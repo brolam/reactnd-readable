@@ -5,17 +5,17 @@ Array [
   <button
     className="liked"
     onClick={undefined}
-  >
+>
     Liked 
     <span>
-      5
+        5
     </span>
-  </button>,
+</button>,
   <button
     className="not-liked"
     onClick={undefined}
-  >
+>
     Not like
-  </button>,
+</button>,
 ]
 `;

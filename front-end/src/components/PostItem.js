@@ -32,7 +32,7 @@ function PostItem(props) {
         <button className="delete-button"
           onClick={e => {
             e.stopPropagation()
-            props.goPostDelete(post.id)
+            props.goPostDelete(post)
           }
           }>Delete</button>
         <VoteScore

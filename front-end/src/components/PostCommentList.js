@@ -24,8 +24,8 @@ function PostCommentList({
           key={comment.id}
           post={post}
           comment={comment}
-          onClickEditButton={e => { onSelectedEditComment(post.id, comment.id) }}
-          onClickDeleteButton={e => { onSelectedDeleteComment(post.id, comment.id) }}
+          onClickEditButton={e => { onSelectedEditComment(post, comment.id) }}
+          onClickDeleteButton={e => { onSelectedDeleteComment(post, comment.id) }}
           onVoteScorePostComment={onVoteScorePostComment}
         />
       ))}

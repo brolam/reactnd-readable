@@ -4,9 +4,8 @@ export const GO_HOME = '/';
 
 //GET Post
 export const GO_POST_NEW = '/posts/new';
-export const GO_POST_GET = '/posts/:id/:action/:commentId?/:commentAction?/';
+export const GO_POST_GET = '/:categoryPath/:id/:action?/:commentId?/:commentAction?/';
 export const POST_URL_ACTIONS = {
-  get: 'get',
   edit: 'edit',
   delete: 'delete',
   comments: 'comments'
@@ -17,7 +16,7 @@ export const COMMENT_URL_ACTIONS = {
   delete: 'delete',
 }
 export const getPostPathToRegexp = pathToRegexp.compile(GO_POST_GET)
-export const getPostPageUrl = postId => (getPostPathToRegexp({ id: postId, action: POST_URL_ACTIONS.get }))
+export const getPostPageUrl = ({ category, id }) => (getPostPathToRegexp({ categoryPath: category, id }))
 
 //GET posts by categoreis 
 export const GO_HOME_FILTER = '/:categoryPath/posts';
@@ -59,7 +58,7 @@ export function isPostPageUrl(url) {
 export function getPostPagePropsByUrl(url, selectedPostComments) {
   if (!isPostPageUrl(url)) return {}
   const params = pathToRegexp(GO_POST_GET).exec(url)
-  const postAction = params[2], commentId = params[3], commentAction = params[4]
+  const postAction = params[3], commentId = params[4], commentAction = params[5]
   const comments = commentId ? selectedPostComments : []
   return ({
     isEditPost: postAction === POST_URL_ACTIONS.edit,
