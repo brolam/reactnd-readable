@@ -38,7 +38,7 @@ export const appMiddleware = store => next => action => {
       //Get post
       ReadableAPI.getPost(postId).then((post) => {
         //Get comments
-        ReadableAPI.getComments(postId, commentsOrder).then((comments) => {
+        ReadableAPI.getComments(post.id, commentsOrder).then((comments) => {
           store.dispatch(returnPost(post, comments, redirectUrl))
         })
       })
