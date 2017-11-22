@@ -474,6 +474,17 @@ describe("Search posts", () => {
 
 })
 
+test('post was not found', () => {
+  rollbackPublicPostsList()
+  const app = mount(
+    <Provider store={store}>
+      <MemoryRouter initialEntries={['/udacity/7ni6ok3ym7mf1p3-invaliId/']}>
+        <App />
+      </MemoryRouter>
+    </Provider>)
+    expect(app.find('div [className="modal-short modal-open"]').length).toBe(1)
+})
+
 const categories = global.dataForTest.categories
 let posts = [...global.dataForTest.posts]
 //Mocked fetch

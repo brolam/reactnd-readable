@@ -1,5 +1,5 @@
 import reducer from './reducers'
-import { createStore, applyMiddleware , compose } from 'redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import { appMiddleware } from './middlewares'
 import { createLogger } from 'redux-logger'
 
@@ -9,4 +9,4 @@ const logger = createLogger({
   // ...options
 });
 
-export default createStore(reducer,  composeEnhancers(applyMiddleware(appMiddleware, logger)));
+export default createStore(reducer, composeEnhancers(applyMiddleware(appMiddleware, logger)));
